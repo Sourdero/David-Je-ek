@@ -93,6 +93,21 @@
       justify-content:flex-end;
     }
 
+    .menu-toggle{
+      display:none;
+      width:46px;
+      height:46px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.05);
+      color:var(--text);
+      font-size:1.4rem;
+      cursor:pointer;
+      align-items:center;
+      justify-content:center;
+      flex:0 0 auto;
+    }
+
     .nav-links{
       display:flex;
       align-items:center;
@@ -583,12 +598,60 @@
 
     @media (max-width: 860px){
       .nav{
-        align-items:flex-start;
+        min-height:auto;
+        align-items:center;
+        gap:12px;
+        padding:12px 0;
+      }
+
+      .brand{
+        flex:1 1 auto;
+        min-width:0;
+      }
+
+      .brand-text strong{
+        font-size:1rem;
+      }
+
+      .brand-text span{
+        display:none;
+      }
+
+      .menu-toggle{
+        display:inline-flex;
       }
 
       .nav-right{
+        width:auto;
+        margin-left:auto;
+        gap:10px;
+        align-items:center;
+        flex-wrap:nowrap;
+      }
+
+      .nav-links{
+        display:none;
         width:100%;
-        justify-content:flex-start;
+        order:3;
+        flex-direction:column;
+        align-items:stretch;
+        gap:8px;
+        padding-top:12px;
+      }
+
+      .nav-links.open{
+        display:flex;
+      }
+
+      .nav-links a{
+        width:100%;
+        padding:12px 14px;
+        border-radius:16px;
+        background:rgba(255,255,255,.04);
+      }
+
+      .lang-switch{
+        gap:6px;
       }
 
       .hero-grid,
@@ -597,20 +660,64 @@
         grid-template-columns:1fr;
       }
 
+      .hero{
+        padding:34px 0 18px;
+      }
+
       .hero-stats{
         grid-template-columns:1fr;
       }
 
       .hero-photo{
-        height:640px;
+        height:clamp(320px, 70vw, 520px);
+        border-radius:24px;
+      }
+
+      .hero-note{
+        left:14px;
+        right:14px;
+        bottom:14px;
+        padding:14px 16px;
+        border-radius:18px;
       }
 
       .section{
-        padding:72px 0;
+        padding:56px 0;
+      }
+
+      .section-title{
+        font-size:clamp(1.8rem, 8vw, 2.6rem);
+        line-height:1.04;
       }
 
       h1{
-        font-size:clamp(2.7rem, 13vw, 4.6rem);
+        font-size:clamp(2.3rem, 11vw, 4rem);
+        margin:16px 0 14px;
+      }
+
+      .lead,
+      .hero p,
+      .card p,
+      .card li{
+        line-height:1.7;
+      }
+
+      .cta-row{
+        flex-direction:column;
+        align-items:stretch;
+      }
+
+      .cta-row .btn{
+        width:100%;
+      }
+
+      .gallery-item,
+      .gallery-item.tall{
+        min-height:260px;
+      }
+
+      .mini-game{
+        gap:18px;
       }
     }
 
@@ -619,45 +726,76 @@
         width:min(calc(100% - 20px),var(--max));
       }
 
-      .topbar .nav{
-        min-height:auto;
+      .topbar{
+        backdrop-filter:blur(10px);
       }
 
       .brand-logo{
-        width:48px;
-        height:48px;
-      }
-
-      .brand-text span{
-        font-size:.82rem;
+        width:44px;
+        height:44px;
+        border-radius:14px;
       }
 
       .lang-btn{
-        width:38px;
-        height:38px;
-        font-size:18px;
+        width:34px;
+        height:34px;
+        font-size:16px;
       }
 
-      .hero{
-        padding-top:42px;
+      .menu-toggle{
+        width:42px;
+        height:42px;
+        border-radius:12px;
       }
 
-      .hero-photo{
-        height:520px;
-        border-radius:24px;
-      }
-
-      .hero-note{
-        left:14px;
-        right:14px;
-        bottom:14px;
-        border-radius:18px;
+      .badge{
+        width:100%;
+        justify-content:center;
+        text-align:center;
+        padding:10px 14px;
+        font-size:.8rem;
       }
 
       .card,
       .panel-box,
+      .game-wrap,
+      .stat-card,
+      .contact-link{
+        padding:18px;
+        border-radius:20px;
+      }
+
+      .contact-link{
+        align-items:flex-start;
+      }
+
+      .section-kicker{
+        letter-spacing:.14em;
+        font-size:.68rem;
+      }
+
+      .hero-note strong,
+      .stat-card strong,
+      .card h3{
+        font-size:1rem;
+      }
+
       .game-wrap{
-        border-radius:22px;
+        padding:10px;
+      }
+
+      canvas{
+        border-radius:18px;
+      }
+
+      #mobileControls{
+        gap:10px;
+      }
+
+      #mobileControls .btn{
+        min-width:0;
+        flex:1 1 0;
+        padding:14px 10px;
       }
     }
   </style>
@@ -677,7 +815,8 @@
       </a>
 
       <div class="nav-right">
-        <nav class="nav-links">
+        <button class="menu-toggle" id="menuToggle" aria-label="Otevřít menu" aria-expanded="false">☰</button>
+        <nav class="nav-links" id="siteMenu">
           <a href="#sluzby" data-i18n="navServices">Služby</a>
           <a href="#procmy" data-i18n="navWhy">Proč my</a>
           <a href="#jak" data-i18n="navProcess">Jak to funguje</a>
@@ -1385,6 +1524,38 @@
       }
     };
 
+
+
+    function setupMobileMenu(){
+      const toggle = document.getElementById("menuToggle");
+      const menu = document.getElementById("siteMenu");
+      if(!toggle || !menu) return;
+
+      toggle.addEventListener("click", () => {
+        const open = menu.classList.toggle("open");
+        toggle.setAttribute("aria-expanded", open ? "true" : "false");
+        toggle.textContent = open ? "✕" : "☰";
+      });
+
+      menu.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+          if(window.innerWidth <= 860){
+            menu.classList.remove("open");
+            toggle.setAttribute("aria-expanded", "false");
+            toggle.textContent = "☰";
+          }
+        });
+      });
+
+      window.addEventListener("resize", () => {
+        if(window.innerWidth > 860){
+          menu.classList.remove("open");
+          toggle.setAttribute("aria-expanded", "false");
+          toggle.textContent = "☰";
+        }
+      });
+    }
+
     function setLang(lang, btn){
       document.documentElement.lang = lang;
       document.querySelectorAll("[data-i18n]").forEach(el => {
@@ -1404,6 +1575,8 @@
       const saved = localStorage.getItem("kominictviLang") || "cs";
       const btn = [...document.querySelectorAll(".lang-btn")].find(b => b.getAttribute("onclick").includes(`'${saved}'`));
       setLang(saved, btn);
+
+      setupMobileMenu();
 
       const observer = new IntersectionObserver((entries)=>{
         entries.forEach(entry=>{
