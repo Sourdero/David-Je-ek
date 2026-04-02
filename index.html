@@ -1,0 +1,1794 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kominictví Ježek</title>
+  <meta name="description" content="Kominictví Ježek – čištění komínů, kontroly a revize, frézování, vložkování a montáž nerezových komínů. Jihomoravský kraj a okres Uherské Hradiště." />
+  <style>
+    :root{
+      --bg:#0b0c10;
+      --bg-2:#12141b;
+      --card:rgba(255,255,255,.05);
+      --card-2:rgba(255,255,255,.08);
+      --text:#f5f1e8;
+      --muted:#c9c2b5;
+      --gold:#d8b36a;
+      --gold-2:#f1d79d;
+      --line:rgba(255,255,255,.1);
+      --shadow:0 20px 60px rgba(0,0,0,.35);
+      --radius:28px;
+      --radius-sm:20px;
+      --max:1240px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(216,179,106,.14), transparent 25%),
+        radial-gradient(circle at top right, rgba(216,179,106,.08), transparent 20%),
+        linear-gradient(180deg,#0a0b0f,#101218 45%,#0c0e12 100%);
+      overflow-x:hidden;
+    }
+
+    a{text-decoration:none;color:inherit}
+    img{display:block;max-width:100%}
+    .container{width:min(calc(100% - 32px),var(--max));margin:auto}
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:100;
+      backdrop-filter:blur(14px);
+      background:rgba(8,9,12,.75);
+      border-bottom:1px solid var(--line);
+    }
+
+    .nav{
+      min-height:78px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      padding:10px 0;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      min-width:0;
+    }
+
+    .brand-logo{
+      width:56px;
+      height:56px;
+      border-radius:18px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      flex:0 0 auto;
+    }
+
+    .brand-text strong{
+      display:block;
+      font-size:1.05rem;
+      letter-spacing:-.02em;
+    }
+
+    .brand-text span{
+      color:var(--muted);
+      font-size:.9rem;
+    }
+
+    .nav-right{
+      display:flex;
+      align-items:center;
+      gap:16px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .nav-links a{
+      padding:10px 14px;
+      border-radius:999px;
+      color:var(--muted);
+      transition:.25s ease;
+      font-size:.95rem;
+    }
+
+    .nav-links a:hover{
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+    }
+
+    .lang-switch{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .lang-btn{
+      width:42px;
+      height:42px;
+      border-radius:50%;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.05);
+      color:#fff;
+      font-size:20px;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:.25s ease;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+    }
+
+    .lang-btn:hover,
+    .lang-btn.active{
+      transform:translateY(-2px) scale(1.04);
+      border-color:rgba(216,179,106,.6);
+      box-shadow:0 0 0 3px rgba(216,179,106,.12), 0 10px 25px rgba(0,0,0,.18);
+      background:linear-gradient(180deg, rgba(216,179,106,.18), rgba(216,179,106,.08));
+    }
+
+    .section{
+      padding:90px 0;
+      position:relative;
+    }
+
+    .section-kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      color:var(--gold-2);
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      font-size:.72rem;
+      font-weight:700;
+      margin-bottom:12px;
+    }
+
+    .section-kicker::before{
+      content:"";
+      width:28px;
+      height:1px;
+      background:linear-gradient(90deg,transparent,var(--gold));
+    }
+
+    .section-title{
+      font-size:clamp(2rem,4vw,4rem);
+      margin:0 0 14px;
+      line-height:.98;
+      letter-spacing:-.04em;
+    }
+
+    .lead{
+      color:var(--muted);
+      font-size:clamp(1rem,1.5vw,1.1rem);
+      line-height:1.85;
+      max-width:820px;
+    }
+
+    .hero{
+      padding:72px 0 42px;
+      overflow:hidden;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:38px;
+      align-items:center;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 16px;
+      border-radius:999px;
+      border:1px solid rgba(216,179,106,.25);
+      background:linear-gradient(180deg, rgba(216,179,106,.12), rgba(216,179,106,.04));
+      color:var(--gold-2);
+      font-weight:700;
+      font-size:.88rem;
+    }
+
+    h1{
+      font-size:clamp(3rem,7vw,6.2rem);
+      line-height:.92;
+      letter-spacing:-.06em;
+      margin:20px 0 18px;
+      max-width:760px;
+    }
+
+    .hero p{
+      color:var(--muted);
+      font-size:clamp(1rem,1.5vw,1.18rem);
+      line-height:1.85;
+      max-width:760px;
+      margin:0;
+    }
+
+    .cta-row{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:28px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:15px 20px;
+      border-radius:999px;
+      border:1px solid transparent;
+      font-weight:800;
+      transition:.25s ease;
+      cursor:pointer;
+    }
+
+    .btn-primary{
+      color:#1d1811;
+      background:linear-gradient(180deg,var(--gold-2),var(--gold));
+      box-shadow:0 12px 30px rgba(216,179,106,.25);
+    }
+
+    .btn-secondary{
+      background:rgba(255,255,255,.05);
+      border-color:rgba(255,255,255,.12);
+      color:var(--text);
+    }
+
+    .btn:hover{
+      transform:translateY(-2px);
+    }
+
+    .hero-stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+      margin-top:28px;
+    }
+
+    .stat-card{
+      padding:20px;
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--line);
+      border-radius:22px;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
+    }
+
+    .stat-card strong{
+      display:block;
+      font-size:1.05rem;
+      margin-bottom:8px;
+    }
+
+    .stat-card span{
+      color:var(--muted);
+      line-height:1.6;
+      font-size:.96rem;
+    }
+
+    .hero-visual{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+
+    .hero-photo{
+      width:min(100%,520px);
+      height:min(78vh,760px);
+      border-radius:34px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.1);
+      box-shadow:var(--shadow);
+      position:relative;
+      background:#111;
+    }
+
+    .hero-photo img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center;
+    }
+
+    .hero-note{
+      position:absolute;
+      left:22px;
+      right:22px;
+      bottom:22px;
+      padding:18px 20px;
+      border-radius:24px;
+      background:rgba(10,12,16,.72);
+      border:1px solid rgba(255,255,255,.08);
+      backdrop-filter:blur(10px);
+    }
+
+    .hero-note strong{
+      display:block;
+      font-size:1.08rem;
+      margin-bottom:8px;
+    }
+
+    .hero-note span{
+      color:var(--muted);
+      line-height:1.6;
+      font-size:.96rem;
+    }
+
+    .grid-3{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:22px;
+    }
+
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.03));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:26px;
+      position:relative;
+      overflow:hidden;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
+    }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      width:170px;
+      height:170px;
+      right:-50px;
+      top:-70px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(216,179,106,.18), transparent 70%);
+      pointer-events:none;
+    }
+
+    .icon{
+      width:54px;
+      height:54px;
+      border-radius:18px;
+      display:grid;
+      place-items:center;
+      font-size:1.35rem;
+      margin-bottom:16px;
+      background:linear-gradient(180deg, rgba(216,179,106,.18), rgba(216,179,106,.06));
+      border:1px solid rgba(216,179,106,.2);
+    }
+
+    .card h3{
+      margin:0 0 10px;
+      font-size:1.22rem;
+    }
+
+    .card p, .card li{
+      color:var(--muted);
+      line-height:1.8;
+      margin:0;
+    }
+
+    .services-list{
+      margin:0;
+      padding-left:18px;
+    }
+
+    .gallery-layout{
+      display:grid;
+      grid-template-columns:1.2fr .9fr .9fr;
+      gap:18px;
+      margin-top:28px;
+    }
+
+    .gallery-item{
+      position:relative;
+      min-height:290px;
+      border-radius:26px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:var(--shadow);
+      background:#111;
+    }
+
+    .gallery-item.tall{
+      min-height:600px;
+    }
+
+    .gallery-item img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:transform .5s ease;
+    }
+
+    .gallery-item:hover img{
+      transform:scale(1.05);
+    }
+
+    .gallery-item::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.55));
+    }
+
+    .gallery-label{
+      position:absolute;
+      left:16px;
+      bottom:16px;
+      z-index:2;
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(8,10,14,.7);
+      border:1px solid rgba(255,255,255,.1);
+      backdrop-filter:blur(8px);
+      font-size:.92rem;
+    }
+
+    .certificate{
+      display:grid;
+      grid-template-columns:.8fr 1.2fr;
+      gap:28px;
+      align-items:center;
+    }
+
+    .certificate-image{
+      border-radius:28px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:var(--shadow);
+      background:rgba(255,255,255,.03);
+    }
+
+    .contact-wrap{
+      display:grid;
+      grid-template-columns:.95fr 1.05fr;
+      gap:24px;
+      align-items:stretch;
+    }
+
+    .contact-list{
+      display:grid;
+      gap:16px;
+      margin-top:8px;
+    }
+
+    .contact-link{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding:18px 20px;
+      border-radius:20px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      transition:.25s ease;
+    }
+
+    .contact-link:hover{
+      transform:translateY(-2px);
+      background:rgba(255,255,255,.06);
+      border-color:rgba(216,179,106,.25);
+    }
+
+    .contact-link small{
+      display:block;
+      color:var(--muted);
+      margin-bottom:3px;
+    }
+
+    .contact-link strong{
+      font-size:1rem;
+    }
+
+    .mini-game{
+      display:grid;
+      grid-template-columns:1fr 340px;
+      gap:24px;
+      align-items:start;
+    }
+
+    .game-wrap{
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:30px;
+      padding:18px;
+      box-shadow:var(--shadow);
+    }
+
+    canvas{
+      width:100%;
+      height:auto;
+      display:block;
+      background:
+        linear-gradient(180deg, #a9d2ff 0%, #dceeff 38%, #edf3f8 38%, #e9e4dc 100%);
+      border-radius:24px;
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    .game-panel{
+      display:grid;
+      gap:16px;
+    }
+
+    .panel-box{
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:24px;
+      padding:22px;
+    }
+
+    .game-result{
+      min-height:72px;
+      color:var(--muted);
+      line-height:1.7;
+    }
+
+    .win{
+      color:#8ff0b0;
+      font-weight:800;
+    }
+
+    footer{
+      padding:28px 0 50px;
+      color:var(--muted);
+      border-top:1px solid rgba(255,255,255,.08);
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(22px);
+      transition:opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.visible{
+      opacity:1;
+      transform:none;
+    }
+
+    @media (max-width: 1100px){
+      .hero-grid,
+      .certificate,
+      .contact-wrap,
+      .mini-game{
+        grid-template-columns:1fr;
+      }
+
+      .gallery-layout{
+        grid-template-columns:1fr 1fr;
+      }
+
+      .gallery-item.tall{
+        min-height:420px;
+      }
+    }
+
+    @media (max-width: 860px){
+      .nav{
+        align-items:flex-start;
+      }
+
+      .nav-right{
+        width:100%;
+        justify-content:flex-start;
+      }
+
+      .hero-grid,
+      .grid-3,
+      .gallery-layout{
+        grid-template-columns:1fr;
+      }
+
+      .hero-stats{
+        grid-template-columns:1fr;
+      }
+
+      .hero-photo{
+        height:640px;
+      }
+
+      .section{
+        padding:72px 0;
+      }
+
+      h1{
+        font-size:clamp(2.7rem, 13vw, 4.6rem);
+      }
+    }
+
+    @media (max-width: 560px){
+      .container{
+        width:min(calc(100% - 20px),var(--max));
+      }
+
+      .topbar .nav{
+        min-height:auto;
+      }
+
+      .brand-logo{
+        width:48px;
+        height:48px;
+      }
+
+      .brand-text span{
+        font-size:.82rem;
+      }
+
+      .lang-btn{
+        width:38px;
+        height:38px;
+        font-size:18px;
+      }
+
+      .hero{
+        padding-top:42px;
+      }
+
+      .hero-photo{
+        height:520px;
+        border-radius:24px;
+      }
+
+      .hero-note{
+        left:14px;
+        right:14px;
+        bottom:14px;
+        border-radius:18px;
+      }
+
+      .card,
+      .panel-box,
+      .game-wrap{
+        border-radius:22px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="container nav">
+      <a href="#home" class="brand">
+        <div class="brand-logo">
+          <img src="logo.png" alt="Kominictví Ježek logo">
+        </div>
+        <div class="brand-text">
+          <strong>Kominictví Ježek</strong>
+          <span data-i18n="brandSub">Profesionální kominické služby</span>
+        </div>
+      </a>
+
+      <div class="nav-right">
+        <nav class="nav-links">
+          <a href="#sluzby" data-i18n="navServices">Služby</a>
+          <a href="#procmy" data-i18n="navWhy">Proč my</a>
+          <a href="#jak" data-i18n="navProcess">Jak to funguje</a>
+          <a href="#galerie" data-i18n="navGallery">Galerie</a>
+          <a href="#kontakt" data-i18n="navContact">Kontakty</a>
+          <a href="#minihra" data-i18n="navGame">Minihra</a>
+        </nav>
+
+        <div class="lang-switch">
+          <button class="lang-btn active" onclick="setLang('cs', this)" title="Čeština">🇨🇿</button>
+          <button class="lang-btn" onclick="setLang('sk', this)" title="Slovenčina">🇸🇰</button>
+          <button class="lang-btn" onclick="setLang('en', this)" title="English">🇬🇧</button>
+          <button class="lang-btn" onclick="setLang('de', this)" title="Deutsch">🇩🇪</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <div class="badge" data-i18n="badge">Čištění, revize, vložkování a montáž komínů</div>
+          <h1 data-i18n="heroTitle">Komín v kondici, klid v domácnosti.</h1>
+          <p data-i18n="heroText">
+            S námi to z komína jen dobře táhne. Kominictví Ježek zajišťuje profesionální čištění komínů, kontroly a revize, frézování, vložkování i montáž nerezových komínů. Působíme v celém Jihomoravském kraji a v okrese Uherské Hradiště.
+          </p>
+
+          <div class="cta-row">
+            <a class="btn btn-primary" href="tel:+420777001019" data-i18n="callNow">📞 Zavolat hned</a>
+            <a class="btn btn-secondary" href="#kontakt" data-i18n="contactsBtn">Kontakty</a>
+            <a class="btn btn-secondary" href="#minihra" data-i18n="gameBtn">Vyzkoušet minihru</a>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat-card">
+              <strong data-i18n="stat1Title">Revize</strong>
+              <span data-i18n="stat1Text">Kontroly a revize pro váš bezpečný provoz.</span>
+            </div>
+            <div class="stat-card">
+              <strong data-i18n="stat2Title">Rychlé termíny</strong>
+              <span data-i18n="stat2Text">Domluva rychle, lidsky a bez zbytečných průtahů.</span>
+            </div>
+            <div class="stat-card">
+              <strong data-i18n="stat3Title">Jižní Morava + UH</strong>
+              <span data-i18n="stat3Text">Působnost v kraji, mimo oblast stačí zavolat.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal">
+          <div class="hero-photo">
+            <img src="komín.png" alt="Kominík stojící na komíně">
+            <div class="hero-note">
+              <strong data-i18n="heroNoteTitle">Vaše bezpečí začíná u komína</strong>
+              <span data-i18n="heroNoteText">Poctivá kominická práce, elegantní výsledek a přístup, na který je spoleh.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="sluzby">
+      <div class="container">
+        <div class="section-kicker" data-i18n="servicesKicker">Služby</div>
+        <h2 class="section-title reveal" data-i18n="servicesTitle">Komplexní kominické služby</h2>
+        <p class="lead reveal" data-i18n="servicesLead">
+          Zajišťujeme vše důležité pro bezpečný a správně fungující komín – od pravidelného čištění až po nové nerezové systémy a odborné revize.
+        </p>
+
+        <div class="grid-3" style="margin-top:30px">
+          <article class="card reveal">
+            <div class="icon">🧹</div>
+            <h3 data-i18n="srv1Title">Čištění komínů</h3>
+            <p data-i18n="srv1Text">Pravidelné čištění komínových cest pro bezpečný provoz a správný tah.</p>
+          </article>
+
+          <article class="card reveal">
+            <div class="icon">📋</div>
+            <h3 data-i18n="srv2Title">Kontroly a revize</h3>
+            <p data-i18n="srv2Text">Provádíme odborné kontroly a revize komínů včetně potřebných výstupů.</p>
+          </article>
+
+          <article class="card reveal">
+            <div class="icon">🛠️</div>
+            <h3 data-i18n="srv3Title">Frézování komínů</h3>
+            <p data-i18n="srv3Text">Úprava průduchu pro vložkování a modernizaci starších komínových těles.</p>
+          </article>
+
+          <article class="card reveal">
+            <div class="icon">🔩</div>
+            <h3 data-i18n="srv4Title">Vložkování</h3>
+            <p data-i18n="srv4Text">Bezpečné a odborné vložkování komínů pro různé typy spotřebičů.</p>
+          </article>
+
+          <article class="card reveal">
+            <div class="icon">🏠</div>
+            <h3 data-i18n="srv5Title">Montáž nerezových komínů</h3>
+            <p data-i18n="srv5Text">Montáž moderních nerezových komínových systémů na míru.</p>
+          </article>
+
+          <article class="card reveal">
+            <div class="icon">💬</div>
+            <h3 data-i18n="srv6Title">Poradenství</h3>
+            <p data-i18n="srv6Text">Pomůžeme s výběrem řešení a poradíme i s dalšími kominickými pracemi.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="procmy">
+      <div class="container">
+        <div class="section-kicker" data-i18n="whyKicker">Proč my</div>
+        <h2 class="section-title reveal" data-i18n="whyTitle">Spolehlivost, zkušenosti a férový přístup</h2>
+        <p class="lead reveal" data-i18n="whyLead">
+          Dáváme důraz na bezpečnost, jasnou domluvu a profesionální provedení každé zakázky.
+        </p>
+
+        <div class="grid-3" style="margin-top:30px">
+          <article class="card reveal">
+            <div class="icon">⚡</div>
+            <h3 data-i18n="why1Title">Rychlé termíny</h3>
+            <p data-i18n="why1Text">Snažíme se najít termín co nejdříve a nezdržovat vás čekáním.</p>
+          </article>
+          <article class="card reveal">
+            <div class="icon">🤝</div>
+            <h3 data-i18n="why2Title">Spolehlivost</h3>
+            <p data-i18n="why2Text">Co si domluvíme, to platí. Důraz na poctivost a lidský přístup.</p>
+          </article>
+          <article class="card reveal">
+            <div class="icon">🎯</div>
+            <h3 data-i18n="why3Title">Profesionální přístup</h3>
+            <p data-i18n="why3Text">Každou realizaci řešíme pečlivě a s ohledem na bezpečnost.</p>
+          </article>
+          <article class="card reveal">
+            <div class="icon">🔥</div>
+            <h3 data-i18n="why4Title">Zkušenosti</h3>
+            <p data-i18n="why4Text">Praktické zkušenosti z terénu a řešení různých typů komínů.</p>
+          </article>
+          <article class="card reveal">
+            <div class="icon">💰</div>
+            <h3 data-i18n="why5Title">Férové ceny</h3>
+            <p data-i18n="why5Text">Rozumné nacenění bez zbytečných složitostí.</p>
+          </article>
+          <article class="card reveal">
+            <div class="icon">🧾</div>
+            <h3 data-i18n="why6Title">Revize a výstupy</h3>
+            <p data-i18n="why6Text">Provádíme také revize a potřebné výstupy pro zákazníky.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="jak">
+      <div class="container">
+        <div class="section-kicker" data-i18n="processKicker">Jak to funguje</div>
+        <h2 class="section-title reveal" data-i18n="processTitle">Jednoduchá domluva ve 3 krocích</h2>
+        <p class="lead reveal" data-i18n="processLead">
+          Zavoláte, domluvíme termín a o zbytek se postaráme.
+        </p>
+
+        <div class="grid-3" style="margin-top:30px">
+          <article class="card reveal">
+            <div class="icon">1</div>
+            <h3 data-i18n="step1Title">Ozvete se</h3>
+            <p data-i18n="step1Text">Zavoláte nebo napíšete přes sociální sítě a řeknete, co potřebujete.</p>
+          </article>
+          <article class="card reveal">
+            <div class="icon">2</div>
+            <h3 data-i18n="step2Title">Domluvíme termín</h3>
+            <p data-i18n="step2Text">Najdeme vhodný termín podle lokality a typu práce.</p>
+          </article>
+          <article class="card reveal">
+            <div class="icon">3</div>
+            <h3 data-i18n="step3Title">Provedeme realizaci</h3>
+            <p data-i18n="step3Text">Práci odvedeme profesionálně, bezpečně a s důrazem na výsledek.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="galerie">
+      <div class="container">
+        <div class="section-kicker" data-i18n="galleryKicker">Galerie</div>
+        <h2 class="section-title reveal" data-i18n="galleryTitle">Ukázky práce a realizací</h2>
+        <p class="lead reveal" data-i18n="galleryLead">
+          Reálné fotografie z praxe. Čištění, montáž, stav před úpravou i výsledné řešení přímo v terénu.
+        </p>
+
+        <div class="gallery-layout">
+          <div class="gallery-item tall reveal">
+            <img src="komín2.png" alt="Montáž nerezového komínu">
+            <div class="gallery-label" data-i18n="gallery1">Montáž nerezového komínu</div>
+          </div>
+
+          <div class="gallery-item reveal">
+            <img src="komín3.png" alt="Stav komínu před úpravou">
+            <div class="gallery-label" data-i18n="gallery2">Stav před úpravou</div>
+          </div>
+
+          <div class="gallery-item reveal">
+            <img src="komin4.png" alt="Hotové řešení na komíně">
+            <div class="gallery-label" data-i18n="gallery3">Hotové řešení</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container certificate">
+        <div class="certificate-image reveal">
+          <img src="spolehlivá.png" alt="Certifikát Spolehlivá firma">
+        </div>
+        <div class="reveal">
+          <div class="section-kicker" data-i18n="trustKicker">Důvěra</div>
+          <h2 class="section-title" data-i18n="trustTitle">Poctivá práce, na kterou je spoleh</h2>
+          <p class="lead" data-i18n="trustText">
+            Zakládáme si na profesionálním přístupu, bezpečnosti a kvalitně odvedené práci. Každá zakázka je pro nás vizitkou.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="kontakt">
+      <div class="container contact-wrap">
+        <div class="card reveal">
+          <div class="section-kicker" data-i18n="contactKicker">Kontakty</div>
+          <h2 class="section-title" data-i18n="contactTitle">Spojte se s námi</h2>
+          <p class="lead" data-i18n="contactLead">
+            Působíme po celém Jihomoravském kraji a v okrese Uherské Hradiště. Pokud jste mimo tuto oblast, stačí zavolat a domluvíme se.
+          </p>
+
+          <div class="contact-list">
+            <a class="contact-link" href="tel:+420777001019">
+              <div>
+                <small data-i18n="phoneLabel">Telefon</small>
+                <strong>777 001 019</strong>
+              </div>
+              <span>📞</span>
+            </a>
+
+            <a class="contact-link" href="https://www.instagram.com/kominictvi_jezek/" target="_blank" rel="noopener noreferrer">
+              <div>
+                <small>Instagram</small>
+                <strong>@kominictvi_jezek</strong>
+              </div>
+              <span>📷</span>
+            </a>
+
+            <a class="contact-link" href="https://www.facebook.com/profile.php?id=61567339137780" target="_blank" rel="noopener noreferrer">
+              <div>
+                <small>Facebook</small>
+                <strong>Kominictví Ježek</strong>
+              </div>
+              <span>📘</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <div class="section-kicker" data-i18n="areaKicker">Působnost</div>
+          <h2 class="section-title" data-i18n="areaTitle">Kde pracujeme</h2>
+          <ul class="services-list">
+            <li data-i18n="area1">Celý Jihomoravský kraj</li>
+            <li data-i18n="area2">Zlínský kraj – okres Uherské Hradiště</li>
+            <li data-i18n="area3">Mimo tyto oblasti stačí zavolat a vždy se domluvíme</li>
+            <li data-i18n="area4">Adresa: Smetanova 780, 697 01 Kyjov</li>
+            <li data-i18n="area5">IČO: 19800193</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="minihra">
+      <div class="container">
+        <div class="section-kicker" data-i18n="gameKicker">Minihra</div>
+        <h2 class="section-title reveal" data-i18n="gameTitle">Vyčisti komín a získej slevu</h2>
+        <p class="lead reveal" data-i18n="gameLead">
+          Tohle není lehké. Posbírej všechny saze, vyhni se překážkám a dostaň kominíka až do cíle. Po výhře získáš slevový kód od 5 do 10 %.
+        </p>
+
+        <div class="mini-game" style="margin-top:30px">
+          <div class="game-wrap reveal">
+            <canvas id="gameCanvas" width="860" height="520"></canvas>
+          </div>
+
+          <div class="game-panel reveal">
+            <div class="panel-box">
+              <h3 style="margin-top:0" data-i18n="controlsTitle">Ovládání</h3>
+              <p class="game-result" data-i18n="controlsText">
+                Klávesy ← → pro pohyb, mezerník pro skok. Na mobilu použij tlačítka pod hrou.
+              </p>
+              <div class="cta-row">
+                <button class="btn btn-secondary" onclick="startGame()" data-i18n="startGameBtn">Spustit znovu</button>
+              </div>
+            </div>
+
+            <div class="panel-box">
+              <h3 style="margin-top:0" data-i18n="objectiveTitle">Cíl hry</h3>
+              <p class="game-result" data-i18n="objectiveText">
+                Posbírej 8 kusů sazí a nespadni ani se nedotkni nebezpečných překážek více než 2x.
+              </p>
+            </div>
+
+            <div class="panel-box">
+              <h3 style="margin-top:0" data-i18n="rewardTitle">Výsledek</h3>
+              <div class="game-result" id="gameResult" data-i18n="rewardDefault">
+                Po dokončení hry se tady zobrazí výhra a slevový kód.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cta-row" style="margin-top:18px; justify-content:center; display:none" id="mobileControls">
+          <button class="btn btn-secondary" id="leftBtn">⬅️</button>
+          <button class="btn btn-secondary" id="jumpBtn">⤒</button>
+          <button class="btn btn-secondary" id="rightBtn">➡️</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <span data-i18n="footerText">Kominictví Ježek • Profesionální kominické služby • Jihomoravský kraj a Uherské Hradiště</span>
+    </div>
+  </footer>
+
+  <script>
+    const translations = {
+      cs: {
+        brandSub: "Profesionální kominické služby",
+        navServices: "Služby",
+        navWhy: "Proč my",
+        navProcess: "Jak to funguje",
+        navGallery: "Galerie",
+        navContact: "Kontakty",
+        navGame: "Minihra",
+        badge: "Čištění, revize, vložkování a montáž komínů",
+        heroTitle: "Komín v kondici, klid v domácnosti.",
+        heroText: "S námi to z komína jen dobře táhne. Kominictví Ježek zajišťuje profesionální čištění komínů, kontroly a revize, frézování, vložkování i montáž nerezových komínů. Působíme v celém Jihomoravském kraji a v okrese Uherské Hradiště.",
+        callNow: "📞 Zavolat hned",
+        contactsBtn: "Kontakty",
+        gameBtn: "Vyzkoušet minihru",
+        stat1Title: "Revize",
+        stat1Text: "Kontroly a revize pro váš bezpečný provoz.",
+        stat2Title: "Rychlé termíny",
+        stat2Text: "Domluva rychle, lidsky a bez zbytečných průtahů.",
+        stat3Title: "Jižní Morava + UH",
+        stat3Text: "Působnost v kraji, mimo oblast stačí zavolat.",
+        heroNoteTitle: "Vaše bezpečí začíná u komína",
+        heroNoteText: "Poctivá kominická práce, elegantní výsledek a přístup, na který je spoleh.",
+        servicesKicker: "Služby",
+        servicesTitle: "Komplexní kominické služby",
+        servicesLead: "Zajišťujeme vše důležité pro bezpečný a správně fungující komín – od pravidelného čištění až po nové nerezové systémy a odborné revize.",
+        srv1Title: "Čištění komínů",
+        srv1Text: "Pravidelné čištění komínových cest pro bezpečný provoz a správný tah.",
+        srv2Title: "Kontroly a revize",
+        srv2Text: "Provádíme odborné kontroly a revize komínů včetně potřebných výstupů.",
+        srv3Title: "Frézování komínů",
+        srv3Text: "Úprava průduchu pro vložkování a modernizaci starších komínových těles.",
+        srv4Title: "Vložkování",
+        srv4Text: "Bezpečné a odborné vložkování komínů pro různé typy spotřebičů.",
+        srv5Title: "Montáž nerezových komínů",
+        srv5Text: "Montáž moderních nerezových komínových systémů na míru.",
+        srv6Title: "Poradenství",
+        srv6Text: "Pomůžeme s výběrem řešení a poradíme i s dalšími kominickými pracemi.",
+        whyKicker: "Proč my",
+        whyTitle: "Spolehlivost, zkušenosti a férový přístup",
+        whyLead: "Dáváme důraz na bezpečnost, jasnou domluvu a profesionální provedení každé zakázky.",
+        why1Title: "Rychlé termíny",
+        why1Text: "Snažíme se najít termín co nejdříve a nezdržovat vás čekáním.",
+        why2Title: "Spolehlivost",
+        why2Text: "Co si domluvíme, to platí. Důraz na poctivost a lidský přístup.",
+        why3Title: "Profesionální přístup",
+        why3Text: "Každou realizaci řešíme pečlivě a s ohledem na bezpečnost.",
+        why4Title: "Zkušenosti",
+        why4Text: "Praktické zkušenosti z terénu a řešení různých typů komínů.",
+        why5Title: "Férové ceny",
+        why5Text: "Rozumné nacenění bez zbytečných složitostí.",
+        why6Title: "Revize a výstupy",
+        why6Text: "Provádíme také revize a potřebné výstupy pro zákazníky.",
+        processKicker: "Jak to funguje",
+        processTitle: "Jednoduchá domluva ve 3 krocích",
+        processLead: "Zavoláte, domluvíme termín a o zbytek se postaráme.",
+        step1Title: "Ozvete se",
+        step1Text: "Zavoláte nebo napíšete přes sociální sítě a řeknete, co potřebujete.",
+        step2Title: "Domluvíme termín",
+        step2Text: "Najdeme vhodný termín podle lokality a typu práce.",
+        step3Title: "Provedeme realizaci",
+        step3Text: "Práci odvedeme profesionálně, bezpečně a s důrazem na výsledek.",
+        galleryKicker: "Galerie",
+        galleryTitle: "Ukázky práce a realizací",
+        galleryLead: "Reálné fotografie z praxe. Čištění, montáž, stav před úpravou i výsledné řešení přímo v terénu.",
+        gallery1: "Montáž nerezového komínu",
+        gallery2: "Stav před úpravou",
+        gallery3: "Hotové řešení",
+        trustKicker: "Důvěra",
+        trustTitle: "Poctivá práce, na kterou je spoleh",
+        trustText: "Zakládáme si na profesionálním přístupu, bezpečnosti a kvalitně odvedené práci. Každá zakázka je pro nás vizitkou.",
+        contactKicker: "Kontakty",
+        contactTitle: "Spojte se s námi",
+        contactLead: "Působíme po celém Jihomoravském kraji a v okrese Uherské Hradiště. Pokud jste mimo tuto oblast, stačí zavolat a domluvíme se.",
+        phoneLabel: "Telefon",
+        areaKicker: "Působnost",
+        areaTitle: "Kde pracujeme",
+        area1: "Celý Jihomoravský kraj",
+        area2: "Zlínský kraj – okres Uherské Hradiště",
+        area3: "Mimo tyto oblasti stačí zavolat a vždy se domluvíme",
+        area4: "Adresa: Smetanova 780, 697 01 Kyjov",
+        area5: "IČO: 19800193",
+        gameKicker: "Minihra",
+        gameTitle: "Vyčisti komín a získej slevu",
+        gameLead: "Tohle není lehké. Posbírej všechny saze, vyhni se překážkám a dostaň kominíka až do cíle. Po výhře získáš slevový kód od 5 do 10 %.",
+        controlsTitle: "Ovládání",
+        controlsText: "Klávesy ← → pro pohyb, mezerník pro skok. Na mobilu použij tlačítka pod hrou.",
+        startGameBtn: "Spustit znovu",
+        objectiveTitle: "Cíl hry",
+        objectiveText: "Posbírej 8 kusů sazí a nespadni ani se nedotkni nebezpečných překážek více než 2x.",
+        rewardTitle: "Výsledek",
+        rewardDefault: "Po dokončení hry se tady zobrazí výhra a slevový kód.",
+        footerText: "Kominictví Ježek • Profesionální kominické služby • Jihomoravský kraj a Uherské Hradiště"
+      },
+
+      sk: {
+        brandSub: "Profesionálne kominárske služby",
+        navServices: "Služby",
+        navWhy: "Prečo my",
+        navProcess: "Ako to funguje",
+        navGallery: "Galéria",
+        navContact: "Kontakty",
+        navGame: "Minihra",
+        badge: "Čistenie, revízie, vložkovanie a montáž komínov",
+        heroTitle: "Komín v kondícii, pokoj v domácnosti.",
+        heroText: "S nami to z komína ťahá správne. Kominictví Ježek zabezpečuje profesionálne čistenie komínov, kontroly a revízie, frézovanie, vložkovanie aj montáž nerezových komínov. Pôsobíme v celom Juhomoravskom kraji a v okrese Uherské Hradiště.",
+        callNow: "📞 Zavolať hneď",
+        contactsBtn: "Kontakty",
+        gameBtn: "Vyskúšať minihru",
+        stat1Title: "Revízie",
+        stat1Text: "Kontroly a revízie pre vašu bezpečnú prevádzku.",
+        stat2Title: "Rýchle termíny",
+        stat2Text: "Dohoda rýchlo, ľudsky a bez zbytočných prieťahov.",
+        stat3Title: "Južná Morava + UH",
+        stat3Text: "Pôsobnosť v kraji, mimo oblasti stačí zavolať.",
+        heroNoteTitle: "Vaša bezpečnosť začína pri komíne",
+        heroNoteText: "Poctivá kominárska práca, elegantný výsledok a prístup, na ktorý je spoľah.",
+        servicesKicker: "Služby",
+        servicesTitle: "Komplexné kominárske služby",
+        servicesLead: "Zabezpečujeme všetko dôležité pre bezpečný a správne fungujúci komín – od pravidelného čistenia až po nové nerezové systémy a odborné revízie.",
+        srv1Title: "Čistenie komínov",
+        srv1Text: "Pravidelné čistenie komínových ciest pre bezpečnú prevádzku a správny ťah.",
+        srv2Title: "Kontroly a revízie",
+        srv2Text: "Vykonávame odborné kontroly a revízie komínov vrátane potrebných výstupov.",
+        srv3Title: "Frézovanie komínov",
+        srv3Text: "Úprava prieduchu pre vložkovanie a modernizáciu starších komínových telies.",
+        srv4Title: "Vložkovanie",
+        srv4Text: "Bezpečné a odborné vložkovanie komínov pre rôzne typy spotrebičov.",
+        srv5Title: "Montáž nerezových komínov",
+        srv5Text: "Montáž moderných nerezových komínových systémov na mieru.",
+        srv6Title: "Poradenstvo",
+        srv6Text: "Pomôžeme s výberom riešenia a poradíme aj s ďalšími kominárskymi prácami.",
+        whyKicker: "Prečo my",
+        whyTitle: "Spoľahlivosť, skúsenosti a férový prístup",
+        whyLead: "Dávame dôraz na bezpečnosť, jasnú dohodu a profesionálne vykonanie každej zákazky.",
+        why1Title: "Rýchle termíny",
+        why1Text: "Snažíme sa nájsť termín čo najskôr a nezdržiavať vás čakaním.",
+        why2Title: "Spoľahlivosť",
+        why2Text: "Čo si dohodneme, to platí. Dôraz na poctivosť a ľudský prístup.",
+        why3Title: "Profesionálny prístup",
+        why3Text: "Každú realizáciu riešime starostlivo a s ohľadom na bezpečnosť.",
+        why4Title: "Skúsenosti",
+        why4Text: "Praktické skúsenosti z terénu a riešenia rôznych typov komínov.",
+        why5Title: "Férové ceny",
+        why5Text: "Rozumné nacenenie bez zbytočných komplikácií.",
+        why6Title: "Revízie a výstupy",
+        why6Text: "Robíme aj revízie a potrebné výstupy pre zákazníkov.",
+        processKicker: "Ako to funguje",
+        processTitle: "Jednoduchá dohoda v 3 krokoch",
+        processLead: "Zavoláte, dohodneme termín a o zvyšok sa postaráme.",
+        step1Title: "Ozvete sa",
+        step1Text: "Zavoláte alebo napíšete cez sociálne siete a poviete, čo potrebujete.",
+        step2Title: "Dohodneme termín",
+        step2Text: "Nájdeme vhodný termín podľa lokality a typu práce.",
+        step3Title: "Zrealizujeme prácu",
+        step3Text: "Prácu odvedieme profesionálne, bezpečne a s dôrazom na výsledok.",
+        galleryKicker: "Galéria",
+        galleryTitle: "Ukážky práce a realizácií",
+        galleryLead: "Reálne fotografie z praxe. Čistenie, montáž, stav pred úpravou aj výsledné riešenie priamo v teréne.",
+        gallery1: "Montáž nerezového komína",
+        gallery2: "Stav pred úpravou",
+        gallery3: "Hotové riešenie",
+        trustKicker: "Dôvera",
+        trustTitle: "Poctivá práca, na ktorú je spoľah",
+        trustText: "Zakladáme si na profesionálnom prístupe, bezpečnosti a kvalitne odvedenej práci. Každá zákazka je pre nás vizitkou.",
+        contactKicker: "Kontakty",
+        contactTitle: "Spojte sa s nami",
+        contactLead: "Pôsobíme po celom Juhomoravskom kraji a v okrese Uherské Hradiště. Ak ste mimo tejto oblasti, stačí zavolať a dohodneme sa.",
+        phoneLabel: "Telefón",
+        areaKicker: "Pôsobnosť",
+        areaTitle: "Kde pracujeme",
+        area1: "Celý Juhomoravský kraj",
+        area2: "Zlínsky kraj – okres Uherské Hradiště",
+        area3: "Mimo týchto oblastí stačí zavolať a vždy sa dohodneme",
+        area4: "Adresa: Smetanova 780, 697 01 Kyjov",
+        area5: "IČO: 19800193",
+        gameKicker: "Minihra",
+        gameTitle: "Vyčisti komín a získaj zľavu",
+        gameLead: "Toto nie je ľahké. Pozbieraj všetky sadze, vyhni sa prekážkam a dostaň kominára až do cieľa. Po výhre získaš zľavový kód od 5 do 10 %.",
+        controlsTitle: "Ovládanie",
+        controlsText: "Klávesy ← → pre pohyb, medzerník pre skok. Na mobile použi tlačidlá pod hrou.",
+        startGameBtn: "Spustiť znova",
+        objectiveTitle: "Cieľ hry",
+        objectiveText: "Pozbieraj 8 kusov sadzí a nespadni ani sa nedotkni nebezpečných prekážok viac než 2x.",
+        rewardTitle: "Výsledok",
+        rewardDefault: "Po dokončení hry sa tu zobrazí výhra a zľavový kód.",
+        footerText: "Kominictví Ježek • Profesionálne kominárske služby • Juhomoravský kraj a Uherské Hradiště"
+      },
+
+      en: {
+        brandSub: "Professional chimney services",
+        navServices: "Services",
+        navWhy: "Why us",
+        navProcess: "How it works",
+        navGallery: "Gallery",
+        navContact: "Contacts",
+        navGame: "Mini game",
+        badge: "Cleaning, inspections, relining and chimney installation",
+        heroTitle: "A healthy chimney, peace at home.",
+        heroText: "With us, your chimney works the way it should. Kominictví Ježek provides professional chimney cleaning, inspections, official reports, milling, relining and stainless steel chimney installation. We operate across the South Moravian region and the Uherské Hradiště district.",
+        callNow: "📞 Call now",
+        contactsBtn: "Contacts",
+        gameBtn: "Try the mini game",
+        stat1Title: "Inspections",
+        stat1Text: "Checks and official inspections for safe operation.",
+        stat2Title: "Fast appointments",
+        stat2Text: "Quick and straightforward communication without unnecessary delays.",
+        stat3Title: "South Moravia + UH",
+        stat3Text: "Coverage across the region. Outside the area? Just call us.",
+        heroNoteTitle: "Your safety starts with the chimney",
+        heroNoteText: "Honest chimney work, elegant results and a service you can rely on.",
+        servicesKicker: "Services",
+        servicesTitle: "Complete chimney services",
+        servicesLead: "We provide everything necessary for a safe and properly functioning chimney – from routine cleaning to stainless systems and official inspections.",
+        srv1Title: "Chimney cleaning",
+        srv1Text: "Regular cleaning of chimney flues for safe operation and proper draft.",
+        srv2Title: "Inspections and reports",
+        srv2Text: "Professional inspections and required reports for your chimney system.",
+        srv3Title: "Chimney milling",
+        srv3Text: "Flue enlargement for relining and modernization of older chimneys.",
+        srv4Title: "Relining",
+        srv4Text: "Professional chimney relining for different appliance types.",
+        srv5Title: "Stainless chimney installation",
+        srv5Text: "Installation of modern stainless steel chimney systems tailored to the property.",
+        srv6Title: "Consultation",
+        srv6Text: "We help you choose the right solution and advise on related chimney work.",
+        whyKicker: "Why us",
+        whyTitle: "Reliability, experience and fair approach",
+        whyLead: "We focus on safety, clear communication and professional execution of every job.",
+        why1Title: "Fast appointments",
+        why1Text: "We try to arrange the earliest possible term.",
+        why2Title: "Reliability",
+        why2Text: "What we agree on, we keep. Honest and human approach.",
+        why3Title: "Professional service",
+        why3Text: "Every project is handled carefully with safety in mind.",
+        why4Title: "Experience",
+        why4Text: "Real field experience with many chimney situations and systems.",
+        why5Title: "Fair prices",
+        why5Text: "Reasonable pricing without unnecessary complications.",
+        why6Title: "Inspection outputs",
+        why6Text: "We also provide inspections and necessary official outputs.",
+        processKicker: "How it works",
+        processTitle: "Simple process in 3 steps",
+        processLead: "You call, we arrange a date, and we take care of the rest.",
+        step1Title: "Get in touch",
+        step1Text: "Call us or message us on social media and tell us what you need.",
+        step2Title: "We arrange a date",
+        step2Text: "We agree on a suitable term based on location and scope of work.",
+        step3Title: "We do the job",
+        step3Text: "We complete the work professionally, safely and with a focus on results.",
+        galleryKicker: "Gallery",
+        galleryTitle: "Examples of our work",
+        galleryLead: "Real photos from practice. Cleaning, installation, condition before repair and final result directly on site.",
+        gallery1: "Stainless chimney installation",
+        gallery2: "Condition before repair",
+        gallery3: "Finished solution",
+        trustKicker: "Trust",
+        trustTitle: "Honest work you can rely on",
+        trustText: "We value professionalism, safety and quality workmanship. Every project represents our name.",
+        contactKicker: "Contacts",
+        contactTitle: "Get in touch",
+        contactLead: "We operate across the South Moravian region and the Uherské Hradiště district. If you are outside this area, just call us and we can discuss it.",
+        phoneLabel: "Phone",
+        areaKicker: "Coverage",
+        areaTitle: "Where we work",
+        area1: "Entire South Moravian region",
+        area2: "Zlín region – Uherské Hradiště district",
+        area3: "Outside these areas? Just call and we will discuss it",
+        area4: "Address: Smetanova 780, 697 01 Kyjov",
+        area5: "Company ID: 19800193",
+        gameKicker: "Mini game",
+        gameTitle: "Clean the chimney and win a discount",
+        gameLead: "This is not easy. Collect all soot pieces, avoid obstacles and get the chimney sweep to the finish. Winning gives you a discount code from 5 to 10%.",
+        controlsTitle: "Controls",
+        controlsText: "Use ← → to move and spacebar to jump. On mobile use the buttons below the game.",
+        startGameBtn: "Restart",
+        objectiveTitle: "Goal",
+        objectiveText: "Collect 8 soot pieces and do not fall or hit dangerous obstacles more than 2 times.",
+        rewardTitle: "Result",
+        rewardDefault: "After finishing the game, your reward and discount code will appear here.",
+        footerText: "Kominictví Ježek • Professional chimney services • South Moravian region and Uherské Hradiště"
+      },
+
+      de: {
+        brandSub: "Professionelle Schornsteinfegerdienste",
+        navServices: "Leistungen",
+        navWhy: "Warum wir",
+        navProcess: "Ablauf",
+        navGallery: "Galerie",
+        navContact: "Kontakte",
+        navGame: "Minispiel",
+        badge: "Reinigung, Inspektionen, Sanierung und Montage von Schornsteinen",
+        heroTitle: "Schornstein in Bestform, Ruhe im Zuhause.",
+        heroText: "Mit uns zieht der Schornstein richtig. Kominictví Ježek bietet professionelle Schornsteinreinigung, Kontrollen und Revisionen, Fräsen, Sanierung sowie die Montage von Edelstahlschornsteinen. Wir arbeiten in der gesamten Südmährischen Region und im Bezirk Uherské Hradiště.",
+        callNow: "📞 Jetzt anrufen",
+        contactsBtn: "Kontakte",
+        gameBtn: "Minispiel starten",
+        stat1Title: "Revisionen",
+        stat1Text: "Kontrollen und Revisionen für einen sicheren Betrieb.",
+        stat2Title: "Schnelle Termine",
+        stat2Text: "Schnelle und direkte Terminvereinbarung ohne unnötige Verzögerungen.",
+        stat3Title: "Südmähren + UH",
+        stat3Text: "Einsatzgebiet in der Region. Außerhalb? Einfach anrufen.",
+        heroNoteTitle: "Ihre Sicherheit beginnt am Schornstein",
+        heroNoteText: "Ehrliche Arbeit, elegantes Ergebnis und ein Service, auf den Verlass ist.",
+        servicesKicker: "Leistungen",
+        servicesTitle: "Komplette Schornsteinlösungen",
+        servicesLead: "Wir bieten alles, was für einen sicheren und funktionierenden Schornstein nötig ist – von der regelmäßigen Reinigung bis zu Edelstahlsystemen und fachlichen Revisionen.",
+        srv1Title: "Schornsteinreinigung",
+        srv1Text: "Regelmäßige Reinigung der Abgaswege für sicheren Betrieb und guten Zug.",
+        srv2Title: "Kontrollen und Revisionen",
+        srv2Text: "Fachliche Kontrollen und Revisionen einschließlich notwendiger Unterlagen.",
+        srv3Title: "Schornsteinfräsen",
+        srv3Text: "Erweiterung des Schornsteinquerschnitts für Sanierung und Modernisierung.",
+        srv4Title: "Sanierung / Einziehen",
+        srv4Text: "Fachgerechte Sanierung von Schornsteinen für verschiedene Heizsysteme.",
+        srv5Title: "Montage von Edelstahlschornsteinen",
+        srv5Text: "Montage moderner Edelstahlschornsteinsysteme nach Maß.",
+        srv6Title: "Beratung",
+        srv6Text: "Wir helfen bei der Auswahl der richtigen Lösung und beraten zu weiteren Arbeiten.",
+        whyKicker: "Warum wir",
+        whyTitle: "Zuverlässigkeit, Erfahrung und fairer Umgang",
+        whyLead: "Wir legen Wert auf Sicherheit, klare Absprachen und professionelle Ausführung.",
+        why1Title: "Schnelle Termine",
+        why1Text: "Wir versuchen, so früh wie möglich einen Termin zu finden.",
+        why2Title: "Zuverlässigkeit",
+        why2Text: "Was wir vereinbaren, gilt. Ehrlicher und menschlicher Umgang.",
+        why3Title: "Professioneller Service",
+        why3Text: "Jedes Projekt wird sorgfältig und sicher durchgeführt.",
+        why4Title: "Erfahrung",
+        why4Text: "Praktische Erfahrung aus vielen realen Einsätzen.",
+        why5Title: "Faire Preise",
+        why5Text: "Angemessene Preise ohne unnötige Komplikationen.",
+        why6Title: "Revisionen und Unterlagen",
+        why6Text: "Wir erstellen auch Revisionen und notwendige Unterlagen.",
+        processKicker: "Ablauf",
+        processTitle: "Einfache Absprache in 3 Schritten",
+        processLead: "Sie rufen an, wir vereinbaren einen Termin und kümmern uns um den Rest.",
+        step1Title: "Sie melden sich",
+        step1Text: "Rufen Sie an oder schreiben Sie uns über soziale Netzwerke.",
+        step2Title: "Terminvereinbarung",
+        step2Text: "Wir finden einen passenden Termin nach Ort und Umfang der Arbeit.",
+        step3Title: "Ausführung",
+        step3Text: "Wir erledigen die Arbeit professionell, sicher und mit Fokus auf das Ergebnis.",
+        galleryKicker: "Galerie",
+        galleryTitle: "Beispiele unserer Arbeiten",
+        galleryLead: "Echte Fotos aus der Praxis. Reinigung, Montage, Zustand vor der Sanierung und das Endergebnis vor Ort.",
+        gallery1: "Montage eines Edelstahlschornsteins",
+        gallery2: "Zustand vor der Sanierung",
+        gallery3: "Fertige Lösung",
+        trustKicker: "Vertrauen",
+        trustTitle: "Saubere Arbeit, auf die Verlass ist",
+        trustText: "Wir stehen für Professionalität, Sicherheit und hochwertige Ausführung. Jeder Auftrag ist unsere Visitenkarte.",
+        contactKicker: "Kontakte",
+        contactTitle: "Kontaktieren Sie uns",
+        contactLead: "Wir arbeiten in der gesamten Südmährischen Region und im Bezirk Uherské Hradiště. Wenn Sie außerhalb dieses Gebiets sind, rufen Sie uns einfach an.",
+        phoneLabel: "Telefon",
+        areaKicker: "Einsatzgebiet",
+        areaTitle: "Wo wir arbeiten",
+        area1: "Gesamte Südmährische Region",
+        area2: "Region Zlín – Bezirk Uherské Hradiště",
+        area3: "Außerhalb dieser Gebiete? Einfach anrufen, wir finden eine Lösung",
+        area4: "Adresse: Smetanova 780, 697 01 Kyjov",
+        area5: "Firmen-ID: 19800193",
+        gameKicker: "Minispiel",
+        gameTitle: "Reinige den Schornstein und gewinne Rabatt",
+        gameLead: "Das ist nicht leicht. Sammle alle Rußteile, weiche Hindernissen aus und bringe den Schornsteinfeger ins Ziel. Beim Gewinn erhältst du einen Rabattcode von 5 bis 10%.",
+        controlsTitle: "Steuerung",
+        controlsText: "Mit ← → bewegen, mit Leertaste springen. Auf dem Handy die Tasten unter dem Spiel benutzen.",
+        startGameBtn: "Neu starten",
+        objectiveTitle: "Ziel",
+        objectiveText: "Sammle 8 Rußteile und falle nicht herunter bzw. berühre gefährliche Hindernisse nicht mehr als 2 Mal.",
+        rewardTitle: "Ergebnis",
+        rewardDefault: "Nach dem Spiel erscheint hier deine Belohnung und der Rabattcode.",
+        footerText: "Kominictví Ježek • Professionelle Schornsteinfegerdienste • Südmährische Region und Uherské Hradiště"
+      }
+    };
+
+    function setLang(lang, btn){
+      document.documentElement.lang = lang;
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if(translations[lang] && translations[lang][key]){
+          el.textContent = translations[lang][key];
+        }
+      });
+
+      document.querySelectorAll(".lang-btn").forEach(b => b.classList.remove("active"));
+      if(btn) btn.classList.add("active");
+
+      localStorage.setItem("kominictviLang", lang);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const saved = localStorage.getItem("kominictviLang") || "cs";
+      const btn = [...document.querySelectorAll(".lang-btn")].find(b => b.getAttribute("onclick").includes(`'${saved}'`));
+      setLang(saved, btn);
+
+      const observer = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            entry.target.classList.add("visible");
+          }
+        });
+      }, {threshold:.14});
+
+      document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+      if(window.innerWidth < 900){
+        document.getElementById("mobileControls").style.display = "flex";
+      }
+
+      startGame();
+    });
+
+    // ===== MINI GAME =====
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+    const resultBox = document.getElementById("gameResult");
+
+    let keys = { left:false, right:false, jump:false };
+    let gameState = {};
+
+    function startGame(){
+      gameState = {
+        running:true,
+        won:false,
+        score:0,
+        damage:0,
+        gravity:0.72,
+        friction:0.86,
+        cameraX:0,
+        maxDamage:2,
+        targetScore:8,
+        player:{
+          x:60,
+          y:380,
+          w:30,
+          h:42,
+          vx:0,
+          vy:0,
+          onGround:false,
+          facing:1
+        },
+        platforms:[
+          {x:0, y:460, w:250, h:60},
+          {x:310, y:420, w:140, h:25},
+          {x:520, y:375, w:120, h:20},
+          {x:720, y:430, w:130, h:20},
+          {x:920, y:380, w:120, h:20},
+          {x:1110, y:330, w:110, h:18},
+          {x:1280, y:390, w:120, h:18},
+          {x:1460, y:350, w:130, h:18},
+          {x:1640, y:300, w:120, h:18},
+          {x:1830, y:360, w:150, h:20},
+          {x:2040, y:315, w:120, h:18},
+          {x:2230, y:270, w:140, h:18},
+          {x:2460, y:330, w:180, h:22}
+        ],
+        hazards:[
+          {x:400,y:445,w:26,h:15},
+          {x:780,y:455,w:30,h:15},
+          {x:997,y:405,w:22,h:15},
+          {x:1345,y:415,w:25,h:15},
+          {x:1710,y:325,w:24,h:15},
+          {x:2105,y:340,w:22,h:15}
+        ],
+        soot:[
+          {x:350,y:380,r:10,collected:false},
+          {x:560,y:335,r:10,collected:false},
+          {x:760,y:390,r:10,collected:false},
+          {x:960,y:340,r:10,collected:false},
+          {x:1150,y:290,r:10,collected:false},
+          {x:1490,y:310,r:10,collected:false},
+          {x:1870,y:320,r:10,collected:false},
+          {x:2280,y:230,r:10,collected:false}
+        ],
+        finish:{x:2535,y:250,w:40,h:80}
+      };
+
+      resultBox.textContent = translations[document.documentElement.lang]?.rewardDefault || translations.cs.rewardDefault;
+      keys.left = keys.right = keys.jump = false;
+    }
+
+    function drawBackground(camX){
+      // sky details
+      ctx.fillStyle = "rgba(255,255,255,.35)";
+      for(let i=0;i<8;i++){
+        const x = (i*220 - (camX*0.15)%220);
+        ctx.beginPath();
+        ctx.arc(x+60, 80 + (i%3)*28, 18, 0, Math.PI*2);
+        ctx.arc(x+84, 80 + (i%3)*28, 24, 0, Math.PI*2);
+        ctx.arc(x+108, 80 + (i%3)*28, 16, 0, Math.PI*2);
+        ctx.fill();
+      }
+
+      // distant roofs
+      ctx.fillStyle = "#87523f";
+      for(let i=0;i<12;i++){
+        const x = i*170 - (camX*0.3)%170;
+        ctx.beginPath();
+        ctx.moveTo(x, 410);
+        ctx.lineTo(x+55, 355);
+        ctx.lineTo(x+110, 410);
+        ctx.closePath();
+        ctx.fill();
+      }
+
+      // ground
+      ctx.fillStyle = "#d8d1c2";
+      ctx.fillRect(0, 460, canvas.width, 60);
+    }
+
+    function drawPlatform(p){
+      const x = p.x - gameState.cameraX;
+      ctx.fillStyle = "#6d6f77";
+      ctx.fillRect(x, p.y, p.w, p.h);
+      ctx.fillStyle = "#8d9099";
+      for(let i=0;i<p.w;i+=34){
+        ctx.fillRect(x+i+2, p.y+2, 26, 10);
+      }
+    }
+
+    function drawPlayer(pl){
+      const x = pl.x - gameState.cameraX;
+      const y = pl.y;
+
+      // hat
+      ctx.fillStyle = "#1d1f24";
+      ctx.fillRect(x+8, y-6, 18, 6);
+      ctx.fillRect(x+12, y-18, 10, 14);
+
+      // head
+      ctx.fillStyle = "#f0c8aa";
+      ctx.beginPath();
+      ctx.arc(x+15, y+8, 10, 0, Math.PI*2);
+      ctx.fill();
+
+      // body
+      ctx.fillStyle = "#2d3038";
+      ctx.fillRect(x+7, y+18, 16, 16);
+
+      // rope
+      ctx.strokeStyle = "#c0a172";
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.arc(x+22, y+26, 9, -1.2, 1.8);
+      ctx.stroke();
+
+      // legs
+      ctx.strokeStyle = "#23252b";
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      ctx.moveTo(x+11, y+34);
+      ctx.lineTo(x+8, y+44);
+      ctx.moveTo(x+19, y+34);
+      ctx.lineTo(x+22, y+44);
+      ctx.stroke();
+
+      // arms
+      ctx.beginPath();
+      ctx.moveTo(x+7, y+22);
+      ctx.lineTo(x+1, y+30);
+      ctx.moveTo(x+23, y+22);
+      ctx.lineTo(x+28, y+29);
+      ctx.stroke();
+    }
+
+    function drawHazard(h){
+      const x = h.x - gameState.cameraX;
+      ctx.fillStyle = "#1f1f1f";
+      ctx.fillRect(x, h.y, h.w, h.h);
+      ctx.fillStyle = "#111";
+      for(let i=0;i<4;i++){
+        ctx.beginPath();
+        ctx.arc(x + 6 + i*6, h.y + 4, 3, 0, Math.PI*2);
+        ctx.fill();
+      }
+      ctx.strokeStyle = "#ff6f5e";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(x+2,h.y+h.h-1);
+      ctx.lineTo(x+7,h.y+2);
+      ctx.lineTo(x+12,h.y+h.h-1);
+      ctx.lineTo(x+17,h.y+2);
+      ctx.lineTo(x+22,h.y+h.h-1);
+      ctx.stroke();
+    }
+
+    function drawSoot(s){
+      if(s.collected) return;
+      const x = s.x - gameState.cameraX;
+      ctx.fillStyle = "#202124";
+      ctx.beginPath();
+      ctx.arc(x, s.y, s.r, 0, Math.PI*2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(x-8, s.y+4, s.r-3, 0, Math.PI*2);
+      ctx.arc(x+7, s.y+5, s.r-4, 0, Math.PI*2);
+      ctx.fill();
+    }
+
+    function drawFinish(f){
+      const x = f.x - gameState.cameraX;
+      ctx.fillStyle = "#3e434d";
+      ctx.fillRect(x+12, f.y+20, 16, 60);
+      ctx.fillStyle = "#e8d39e";
+      ctx.beginPath();
+      ctx.moveTo(x+28, f.y+20);
+      ctx.lineTo(x+65, f.y+32);
+      ctx.lineTo(x+28, f.y+44);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    function rectsIntersect(a,b){
+      return a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
+    }
+
+    function playerHitbox(pl){
+      return {x:pl.x, y:pl.y, w:pl.w, h:pl.h};
+    }
+
+    function hurtPlayer(){
+      gameState.damage++;
+      gameState.player.x -= 40;
+      gameState.player.vx = -2;
+      gameState.player.vy = -6;
+
+      if(gameState.damage > gameState.maxDamage){
+        gameState.running = false;
+        resultBox.textContent = "Hra skončila. Tahle výzva je opravdu těžká – zkus to znovu.";
+      }
+    }
+
+    function winGame(){
+      gameState.running = false;
+      gameState.won = true;
+      const discount = Math.floor(Math.random() * 6) + 5;
+      resultBox.innerHTML = `<span class="win">Gratulujeme, získáváte slevový kód JEZEK${discount}</span><br>Pokud chcete slevový kód využít, musíte ho říct při začátku realizace objednávky.`;
+    }
+
+    function update(){
+      if(!gameState.running) return;
+
+      const p = gameState.player;
+
+      if(keys.left){
+        p.vx -= 0.65;
+        p.facing = -1;
+      }
+      if(keys.right){
+        p.vx += 0.65;
+        p.facing = 1;
+      }
+      if(!keys.left && !keys.right){
+        p.vx *= gameState.friction;
+      }
+
+      p.vx = Math.max(-5.3, Math.min(5.3, p.vx));
+
+      if(keys.jump && p.onGround){
+        p.vy = -12.4;
+        p.onGround = false;
+      }
+
+      p.vy += gameState.gravity;
+      p.x += p.vx;
+      p.y += p.vy;
+      p.onGround = false;
+
+      for(const plat of gameState.platforms){
+        const pb = playerHitbox(p);
+        if(
+          pb.x + pb.w > plat.x &&
+          pb.x < plat.x + plat.w &&
+          pb.y + pb.h > plat.y &&
+          pb.y + pb.h < plat.y + 22 &&
+          p.vy >= 0
+        ){
+          p.y = plat.y - p.h;
+          p.vy = 0;
+          p.onGround = true;
+        }
+      }
+
+      if(p.y > canvas.height + 80){
+        hurtPlayer();
+        p.x = 60;
+        p.y = 380;
+        p.vx = 0;
+        p.vy = 0;
+      }
+
+      for(const hz of gameState.hazards){
+        if(rectsIntersect(playerHitbox(p), hz)){
+          hurtPlayer();
+          break;
+        }
+      }
+
+      for(const s of gameState.soot){
+        if(!s.collected && Math.hypot((p.x + p.w/2) - s.x, (p.y + p.h/2) - s.y) < 24){
+          s.collected = true;
+          gameState.score++;
+        }
+      }
+
+      if(gameState.score >= gameState.targetScore && rectsIntersect(playerHitbox(p), gameState.finish)){
+        winGame();
+      }
+
+      gameState.cameraX = Math.max(0, p.x - 220);
+    }
+
+    function drawHUD(){
+      ctx.fillStyle = "rgba(10,12,16,.75)";
+      ctx.fillRect(16,16,260,74);
+      ctx.strokeStyle = "rgba(255,255,255,.12)";
+      ctx.strokeRect(16,16,260,74);
+
+      ctx.fillStyle = "#f5f1e8";
+      ctx.font = "700 20px Inter, sans-serif";
+      ctx.fillText(`Saze: ${gameState.score}/${gameState.targetScore}`, 28, 45);
+      ctx.fillText(`Chyby: ${gameState.damage}/${gameState.maxDamage+1}`, 28, 73);
+    }
+
+    function draw(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      drawBackground(gameState.cameraX);
+
+      for(const plat of gameState.platforms) drawPlatform(plat);
+      for(const hz of gameState.hazards) drawHazard(hz);
+      for(const s of gameState.soot) drawSoot(s);
+      drawFinish(gameState.finish);
+      drawPlayer(gameState.player);
+      drawHUD();
+    }
+
+    function loop(){
+      update();
+      draw();
+      requestAnimationFrame(loop);
+    }
+
+    loop();
+
+    window.addEventListener("keydown", (e)=>{
+      if(e.code === "ArrowLeft") keys.left = true;
+      if(e.code === "ArrowRight") keys.right = true;
+      if(e.code === "Space"){
+        e.preventDefault();
+        keys.jump = true;
+      }
+    });
+
+    window.addEventListener("keyup", (e)=>{
+      if(e.code === "ArrowLeft") keys.left = false;
+      if(e.code === "ArrowRight") keys.right = false;
+      if(e.code === "Space") keys.jump = false;
+    });
+
+    const bindTouch = (id, keyName) => {
+      const el = document.getElementById(id);
+      if(!el) return;
+      ["touchstart","mousedown"].forEach(evt => {
+        el.addEventListener(evt, (e)=>{
+          e.preventDefault();
+          keys[keyName] = true;
+        });
+      });
+      ["touchend","touchcancel","mouseup","mouseleave"].forEach(evt => {
+        el.addEventListener(evt, (e)=>{
+          e.preventDefault();
+          keys[keyName] = false;
+        });
+      });
+    };
+
+    bindTouch("leftBtn","left");
+    bindTouch("rightBtn","right");
+    bindTouch("jumpBtn","jump");
+  </script>
+</body>
+</html>
