@@ -658,6 +658,26 @@
     }
     .legal-text li { margin-bottom: 8px; }
     .legal-text li:last-child { margin-bottom: 0; }
+    .legal-contact-callout {
+      margin-top: 18px;
+      padding: 16px 18px;
+      border: 1px solid rgba(245,217,155,.38);
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(245,217,155,.16), rgba(245,217,155,.055));
+      color: var(--text);
+      font-weight: 850;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 14px 34px rgba(0,0,0,.18);
+    }
+    .legal-contact-callout .legal-email {
+      display: inline-block;
+      color: var(--gold-light);
+      font-size: 1.12em;
+      font-weight: 950;
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 4px;
+      overflow-wrap: anywhere;
+    }
     .legal-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
     .fine-print { color: var(--muted); font-size: .92rem; line-height: 1.7; }
     .footer__links { display: flex; gap: 16px; flex-wrap: wrap; }
@@ -1165,7 +1185,8 @@
               <li>vznést námitku proti zpracování na základě oprávněného zájmu (čl. 21 GDPR),</li>
               <li>odvolat souhlas, pokud je zpracování založeno na souhlasu.</li>
             </ul>
-            <p>Se žádostí nás můžete kontaktovat na e-mailu: <a href="mailto:d.jezurci@seznam.cz">d.jezurci@seznam.cz</a>. Dále máte právo podat stížnost u Úřadu pro ochranu osobních údajů (<a href="https://www.uoou.cz" target="_blank" rel="noopener noreferrer">www.uoou.cz</a>), pokud se domníváte, že bylo porušeno vaše právo na ochranu osobních údajů.</p>
+            <p class="legal-contact-callout">Se žádostí nás můžete kontaktovat na e-mailu: <a class="legal-email" href="mailto:d.jezurci@seznam.cz">d.jezurci@seznam.cz</a>.</p>
+            <p>Dále máte právo podat stížnost u Úřadu pro ochranu osobních údajů (<a href="https://www.uoou.cz" target="_blank" rel="noopener noreferrer">www.uoou.cz</a>), pokud se domníváte, že bylo porušeno vaše právo na ochranu osobních údajů.</p>
           </div>
         </article>
 
@@ -1174,9 +1195,11 @@
           <div class="legal-text">
             <p>Tento web používá soubory cookies v souladu s § 89 odst. 3 zákona č. 127/2005 Sb., o elektronických komunikacích. Cookies jsou malé textové soubory, které se ukládají ve vašem zařízení.</p>
             <p><strong>Nezbytné cookies:</strong> Slouží k základnímu fungování a zabezpečení webu (např. uložení vašich preferencí ohledně samotné cookie lišty). Tyto cookies jsou ukládány vždy a nepotřebujeme k nim váš souhlas.</p>
+            <p><strong>Analytické cookies:</strong> Pomáhají nám zjistit, jak návštěvníci web používají (např. Google Analytics). Tyto cookies použijeme pouze v případě, že nám k tomu udělíte výslovný souhlas v cookie liště.</p>
             <p><strong>Marketingové cookies:</strong> Aktuálně nepoužíváme. Pokud by byly v budoucnu nasazeny, budou spuštěny pouze na základě vašeho předchozího souhlasu.</p>
             <p>Svůj souhlas můžete kdykoliv změnit nebo odvolat kliknutím na odkaz „Nastavení cookies“ v patičce webu.</p>
-            </div>
+            <p class="fine-print">Pokud v budoucnu doplníte Google Analytics, Meta Pixel nebo jiný měřicí nástroj, jeho kód vložte pouze do funkce <code>enableOptionalAnalytics()</code>, aby se spustil až po souhlasu uživatele.</p>
+          </div>
           <div class="legal-actions">
             <button class="btn btn--secondary" type="button" id="openCookieSettings">Nastavení cookies</button>
           </div>
@@ -1368,6 +1391,8 @@
     }
 
     function enableOptionalAnalytics() {
+      // Sem vložte měřicí kód až ve chvíli, kdy budete chtít používat analytiku
+      // například Google Analytics / Meta Pixel. Funkce se spustí pouze po souhlasu.
     }
 
     function showCookieBanner(force = false) {
