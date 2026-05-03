@@ -14,9 +14,11 @@
     "name": "Kominictví Ježek",
     "description": "Profesionální kominické služby – čištění komínů, revize, frézování, vložkování a montáž nerezových komínů.",
     "telephone": "+420777001019",
+    "email": "d.jezurci@seznam.cz",
+    "legalName": "David Ježek",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Smetanova 780",
+      "streetAddress": "Smetanova 780/30",
       "postalCode": "697 01",
       "addressLocality": "Kyjov",
       "addressCountry": "CZ"
@@ -477,16 +479,7 @@
     .gallery__item:hover { transform: translateY(-4px); border-color: rgba(245,217,155,.25); }
     .gallery__item--tall { min-height: 620px; }
     .gallery__item img { width: 100%; height: 100%; min-height: inherit; object-fit: cover; transition: transform .5s ease; }
-    .gallery__item--contain img {
-      object-fit: contain;
-      padding: 26px;
-      background:
-        radial-gradient(circle at 50% 36%, rgba(245,217,155,.12), transparent 58%),
-        rgba(255,255,255,.92);
-    }
-    .gallery__item--wide { grid-column: span 2; }
     .gallery__item:hover img { transform: scale(1.045); }
-    .gallery__item--contain:hover img { transform: scale(1.02); }
     .gallery__item::after {
       content: "";
       position: absolute;
@@ -623,6 +616,166 @@
     }
     .touch-btn:active, .touch-btn.is-pressed { background: rgba(245,217,155,.17); border-color: rgba(245,217,155,.42); }
 
+
+
+    .legal-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      margin-top: 30px;
+    }
+    .legal-card {
+      padding: 26px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(255,255,255,.064), rgba(255,255,255,.03));
+      box-shadow: 0 18px 46px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.05);
+    }
+    .legal-card--wide { grid-column: 1 / -1; }
+    .legal-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      color: var(--text-soft);
+      line-height: 1.7;
+    }
+    .legal-list li { display: grid; gap: 2px; }
+    .legal-list strong { color: var(--text); }
+    .legal-text { color: var(--text-soft); line-height: 1.75; }
+    .legal-text h4 {
+      margin: 22px 0 8px;
+      color: var(--text);
+      font-size: 1rem;
+      letter-spacing: -.015em;
+    }
+    .legal-text p { margin: 0 0 12px; }
+    .legal-text p:last-child { margin-bottom: 0; }
+    .legal-text ul {
+      margin: 0 0 16px;
+      padding-left: 1.2rem;
+    }
+    .legal-text li { margin-bottom: 8px; }
+    .legal-text li:last-child { margin-bottom: 0; }
+    .legal-contact-callout {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+      padding: 18px;
+      border: 1px solid rgba(245,217,155,.42);
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(245,217,155,.18), rgba(245,217,155,.065));
+      color: var(--text);
+      font-weight: 850;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 14px 34px rgba(0,0,0,.18);
+    }
+    .legal-contact-callout .legal-email {
+      display: inline-flex;
+      width: fit-content;
+      max-width: 100%;
+      align-items: center;
+      padding: 10px 14px;
+      border: 2px solid rgba(245,217,155,.78);
+      border-radius: 14px;
+      background: linear-gradient(180deg, var(--gold-light), var(--gold));
+      color: #17120b !important;
+      font-size: clamp(1.18rem, 3vw, 1.45rem);
+      font-weight: 1000 !important;
+      line-height: 1.15;
+      letter-spacing: .01em;
+      text-decoration: underline;
+      text-decoration-thickness: 3px;
+      text-underline-offset: 4px;
+      overflow-wrap: anywhere;
+      box-shadow: 0 12px 28px rgba(214,174,98,.2);
+    }
+    .legal-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
+    .fine-print { color: var(--muted); font-size: .92rem; line-height: 1.7; }
+    .footer__links { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    body.has-modal { overflow: hidden; }
+
+    .legal-drawer {
+      position: fixed;
+      inset: 0;
+      z-index: 120;
+      display: none;
+      padding: 18px;
+    }
+    .legal-drawer:target,
+    .legal-drawer.is-open { display: block; }
+    .legal-drawer__backdrop {
+      position: fixed;
+      inset: 0;
+      display: block;
+      background: rgba(0,0,0,.68);
+      backdrop-filter: blur(10px);
+    }
+    .legal-drawer__panel {
+      position: relative;
+      z-index: 1;
+      width: min(calc(100% - 18px), var(--container));
+      max-height: calc(100dvh - 36px);
+      margin: 0 auto;
+      overflow: auto;
+      padding: clamp(22px, 4vw, 42px);
+      border: 1px solid rgba(245,217,155,.28);
+      border-radius: var(--radius-lg);
+      background:
+        radial-gradient(circle at 15% 8%, rgba(214,174,98,.16), transparent 28rem),
+        rgba(9,10,15,.98);
+      box-shadow: 0 28px 90px rgba(0,0,0,.62), inset 0 1px 0 rgba(255,255,255,.08);
+    }
+    .legal-drawer__head {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: flex-start;
+      margin-bottom: 26px;
+    }
+    .legal-close {
+      flex: 0 0 auto;
+    }
+    .legal-text code {
+      padding: .12em .35em;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255,255,255,.055);
+      color: var(--gold-light);
+    }
+
+    .cookie-banner {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      left: 18px;
+      z-index: 100;
+      max-width: 980px;
+      margin-inline: auto;
+      padding: 18px;
+      border: 1px solid rgba(245,217,155,.28);
+      border-radius: 26px;
+      background: rgba(9,10,15,.96);
+      box-shadow: 0 26px 80px rgba(0,0,0,.48), inset 0 1px 0 rgba(255,255,255,.08);
+      backdrop-filter: blur(18px);
+    }
+    .cookie-banner[hidden] { display: none; }
+    .cookie-banner__grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: center;
+    }
+    .cookie-banner h2 {
+      margin: 0 0 6px;
+      font-size: 1.05rem;
+      letter-spacing: -.02em;
+    }
+    .cookie-banner p { margin: 0; color: var(--text-soft); line-height: 1.65; }
+    .cookie-banner__actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+    .cookie-banner .btn { min-height: 48px; padding: 12px 16px; }
+
     .footer {
       padding: 32px 0 52px;
       border-top: 1px solid var(--line);
@@ -634,6 +787,13 @@
       justify-content: space-between;
       gap: 18px;
       flex-wrap: wrap;
+    }
+    .footer__copyright {
+      width: 100%;
+      margin-top: 8px;
+      text-align: center;
+      color: var(--text);
+      font-weight: 800;
     }
 
     .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
@@ -689,15 +849,21 @@
       .badge { border-radius: 20px; }
       .actions { flex-direction: column; }
       .actions .btn { width: 100%; }
-      .grid--3, .grid--2, .gallery, .game-panel { grid-template-columns: 1fr; }
+      .grid--3, .grid--2, .gallery, .game-panel, .legal-grid { grid-template-columns: 1fr; }
+      .legal-card--wide { grid-column: auto; }
+      .cookie-banner__grid { grid-template-columns: 1fr; }
+      .cookie-banner__actions .btn { flex: 1 1 150px; }
       .gallery__item, .gallery__item--tall { min-height: 260px; }
-      .gallery__item--wide { grid-column: span 1; }
       .hero-card__image { min-height: 430px; border-radius: 28px; }
       .hero-card__note { left: 14px; right: 14px; bottom: 14px; padding: 15px; border-radius: 20px; }
       .card, .panel, .game-shell { border-radius: 24px; }
       .card { padding: 22px; }
       .game-shell { padding: 10px; }
       .game-canvas { border-radius: 18px; }
+      .legal-drawer { padding: 10px; }
+      .legal-drawer__panel { width: 100%; max-height: calc(100dvh - 20px); border-radius: 24px; }
+      .legal-drawer__head { flex-direction: column; }
+      .legal-close { width: 100%; }
       .touch-controls { display: grid; }
     }
 
@@ -723,7 +889,7 @@
   <header class="site-header">
     <div class="container nav" aria-label="Hlavní navigace">
       <a href="#home" class="brand" aria-label="Kominictví Ježek – domů">
-        <span class="brand__logo" aria-hidden="true"><img src="profilovka-fotka.png" alt="Logo Kominictví Ježek" width="116" height="116" /></span>
+        <span class="brand__logo" aria-hidden="true"><img src="logo.png" alt="" width="116" height="116" /></span>
         <span>
           <span class="brand__title">Kominictví Ježek</span>
           <span class="brand__subtitle" data-i18n="brandSub">Profesionální kominické služby</span>
@@ -779,7 +945,7 @@
 
         <div class="hero-card reveal">
           <div class="hero-card__image">
-            <img src="david-na-komine.jpg" alt="David Ježek při práci na komíně" width="900" height="1200" fetchpriority="high" />
+            <img src="david-stojici-u-kominu-s-cepici.png" alt="David stojící u komínu s kominickou čepicí" width="1536" height="2048" fetchpriority="high" />
             <div class="hero-card__note">
               <strong data-i18n="heroNoteTitle">Vaše bezpečí začíná u komína</strong>
               <span data-i18n="heroNoteText">Poctivá kominická práce, elegantní výsledek a přístup, na který je spoleh.</span>
@@ -852,16 +1018,12 @@
         </div>
 
         <div class="gallery">
-          <figure class="gallery__item gallery__item--tall reveal"><img src="david-na-komine.jpg" alt="David Ježek při práci na komíně" loading="lazy" decoding="async" /><figcaption class="gallery__label" data-i18n="gallery1">David na komíně</figcaption></figure>
-          <figure class="gallery__item reveal"><img src="david-na-komine-2.png" alt="David Ježek stojící na komíně" loading="lazy" decoding="async" /><figcaption class="gallery__label" data-i18n="gallery2">David na komíně 2</figcaption></figure>
-          <figure class="gallery__item reveal"><img src="david-u-kominu-cepice.png" alt="David stojící u komínu v kominické čepici" loading="lazy" decoding="async" /><figcaption class="gallery__label" data-i18n="gallery3">Kominík u komínu</figcaption></figure>
-          <figure class="gallery__item reveal"><img src="komin.png" alt="Pohled na komín a komínový nástavec ze střechy" loading="lazy" decoding="async" /><figcaption class="gallery__label" data-i18n="gallery4">Komín</figcaption></figure>
-          <figure class="gallery__item gallery__item--wide reveal"><img src="montaz.png" alt="Montáž nerezového komínu na fasádě domu" loading="lazy" decoding="async" /><figcaption class="gallery__label" data-i18n="gallery5">Montáž</figcaption></figure>
-          <figure class="gallery__item reveal"><img src="stavba-komina.png" alt="Stavba a oprava zděného komína" loading="lazy" decoding="async" /><figcaption class="gallery__label" data-i18n="gallery6">Stavba komína</figcaption></figure>
-          <figure class="gallery__item reveal"><img src="spatny-stav-komina.png" alt="Špatný stav komína před úpravou" loading="lazy" decoding="async" /><figcaption class="gallery__label" data-i18n="gallery7">Špatný stav komína</figcaption></figure>
-          <figure class="gallery__item gallery__item--contain reveal"><img src="profilovka-fotka.png" alt="Logo Kominictví Ježek s ježkem" loading="lazy" decoding="async" /><figcaption class="gallery__label" data-i18n="gallery8">Profilová fotka / logo</figcaption></figure>
-          <figure class="gallery__item gallery__item--contain reveal"><img src="spolehliva.png" alt="Certifikát Spolehlivá firma" loading="lazy" decoding="async" /><figcaption class="gallery__label" data-i18n="gallery9">Spolehlivá firma</figcaption></figure>
-          <figure class="gallery__item gallery__item--wide reveal"><img src="vizitka.png" alt="Vizitka Kominictví Ježek s kontaktními údaji" loading="lazy" decoding="async" /><figcaption class="gallery__label" data-i18n="gallery10">Vizitka</figcaption></figure>
+          <figure class="gallery__item gallery__item--tall reveal"><img src="david-na-komine-2.png" alt="David na komíně" loading="lazy" decoding="async" /><figcaption class="gallery__label" data-i18n="gallery1">David na komíně 2.</figcaption></figure>
+          <figure class="gallery__item reveal"><img src="david-na-komine.png" alt="David na komíně" loading="lazy" decoding="async" /><figcaption class="gallery__label" data-i18n="gallery2">David na komíně</figcaption></figure>
+          <figure class="gallery__item reveal"><img src="stavba-komina.png" alt="Stavba komína" loading="lazy" decoding="async" /><figcaption class="gallery__label" data-i18n="gallery3">Stavba komína</figcaption></figure>
+          <figure class="gallery__item reveal"><img src="komin.png" alt="Komín" loading="lazy" decoding="async" /><figcaption class="gallery__label" data-i18n="gallery4">Komín</figcaption></figure>
+          <figure class="gallery__item reveal"><img src="montaz.png" alt="Montáž" loading="lazy" decoding="async" /><figcaption class="gallery__label" data-i18n="gallery5">Montáž</figcaption></figure>
+          <figure class="gallery__item reveal"><img src="spatny-stav-komina.png" alt="Špatný stav komína" loading="lazy" decoding="async" /><figcaption class="gallery__label" data-i18n="gallery6">Špatný stav komína</figcaption></figure>
         </div>
       </div>
     </section>
@@ -886,6 +1048,7 @@
 
           <div class="contact-list">
             <a class="contact-link" href="tel:+420777001019"><span><small data-i18n="phoneLabel">Telefon</small><strong>777 001 019</strong></span><span class="contact-link__icon" aria-hidden="true">📞</span></a>
+            <a class="contact-link" href="mailto:d.jezurci@seznam.cz"><span><small>E-mail</small><strong>d.jezurci@seznam.cz</strong></span><span class="contact-link__icon" aria-hidden="true">✉️</span></a>
             <a class="contact-link" href="https://www.instagram.com/kominictvi_jezek/" target="_blank" rel="noopener noreferrer"><span><small>Instagram</small><strong>@kominictvi_jezek</strong></span><span class="contact-link__icon" aria-hidden="true">📷</span></a>
             <a class="contact-link" href="https://www.facebook.com/profile.php?id=61567339137780" target="_blank" rel="noopener noreferrer"><span><small>Facebook</small><strong>Kominictví Ježek</strong></span><span class="contact-link__icon" aria-hidden="true">📘</span></a>
           </div>
@@ -898,9 +1061,15 @@
             <li data-i18n="area1">Celý Jihomoravský kraj</li>
             <li data-i18n="area2">Zlínský kraj – okres Uherské Hradiště</li>
             <li data-i18n="area3">Mimo tyto oblasti stačí zavolat a vždy se domluvíme</li>
-            <li data-i18n="area4">Adresa: Smetanova 780, 697 01 Kyjov</li>
+            <li data-i18n="area4">Adresa: Smetanova 780/30, 697 01 Kyjov</li>
+            <li>Provozovatel: David Ježek</li>
             <li data-i18n="area5">IČO: 19800193</li>
+            <li>Zapsán v živnostenském rejstříku</li>
           </ul>
+
+          <div class="trust__image reveal" style="margin-top:24px;">
+            <img src="vizitka.png" alt="Vizitka Kominictví Ježek" loading="lazy" decoding="async" />
+          </div>
         </div>
       </div>
     </section>
@@ -936,19 +1105,159 @@
             <div class="panel panel--result">
               <h3 data-i18n="rewardTitle">Výsledek</h3>
               <div class="game-result" id="gameResult" data-i18n="rewardDefault">Po dokončení hry se tady zobrazí výhra a slevový kód.</div>
+              <p class="fine-print">Sleva z minihry platí jednorázově na cenu práce, nevztahuje se na materiál a dopravu, nelze ji kombinovat s jinými akcemi a je potřeba ji nahlásit při objednávce.</p>
             </div>
           </div>
         </div>
       </div>
     </section>
+
+
+
   </main>
 
   <footer class="footer">
     <div class="container footer__inner">
-      <span data-i18n="footerText">Kominictví Ježek • Profesionální kominické služby • Jihomoravský kraj a Uherské Hradiště</span>
-      <a href="tel:+420777001019">777 001 019</a>
+      <span>Kominictví Ježek • David Ježek • IČO: 19800193 • Smetanova 780/30, 697 01 Kyjov</span>
+      <span class="footer__links"><a href="tel:+420777001019">777 001 019</a><a href="mailto:d.jezurci@seznam.cz">d.jezurci@seznam.cz</a><a href="#pravni-info" data-open-legal>GDPR, cookies a právní informace</a></span>
+      <div class="footer__copyright">Copyright © 2026 David Ježek</div>
     </div>
   </footer>
+
+
+
+  <div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-labelledby="cookieTitle" hidden>
+    <div class="cookie-banner__grid">
+      <div>
+        <h2 id="cookieTitle">Používáme cookies</h2>
+        <p>Tento web používá nezbytné cookies pro své správné fungování. Analytické cookies, díky kterým můžeme web vylepšovat, použijeme pouze s vaším souhlasem.</p>
+      </div>
+      <div class="cookie-banner__actions" aria-label="Volba cookies">
+        <button class="btn btn--secondary" type="button" data-cookie-choice="accepted">Povolit analytiku</button>
+        <button class="btn btn--secondary" type="button" data-cookie-choice="declined">Odmítnout volitelné</button>
+        <a class="btn btn--secondary" href="#pravni-info" data-open-legal>Více o cookies / Nastavení</a>
+      </div>
+    </div>
+  </div>
+
+
+
+  <section class="legal-drawer" id="pravni-info" aria-labelledby="legal-title">
+    <a class="legal-drawer__backdrop" href="#" data-close-legal aria-label="Zavřít právní informace"></a>
+    <div class="legal-drawer__panel" role="dialog" aria-modal="true" aria-labelledby="legal-title">
+      <div class="legal-drawer__head">
+        <div>
+          <div class="kicker">Právní informace</div>
+          <h2 class="section-title" id="legal-title">Ochrana osobních údajů, cookies a identifikační údaje</h2>
+          <p class="lead">Tato část je skrytá mimo běžný obsah webu a otevře se až po kliknutí na „Více o cookies / Nastavení“ nebo odkaz v patičce.</p>
+        </div>
+        <a class="btn btn--secondary legal-close" href="#" data-close-legal>Zavřít</a>
+      </div>
+
+      <div class="legal-grid">
+        <article class="legal-card">
+          <h3>Provozovatel webu</h3>
+          <ul class="legal-list">
+            <li><strong>Jméno podnikatele:</strong> David Ježek</li>
+            <li><strong>Značka/služba:</strong> Kominictví Ježek</li>
+            <li><strong>IČO:</strong> 19800193</li>
+            <li><strong>Sídlo:</strong> Smetanova 780/30, 697 01 Kyjov</li>
+            <li><strong>Evidence:</strong> zapsán v živnostenském rejstříku</li>
+            <li><strong>Telefon:</strong> <a href="tel:+420777001019">777 001 019</a></li>
+            <li><strong>E-mail:</strong> <a href="mailto:d.jezurci@seznam.cz">d.jezurci@seznam.cz</a></li>
+          </ul>
+        </article>
+
+        <article class="legal-card legal-card--wide">
+          <h3>Ochrana osobních údajů (GDPR)</h3>
+          <div class="legal-text">
+            <p>Vaše osobní údaje zpracováváme v souladu s Nařízením Evropského parlamentu a Rady (EU) 2016/679 (dále jen „GDPR“). Údaje zpracováváme pouze v rozsahu, který je nezbytný pro komunikaci, vyřízení poptávky, domluvu termínu a případné poskytnutí kominických služeb.</p>
+
+            <h4>Jaké údaje můžeme zpracovávat</h4>
+            <ul>
+              <li>jméno a příjmení,</li>
+              <li>telefonní číslo,</li>
+              <li>e-mailovou adresu,</li>
+              <li>adresu realizace služby,</li>
+              <li>obsah vaší zprávy nebo poptávky,</li>
+              <li>údaje potřebné pro vystavení dokladu (IČO, DIČ, fakturační adresa),</li>
+              <li>technické údaje související s provozem webu (IP adresa apod.).</li>
+            </ul>
+
+            <h4>Proč údaje zpracováváme a náš právní základ</h4>
+            <p>Osobní údaje zpracováváme na základě těchto právních titulů dle čl. 6 odst. 1 GDPR:</p>
+            <ul>
+              <li><strong>Jednání o uzavření smlouvy a plnění smlouvy (čl. 6 odst. 1 písm. b) GDPR):</strong> odpověď na vaši poptávku, domluva termínu, poskytnutí objednané služby.</li>
+              <li><strong>Splnění právní povinnosti (čl. 6 odst. 1 písm. c) GDPR):</strong> vystavení a uchování účetních a daňových dokladů dle zákona o účetnictví a zákona o DPH.</li>
+              <li><strong>Oprávněný zájem (čl. 6 odst. 1 písm. f) GDPR):</strong> ochrana našich právních nároků a zajištění bezpečnosti webu.</li>
+              <li><strong>Souhlas (čl. 6 odst. 1 písm. a) GDPR):</strong> například pro spuštění analytických cookies (viz sekce Cookies).</li>
+            </ul>
+
+            <h4>Jak dlouho údaje uchováváme</h4>
+            <ul>
+              <li>Údaje pro vyřízení poptávky a realizaci služby uchováváme po dobu trvání spolupráce a následně po dobu nezbytnou k ochraně našich právních nároků (typicky 3 roky od ukončení služby).</li>
+              <li>Údaje uvedené na účetních a daňových dokladech uchováváme po dobu stanovenou zákonem (např. 10 let dle zákona o DPH).</li>
+            </ul>
+
+            <h4>Komu mohou být údaje předány</h4>
+            <p>Vaše osobní údaje nepředáváme třetím stranám k marketingovým účelům. K údajům mohou mít v nezbytném rozsahu přístup zpracovatelé, se kterými máme uzavřenou smlouvu o zpracování (např. poskytovatel webhostingu, poskytovatel e-mailových služeb, externí účetní) nebo orgány veřejné moci, pokud to ukládá zákon.</p>
+
+            <h4>Vaše práva dle GDPR</h4>
+            <p>Za podmínek stanovených v GDPR máte právo:</p>
+            <ul>
+              <li>požadovat přístup ke svým osobním údajům (čl. 15 GDPR),</li>
+              <li>požadovat opravu nepřesných údajů (čl. 16 GDPR),</li>
+              <li>požadovat výmaz údajů, tzv. „právo být zapomenut“ (čl. 17 GDPR),</li>
+              <li>požadovat omezení zpracování (čl. 18 GDPR),</li>
+              <li>vznést námitku proti zpracování na základě oprávněného zájmu (čl. 21 GDPR),</li>
+              <li>odvolat souhlas, pokud je zpracování založeno na souhlasu.</li>
+            </ul>
+            <p class="legal-contact-callout"><span>Se žádostí nás můžete kontaktovat na e-mailu:</span> <a class="legal-email" href="mailto:d.jezurci@seznam.cz">d.jezurci@seznam.cz</a></p>
+            <p>Dále máte právo podat stížnost u Úřadu pro ochranu osobních údajů (<a href="https://www.uoou.cz" target="_blank" rel="noopener noreferrer">www.uoou.cz</a>), pokud se domníváte, že bylo porušeno vaše právo na ochranu osobních údajů.</p>
+          </div>
+        </article>
+
+        <article class="legal-card legal-card--wide">
+          <h3>Cookies</h3>
+          <div class="legal-text">
+            <p>Tento web používá soubory cookies v souladu s § 89 odst. 3 zákona č. 127/2005 Sb., o elektronických komunikacích. Cookies jsou malé textové soubory, které se ukládají ve vašem zařízení.</p>
+            <p><strong>Nezbytné cookies:</strong> Slouží k základnímu fungování a zabezpečení webu (např. uložení vašich preferencí ohledně samotné cookie lišty). Tyto cookies jsou ukládány vždy a nepotřebujeme k nim váš souhlas.</p>
+            <p><strong>Analytické cookies:</strong> Pomáhají nám zjistit, jak návštěvníci web používají (např. Google Analytics). Tyto cookies použijeme pouze v případě, že nám k tomu udělíte výslovný souhlas v cookie liště.</p>
+            <p><strong>Marketingové cookies:</strong> Aktuálně nepoužíváme. Pokud by byly v budoucnu nasazeny, budou spuštěny pouze na základě vašeho předchozího souhlasu.</p>
+            <p>Svůj souhlas můžete kdykoliv změnit nebo odvolat kliknutím na odkaz „Nastavení cookies“ v patičce webu.</p>
+            <p class="fine-print">Pokud v budoucnu doplníte Google Analytics, Meta Pixel nebo jiný měřicí nástroj, jeho kód vložte pouze do funkce <code>enableOptionalAnalytics()</code>, aby se spustil až po souhlasu uživatele.</p>
+          </div>
+          <div class="legal-actions">
+            <button class="btn btn--secondary" type="button" id="openCookieSettings">Nastavení cookies</button>
+          </div>
+        </article>
+
+        <article class="legal-card legal-card--wide">
+          <h3>Minihra a slevový kód</h3>
+          <div class="legal-text">
+            <p>Na webu může být k dispozici jednoduchá minihra, po jejímž dokončení se zobrazí slevový kód.</p>
+            <ul>
+              <li>Slevový kód je nutné oznámit při objednávce, nejpozději však před začátkem realizace služby.</li>
+              <li>Sleva je jednorázová a vztahuje se výhradně na cenu práce.</li>
+              <li>Sleva se nevztahuje na materiál, dopravu a jiné externí náklady.</li>
+              <li>Slevu nelze kombinovat s jinými slevami nebo akcemi.</li>
+              <li>Provozovatel si vyhrazuje právo slevu nepřiznat nebo odmítnout bez udání důvodu (zejména při podezření na technické zneužití systému, podvodné chování nebo opakované použití stejným zákazníkem).</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="legal-card legal-card--wide">
+          <h3>Mimosoudní řešení sporů</h3>
+          <div class="legal-text">
+            <p>V souladu s § 14 zákona č. 634/1992 Sb., o ochraně spotřebitele, informujeme, že případné spory mezi provozovatelem a zákazníkem, které se nepodaří vyřešit vzájemnou dohodou, lze řešit mimosoudně. Příslušným subjektem pro mimosoudní řešení spotřebitelských sporů je:</p>
+            <p><strong>Česká obchodní inspekce</strong><br>Ústřední inspektorát – oddělení ADR<br>Štěpánská 567/15, 120 00 Praha 2<br>E-mail: <a href="mailto:adr@coi.cz">adr@coi.cz</a><br>Web: <a href="https://adr.coi.cz" target="_blank" rel="noopener noreferrer">adr.coi.cz</a></p>
+            <p>Web slouží jako prezentační stránka kominických služeb. Objednávka ani platba se na webu neprovádí.</p>
+            <p class="fine-print">Datum poslední aktualizace: 30. 4. 2026</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
 
   <script>
     "use strict";
@@ -961,8 +1270,8 @@
         servicesKicker: "Služby", servicesTitle: "Komplexní kominické služby", servicesLead: "Zajišťujeme vše důležité pro bezpečný a správně fungující komín – od pravidelného čištění až po nové nerezové systémy a odborné revize.", srv1Title: "Čištění komínů", srv1Text: "Pravidelné čištění komínových cest pro bezpečný provoz a správný tah.", srv2Title: "Kontroly a revize", srv2Text: "Odborné kontroly a revize komínů včetně potřebných výstupů.", srv3Title: "Frézování komínů", srv3Text: "Úprava průduchu pro vložkování a modernizaci starších komínových těles.", srv4Title: "Vložkování", srv4Text: "Bezpečné a odborné vložkování komínů pro různé typy spotřebičů.", srv5Title: "Montáž nerezových komínů", srv5Text: "Montáž moderních nerezových komínových systémů na míru.", srv6Title: "Poradenství", srv6Text: "Pomůžeme s výběrem řešení a poradíme i s dalšími kominickými pracemi.",
         whyKicker: "Proč my", whyTitle: "Spolehlivost, zkušenosti a férový přístup", whyLead: "Dáváme důraz na bezpečnost, jasnou domluvu a profesionální provedení každé zakázky.", why1Title: "Rychlé termíny", why1Text: "Snažíme se najít termín co nejdříve a nezdržovat vás čekáním.", why2Title: "Spolehlivost", why2Text: "Co si domluvíme, to platí. Důraz na poctivost a lidský přístup.", why3Title: "Profesionální přístup", why3Text: "Každou realizaci řešíme pečlivě a s ohledem na bezpečnost.", why4Title: "Zkušenosti", why4Text: "Praktické zkušenosti z terénu a řešení různých typů komínů.", why5Title: "Férové ceny", why5Text: "Rozumné nacenění bez zbytečných složitostí.", why6Title: "Revize a výstupy", why6Text: "Provádíme také revize a potřebné výstupy pro zákazníky.",
         processKicker: "Jak to funguje", processTitle: "Jednoduchá domluva ve 3 krocích", processLead: "Zavoláte, domluvíme termín a o zbytek se postaráme.", step1Title: "Ozvete se", step1Text: "Zavoláte nebo napíšete přes sociální sítě a řeknete, co potřebujete.", step2Title: "Domluvíme termín", step2Text: "Najdeme vhodný termín podle lokality a typu práce.", step3Title: "Provedeme realizaci", step3Text: "Práci odvedeme profesionálně, bezpečně a s důrazem na výsledek.",
-        galleryKicker: "Galerie", galleryTitle: "Ukázky práce a realizací", galleryLead: "Reálné fotografie z praxe. Čištění, montáž, stav před úpravou i výsledné řešení přímo v terénu.", gallery1: "David na komíně", gallery2: "David na komíně 2", gallery3: "Kominík u komínu", gallery4: "Komín", gallery5: "Montáž", gallery6: "Stavba komína", gallery7: "Špatný stav komína", gallery8: "Profilová fotka / logo", gallery9: "Spolehlivá firma", gallery10: "Vizitka", trustKicker: "Důvěra", trustTitle: "Poctivá práce, na kterou je spoleh", trustText: "Zakládáme si na profesionálním přístupu, bezpečnosti a kvalitně odvedené práci. Každá zakázka je pro nás vizitkou.",
-        contactKicker: "Kontakty", contactTitle: "Spojte se s námi", contactLead: "Působíme po celém Jihomoravském kraji a v okrese Uherské Hradiště. Pokud jste mimo tuto oblast, stačí zavolat a domluvíme se.", phoneLabel: "Telefon", areaKicker: "Působnost", areaTitle: "Kde pracujeme", area1: "Celý Jihomoravský kraj", area2: "Zlínský kraj – okres Uherské Hradiště", area3: "Mimo tyto oblasti stačí zavolat a vždy se domluvíme", area4: "Adresa: Smetanova 780, 697 01 Kyjov", area5: "IČO: 19800193",
+        galleryKicker: "Galerie", galleryTitle: "Ukázky práce a realizací", galleryLead: "Reálné fotografie z praxe. Čištění, montáž, stav před úpravou i výsledné řešení přímo v terénu.", gallery1: "David na komíně 2.", gallery2: "David na komíně", gallery3: "Stavba komína", gallery4: "Komín", gallery5: "Montáž", gallery6: "Špatný stav komína", trustKicker: "Důvěra", trustTitle: "Poctivá práce, na kterou je spoleh", trustText: "Zakládáme si na profesionálním přístupu, bezpečnosti a kvalitně odvedené práci. Každá zakázka je pro nás vizitkou.",
+        contactKicker: "Kontakty", contactTitle: "Spojte se s námi", contactLead: "Působíme po celém Jihomoravském kraji a v okrese Uherské Hradiště. Pokud jste mimo tuto oblast, stačí zavolat a domluvíme se.", phoneLabel: "Telefon", areaKicker: "Působnost", areaTitle: "Kde pracujeme", area1: "Celý Jihomoravský kraj", area2: "Zlínský kraj – okres Uherské Hradiště", area3: "Mimo tyto oblasti stačí zavolat a vždy se domluvíme", area4: "Adresa: Smetanova 780/30, 697 01 Kyjov", area5: "IČO: 19800193",
         gameKicker: "Minihra", gameTitle: "Vyčisti komín a získej slevu", gameLead: "Posbírej všechny saze, vyhni se překážkám a dostaň kominíka až do cíle. Po výhře získáš slevový kód od 5 do 10 %.", controlsTitle: "Ovládání", controlsText: "Na PC použij ← → nebo A/D pro pohyb a mezerník/W/↑ pro skok. Na mobilu použij tlačítka pod hrou.", startGameBtn: "Spustit znovu", objectiveTitle: "Cíl hry", objectiveText: "Posbírej 8 kusů sazí, vyhni se překážkám a dojdi k praporku. Máš maximálně 2 chyby.", rewardTitle: "Výsledek", rewardDefault: "Po dokončení hry se tady zobrazí výhra a slevový kód.", footerText: "Kominictví Ježek • Profesionální kominické služby • Jihomoravský kraj a Uherské Hradiště",
         gameOver: "Hra skončila. Překážky tě zastavily – zkus to znovu.", winPrefix: "Gratulujeme, získáváte slevový kód", winSuffix: "Slevový kód řekněte při objednávce nebo na začátku realizace."
       },
@@ -973,8 +1282,8 @@
         servicesKicker: "Služby", servicesTitle: "Komplexné kominárske služby", servicesLead: "Zabezpečujeme všetko dôležité pre bezpečný a správne fungujúci komín – od pravidelného čistenia až po nové nerezové systémy a odborné revízie.", srv1Title: "Čistenie komínov", srv1Text: "Pravidelné čistenie komínových ciest pre bezpečnú prevádzku a správny ťah.", srv2Title: "Kontroly a revízie", srv2Text: "Odborné kontroly a revízie komínov vrátane potrebných výstupov.", srv3Title: "Frézovanie komínov", srv3Text: "Úprava prieduchu pre vložkovanie a modernizáciu starších komínových telies.", srv4Title: "Vložkovanie", srv4Text: "Bezpečné a odborné vložkovanie komínov pre rôzne typy spotrebičov.", srv5Title: "Montáž nerezových komínov", srv5Text: "Montáž moderných nerezových komínových systémov na mieru.", srv6Title: "Poradenstvo", srv6Text: "Pomôžeme s výberom riešenia a poradíme aj s ďalšími kominárskymi prácami.",
         whyKicker: "Prečo my", whyTitle: "Spoľahlivosť, skúsenosti a férový prístup", whyLead: "Dávame dôraz na bezpečnosť, jasnú dohodu a profesionálne vykonanie každej zákazky.", why1Title: "Rýchle termíny", why1Text: "Snažíme sa nájsť termín čo najskôr a nezdržiavať vás čakaním.", why2Title: "Spoľahlivosť", why2Text: "Čo si dohodneme, to platí. Dôraz na poctivosť a ľudský prístup.", why3Title: "Profesionálny prístup", why3Text: "Každú realizáciu riešime starostlivo a s ohľadom na bezpečnosť.", why4Title: "Skúsenosti", why4Text: "Praktické skúsenosti z terénu a riešenia rôznych typov komínov.", why5Title: "Férové ceny", why5Text: "Rozumné nacenenie bez zbytočných komplikácií.", why6Title: "Revízie a výstupy", why6Text: "Robíme aj revízie a potrebné výstupy pre zákazníkov.",
         processKicker: "Ako to funguje", processTitle: "Jednoduchá dohoda v 3 krokoch", processLead: "Zavoláte, dohodneme termín a o zvyšok sa postaráme.", step1Title: "Ozvete sa", step1Text: "Zavoláte alebo napíšete cez sociálne siete a poviete, čo potrebujete.", step2Title: "Dohodneme termín", step2Text: "Nájdeme vhodný termín podľa lokality a typu práce.", step3Title: "Zrealizujeme prácu", step3Text: "Prácu odvedieme profesionálne, bezpečne a s dôrazom na výsledok.",
-        galleryKicker: "Galéria", galleryTitle: "Ukážky práce a realizácií", galleryLead: "Reálne fotografie z praxe. Čistenie, montáž, stav pred úpravou aj výsledné riešenie priamo v teréne.", gallery1: "David na komíne", gallery2: "David na komíne 2", gallery3: "Kominár pri komíne", gallery4: "Komín", gallery5: "Montáž", gallery6: "Stavba komína", gallery7: "Zlý stav komína", gallery8: "Profilová fotka / logo", gallery9: "Spoľahlivá firma", gallery10: "Vizitka", trustKicker: "Dôvera", trustTitle: "Poctivá práca, na ktorú je spoľah", trustText: "Zakladáme si na profesionálnom prístupe, bezpečnosti a kvalitne odvedenej práci. Každá zákazka je pre nás vizitkou.",
-        contactKicker: "Kontakty", contactTitle: "Spojte sa s nami", contactLead: "Pôsobíme po celom Juhomoravskom kraji a v okrese Uherské Hradiště. Ak ste mimo tejto oblasti, stačí zavolať a dohodneme sa.", phoneLabel: "Telefón", areaKicker: "Pôsobnosť", areaTitle: "Kde pracujeme", area1: "Celý Juhomoravský kraj", area2: "Zlínsky kraj – okres Uherské Hradiště", area3: "Mimo týchto oblastí stačí zavolať a vždy sa dohodneme", area4: "Adresa: Smetanova 780, 697 01 Kyjov", area5: "IČO: 19800193",
+        galleryKicker: "Galéria", galleryTitle: "Ukážky práce a realizácií", galleryLead: "Reálne fotografie z praxe. Čistenie, montáž, stav pred úpravou aj výsledné riešenie priamo v teréne.", gallery1: "David na komíne 2.", gallery2: "David na komíne", gallery3: "Stavba komína", gallery4: "Komín", gallery5: "Montáž", gallery6: "Zlý stav komína", trustKicker: "Dôvera", trustTitle: "Poctivá práca, na ktorú je spoľah", trustText: "Zakladáme si na profesionálnom prístupe, bezpečnosti a kvalitne odvedenej práci. Každá zákazka je pre nás vizitkou.",
+        contactKicker: "Kontakty", contactTitle: "Spojte sa s nami", contactLead: "Pôsobíme po celom Juhomoravskom kraji a v okrese Uherské Hradiště. Ak ste mimo tejto oblasti, stačí zavolať a dohodneme sa.", phoneLabel: "Telefón", areaKicker: "Pôsobnosť", areaTitle: "Kde pracujeme", area1: "Celý Juhomoravský kraj", area2: "Zlínsky kraj – okres Uherské Hradiště", area3: "Mimo týchto oblastí stačí zavolať a vždy sa dohodneme", area4: "Adresa: Smetanova 780/30, 697 01 Kyjov", area5: "IČO: 19800193",
         gameKicker: "Minihra", gameTitle: "Vyčisti komín a získaj zľavu", gameLead: "Pozbieraj všetky sadze, vyhni sa prekážkam a dostaň kominára až do cieľa. Po výhre získaš zľavový kód od 5 do 10 %.", controlsTitle: "Ovládanie", controlsText: "Na PC použi ← → alebo A/D pre pohyb a medzerník/W/↑ pre skok. Na mobile použi tlačidlá pod hrou.", startGameBtn: "Spustiť znova", objectiveTitle: "Cieľ hry", objectiveText: "Pozbieraj 8 kusov sadzí, vyhni sa prekážkam a dôjdi k vlajke. Máš maximálne 2 chyby.", rewardTitle: "Výsledok", rewardDefault: "Po dokončení hry sa tu zobrazí výhra a zľavový kód.", footerText: "Kominictví Ježek • Profesionálne kominárske služby • Juhomoravský kraj a Uherské Hradiště",
         gameOver: "Hra sa skončila. Prekážky ťa zastavili – skús to znova.", winPrefix: "Gratulujeme, získavaš zľavový kód", winSuffix: "Zľavový kód povedz pri objednávke alebo na začiatku realizácie."
       },
@@ -985,8 +1294,8 @@
         servicesKicker: "Services", servicesTitle: "Complete chimney services", servicesLead: "We provide everything necessary for a safe and properly functioning chimney – from routine cleaning to stainless systems and official inspections.", srv1Title: "Chimney cleaning", srv1Text: "Regular cleaning of chimney flues for safe operation and proper draft.", srv2Title: "Inspections and reports", srv2Text: "Professional inspections and required reports for your chimney system.", srv3Title: "Chimney milling", srv3Text: "Flue enlargement for relining and modernization of older chimneys.", srv4Title: "Relining", srv4Text: "Professional chimney relining for different appliance types.", srv5Title: "Stainless chimney installation", srv5Text: "Installation of modern stainless steel chimney systems tailored to the property.", srv6Title: "Consultation", srv6Text: "We help you choose the right solution and advise on related chimney work.",
         whyKicker: "Why us", whyTitle: "Reliability, experience and fair approach", whyLead: "We focus on safety, clear communication and professional execution of every job.", why1Title: "Fast appointments", why1Text: "We try to arrange the earliest possible appointment.", why2Title: "Reliability", why2Text: "What we agree on, we keep. Honest and human approach.", why3Title: "Professional service", why3Text: "Every project is handled carefully with safety in mind.", why4Title: "Experience", why4Text: "Real field experience with many chimney systems and situations.", why5Title: "Fair prices", why5Text: "Reasonable pricing without unnecessary complications.", why6Title: "Inspection outputs", why6Text: "We also provide inspections and necessary official outputs.",
         processKicker: "How it works", processTitle: "Simple process in 3 steps", processLead: "You call, we arrange a date, and we take care of the rest.", step1Title: "Get in touch", step1Text: "Call us or message us on social media and tell us what you need.", step2Title: "We arrange a date", step2Text: "We agree on a suitable term based on location and scope of work.", step3Title: "We do the job", step3Text: "We complete the work professionally, safely and with a focus on results.",
-        galleryKicker: "Gallery", galleryTitle: "Examples of our work", galleryLead: "Real photos from practice. Cleaning, installation, condition before repair and final result directly on site.", gallery1: "David on a chimney", gallery2: "David on a chimney 2", gallery3: "Chimney sweep by the chimney", gallery4: "Chimney", gallery5: "Installation", gallery6: "Chimney construction", gallery7: "Poor chimney condition", gallery8: "Profile photo / logo", gallery9: "Reliable company", gallery10: "Business card", trustKicker: "Trust", trustTitle: "Honest work you can rely on", trustText: "We value professionalism, safety and quality workmanship. Every project represents our name.",
-        contactKicker: "Contacts", contactTitle: "Get in touch", contactLead: "We operate across the South Moravian region and the Uherské Hradiště district. If you are outside this area, just call us and we can discuss it.", phoneLabel: "Phone", areaKicker: "Coverage", areaTitle: "Where we work", area1: "Entire South Moravian region", area2: "Zlín region – Uherské Hradiště district", area3: "Outside these areas? Just call and we will discuss it", area4: "Address: Smetanova 780, 697 01 Kyjov", area5: "Company ID: 19800193",
+        galleryKicker: "Gallery", galleryTitle: "Examples of our work", galleryLead: "Real photos from practice. Cleaning, installation, condition before repair and final result directly on site.", gallery1: "David on the chimney 2.", gallery2: "David on the chimney", gallery3: "Chimney construction", gallery4: "Chimney", gallery5: "Installation", gallery6: "Poor chimney condition", trustKicker: "Trust", trustTitle: "Honest work you can rely on", trustText: "We value professionalism, safety and quality workmanship. Every project represents our name.",
+        contactKicker: "Contacts", contactTitle: "Get in touch", contactLead: "We operate across the South Moravian region and the Uherské Hradiště district. If you are outside this area, just call us and we can discuss it.", phoneLabel: "Phone", areaKicker: "Coverage", areaTitle: "Where we work", area1: "Entire South Moravian region", area2: "Zlín region – Uherské Hradiště district", area3: "Outside these areas? Just call and we will discuss it", area4: "Address: Smetanova 780/30, 697 01 Kyjov", area5: "Company ID: 19800193",
         gameKicker: "Mini game", gameTitle: "Clean the chimney and win a discount", gameLead: "Collect all soot pieces, avoid obstacles and get the chimney sweep to the finish. Winning gives you a discount code from 5 to 10%.", controlsTitle: "Controls", controlsText: "On desktop use ← → or A/D to move and Space/W/↑ to jump. On mobile use the buttons below the game.", startGameBtn: "Restart", objectiveTitle: "Goal", objectiveText: "Collect 8 soot pieces, avoid obstacles and reach the flag. You can make at most 2 mistakes.", rewardTitle: "Result", rewardDefault: "After finishing the game, your reward and discount code will appear here.", footerText: "Kominictví Ježek • Professional chimney services • South Moravian region and Uherské Hradiště",
         gameOver: "Game over. The obstacles stopped you – try again.", winPrefix: "Congratulations, your discount code is", winSuffix: "Say the discount code when ordering or at the start of the job."
       },
@@ -997,8 +1306,8 @@
         servicesKicker: "Leistungen", servicesTitle: "Komplette Schornsteinlösungen", servicesLead: "Wir bieten alles, was für einen sicheren und funktionierenden Schornstein nötig ist – von der regelmäßigen Reinigung bis zu Edelstahlsystemen und fachlichen Revisionen.", srv1Title: "Schornsteinreinigung", srv1Text: "Regelmäßige Reinigung der Abgaswege für sicheren Betrieb und guten Zug.", srv2Title: "Kontrollen und Revisionen", srv2Text: "Fachliche Kontrollen und Revisionen einschließlich notwendiger Unterlagen.", srv3Title: "Schornsteinfräsen", srv3Text: "Erweiterung des Schornsteinquerschnitts für Sanierung und Modernisierung.", srv4Title: "Sanierung / Einziehen", srv4Text: "Fachgerechte Sanierung von Schornsteinen für verschiedene Heizsysteme.", srv5Title: "Montage von Edelstahlschornsteinen", srv5Text: "Montage moderner Edelstahlschornsteinsysteme nach Maß.", srv6Title: "Beratung", srv6Text: "Wir helfen bei der Auswahl der passenden Lösung und beraten zu weiteren Arbeiten.",
         whyKicker: "Warum wir", whyTitle: "Zuverlässigkeit, Erfahrung und fairer Ansatz", whyLead: "Wir achten auf Sicherheit, klare Absprache und professionelle Ausführung jeder Arbeit.", why1Title: "Schnelle Termine", why1Text: "Wir bemühen uns um einen möglichst schnellen Termin.", why2Title: "Zuverlässigkeit", why2Text: "Was vereinbart ist, gilt. Ehrlicher und menschlicher Umgang.", why3Title: "Professioneller Service", why3Text: "Jede Ausführung erfolgt sorgfältig und mit Blick auf Sicherheit.", why4Title: "Erfahrung", why4Text: "Praktische Erfahrung aus der Praxis mit vielen Schornsteintypen.", why5Title: "Faire Preise", why5Text: "Vernünftige Preisgestaltung ohne unnötige Komplikationen.", why6Title: "Revisionen und Unterlagen", why6Text: "Wir erstellen auch Revisionen und notwendige Ausgaben für Kunden.",
         processKicker: "Ablauf", processTitle: "Einfache Absprache in 3 Schritten", processLead: "Sie rufen an, wir vereinbaren einen Termin und kümmern uns um den Rest.", step1Title: "Kontakt aufnehmen", step1Text: "Sie rufen an oder schreiben über soziale Netzwerke und sagen, was Sie brauchen.", step2Title: "Termin vereinbaren", step2Text: "Wir finden einen passenden Termin je nach Ort und Arbeitsumfang.", step3Title: "Ausführung", step3Text: "Wir führen die Arbeit professionell, sicher und ergebnisorientiert aus.",
-        galleryKicker: "Galerie", galleryTitle: "Beispiele unserer Arbeit", galleryLead: "Echte Fotos aus der Praxis. Reinigung, Montage, Zustand vor der Anpassung und fertige Lösung direkt vor Ort.", gallery1: "David auf dem Schornstein", gallery2: "David auf dem Schornstein 2", gallery3: "Schornsteinfeger am Schornstein", gallery4: "Schornstein", gallery5: "Montage", gallery6: "Schornsteinbau", gallery7: "Schlechter Zustand des Schornsteins", gallery8: "Profilfoto / Logo", gallery9: "Zuverlässige Firma", gallery10: "Visitenkarte", trustKicker: "Vertrauen", trustTitle: "Ehrliche Arbeit, auf die Verlass ist", trustText: "Wir legen Wert auf Professionalität, Sicherheit und hochwertige Arbeit. Jeder Auftrag ist unsere Visitenkarte.",
-        contactKicker: "Kontakte", contactTitle: "Kontaktieren Sie uns", contactLead: "Wir arbeiten in der gesamten Südmährischen Region und im Bezirk Uherské Hradiště. Wenn Sie außerhalb dieses Gebiets sind, rufen Sie einfach an.", phoneLabel: "Telefon", areaKicker: "Einsatzgebiet", areaTitle: "Wo wir arbeiten", area1: "Gesamte Südmährische Region", area2: "Region Zlín – Bezirk Uherské Hradiště", area3: "Außerhalb dieser Gebiete? Einfach anrufen und wir besprechen es", area4: "Adresse: Smetanova 780, 697 01 Kyjov", area5: "Ident.-Nr.: 19800193",
+        galleryKicker: "Galerie", galleryTitle: "Beispiele unserer Arbeit", galleryLead: "Echte Fotos aus der Praxis. Reinigung, Montage, Zustand vor der Anpassung und fertige Lösung direkt vor Ort.", gallery1: "David auf dem Schornstein 2.", gallery2: "David auf dem Schornstein", gallery3: "Schornsteinbau", gallery4: "Schornstein", gallery5: "Montage", gallery6: "Schlechter Zustand des Schornsteins", trustKicker: "Vertrauen", trustTitle: "Ehrliche Arbeit, auf die Verlass ist", trustText: "Wir legen Wert auf Professionalität, Sicherheit und hochwertige Arbeit. Jeder Auftrag ist unsere Visitenkarte.",
+        contactKicker: "Kontakte", contactTitle: "Kontaktieren Sie uns", contactLead: "Wir arbeiten in der gesamten Südmährischen Region und im Bezirk Uherské Hradiště. Wenn Sie außerhalb dieses Gebiets sind, rufen Sie einfach an.", phoneLabel: "Telefon", areaKicker: "Einsatzgebiet", areaTitle: "Wo wir arbeiten", area1: "Gesamte Südmährische Region", area2: "Region Zlín – Bezirk Uherské Hradiště", area3: "Außerhalb dieser Gebiete? Einfach anrufen und wir besprechen es", area4: "Adresse: Smetanova 780/30, 697 01 Kyjov", area5: "Ident.-Nr.: 19800193",
         gameKicker: "Minispiel", gameTitle: "Reinige den Schornstein und gewinne Rabatt", gameLead: "Sammle alle Rußteile, weiche Hindernissen aus und bringe den Schornsteinfeger ins Ziel. Nach dem Sieg erhältst du einen Rabattcode von 5 bis 10 %.", controlsTitle: "Steuerung", controlsText: "Am PC ← → oder A/D zum Bewegen und Leertaste/W/↑ zum Springen. Am Handy die Tasten unter dem Spiel benutzen.", startGameBtn: "Neu starten", objectiveTitle: "Ziel", objectiveText: "Sammle 8 Rußteile, weiche Hindernissen aus und erreiche die Fahne. Du hast maximal 2 Fehler.", rewardTitle: "Ergebnis", rewardDefault: "Nach dem Spiel erscheint hier deine Belohnung und der Rabattcode.", footerText: "Kominictví Ježek • Professionelle Schornsteinfegerdienste • Südmährische Region und Uherské Hradiště",
         gameOver: "Spiel beendet. Die Hindernisse haben dich gestoppt – versuche es erneut.", winPrefix: "Glückwunsch, dein Rabattcode ist", winSuffix: "Nenne den Rabattcode bei der Bestellung oder zu Beginn der Ausführung."
       }
@@ -1048,9 +1357,82 @@
     });
 
     siteMenu?.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
-    window.addEventListener("keydown", (event) => { if (event.key === "Escape") closeMenu(); });
+    window.addEventListener("keydown", (event) => { if (event.key === "Escape") { closeMenu(); closeLegalDrawer(event); } });
     window.addEventListener("resize", () => { if (window.innerWidth > 930) closeMenu(); });
     langButtons.forEach((button) => button.addEventListener("click", () => setLanguage(button.dataset.lang)));
+
+
+
+    const cookieBanner = document.getElementById("cookieBanner");
+    const cookieSettingsButton = document.getElementById("openCookieSettings");
+    const COOKIE_CONSENT_KEY = "kominictvi-jezek-cookie-consent";
+    const legalDrawer = document.getElementById("pravni-info");
+    const legalOpeners = document.querySelectorAll("[data-open-legal]");
+    const legalClosers = document.querySelectorAll("[data-close-legal]");
+
+    function openLegalDrawer(event) {
+      event?.preventDefault();
+      legalDrawer?.classList.add("is-open");
+      document.body.classList.add("has-modal");
+      if (window.location.hash !== "#pravni-info") history.pushState(null, "", "#pravni-info");
+    }
+
+    function closeLegalDrawer(event) {
+      event?.preventDefault();
+      legalDrawer?.classList.remove("is-open");
+      document.body.classList.remove("has-modal");
+      if (window.location.hash === "#pravni-info") history.pushState(null, "", window.location.pathname + window.location.search);
+    }
+
+    legalOpeners.forEach((link) => link.addEventListener("click", openLegalDrawer));
+    legalClosers.forEach((link) => link.addEventListener("click", closeLegalDrawer));
+    window.addEventListener("hashchange", () => {
+      if (window.location.hash === "#pravni-info") {
+        legalDrawer?.classList.add("is-open");
+        document.body.classList.add("has-modal");
+      } else {
+        legalDrawer?.classList.remove("is-open");
+        document.body.classList.remove("has-modal");
+      }
+    });
+    if (window.location.hash === "#pravni-info") {
+      legalDrawer?.classList.add("is-open");
+      document.body.classList.add("has-modal");
+    }
+
+    function getCookieConsent() {
+      try { return JSON.parse(localStorage.getItem(COOKIE_CONSENT_KEY) || "null"); }
+      catch (_) { return null; }
+    }
+
+    function saveCookieConsent(choice) {
+      try {
+        localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify({
+          choice,
+          analytics: choice === "accepted",
+          savedAt: new Date().toISOString()
+        }));
+      } catch (_) {}
+      if (cookieBanner) cookieBanner.hidden = true;
+      if (choice === "accepted") enableOptionalAnalytics();
+    }
+
+    function enableOptionalAnalytics() {
+      // Sem vložte měřicí kód až ve chvíli, kdy budete chtít používat analytiku
+      // například Google Analytics / Meta Pixel. Funkce se spustí pouze po souhlasu.
+    }
+
+    function showCookieBanner(force = false) {
+      const consent = getCookieConsent();
+      if (cookieBanner && (force || !consent)) cookieBanner.hidden = false;
+    }
+
+    document.querySelectorAll("[data-cookie-choice]").forEach((button) => {
+      button.addEventListener("click", () => saveCookieConsent(button.dataset.cookieChoice));
+    });
+    cookieSettingsButton?.addEventListener("click", (event) => { closeLegalDrawer(event); showCookieBanner(true); });
+    if (getCookieConsent()?.analytics) enableOptionalAnalytics();
+    showCookieBanner();
 
     const revealItems = document.querySelectorAll(".reveal");
     if ("IntersectionObserver" in window) {
