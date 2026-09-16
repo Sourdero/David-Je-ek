@@ -150,12 +150,91 @@
 
     .nav {
       position: relative;
+      z-index: 2;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 18px;
       min-height: var(--header-h);
       padding-block: 10px;
+    }
+
+    .chimney-runner-track {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      overflow: hidden;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .chimney-runner {
+      position: absolute;
+      top: calc(50% - 18px);
+      left: 0;
+      width: 66px;
+      height: 46px;
+      opacity: 1;
+      will-change: transform;
+      animation: chimney-run-across 13s linear infinite;
+      filter:
+        drop-shadow(0 4px 5px rgba(0,0,0,.85))
+        drop-shadow(0 0 8px rgba(214,174,98,.38));
+    }
+
+    .chimney-runner__wave {
+      position: relative;
+      display: block;
+      width: 100%;
+      height: 100%;
+      will-change: transform;
+      animation: chimney-run-wave 1.5s ease-in-out infinite;
+    }
+
+    .chimney-runner__figure {
+      position: absolute;
+      inset: 0;
+      display: block;
+      animation: chimney-run-step .32s ease-in-out infinite;
+    }
+
+    .chimney-runner__person,
+    .chimney-runner__broom {
+      position: absolute;
+      display: block;
+      font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+      line-height: 1;
+    }
+
+    .chimney-runner__person {
+      right: 1px;
+      bottom: 2px;
+      z-index: 2;
+      font-size: 34px;
+    }
+
+    .chimney-runner__broom {
+      left: 1px;
+      bottom: 1px;
+      z-index: 1;
+      font-size: 30px;
+      transform: rotate(-28deg);
+      transform-origin: 70% 70%;
+    }
+
+    @keyframes chimney-run-across {
+      from { transform: translate3d(-90px, 0, 0); }
+      to { transform: translate3d(calc(100vw + 90px), 0, 0); }
+    }
+
+    @keyframes chimney-run-wave {
+      0%, 100% { transform: translateY(-18px) rotate(-3deg); }
+      50% { transform: translateY(18px) rotate(3deg); }
+    }
+
+    @keyframes chimney-run-step {
+      0%, 100% { transform: translateY(0) rotate(-3deg); }
+      50% { transform: translateY(-3px) rotate(3deg); }
     }
 
     .brand {
@@ -639,6 +718,26 @@
     .contact-link--phone strong { font-size: clamp(1.35rem, 3vw, 1.75rem); }
 
     .form-card { padding: clamp(24px, 4vw, 36px); }
+    .form-response-note {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 20px 0 0;
+      padding: 14px 16px;
+      border: 1px solid rgba(245,217,155,.38);
+      border-radius: 16px;
+      background: rgba(214,174,98,.11);
+      color: var(--text-soft);
+      line-height: 1.55;
+    }
+    .form-response-note__icon { flex: 0 0 auto; font-size: 1.4rem; }
+    .form-response-note strong { color: var(--text); }
+    .form-response-note a {
+      color: var(--gold-light);
+      font-weight: 900;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
     .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 24px; }
     .form-field { display: grid; gap: 7px; }
     .form-field--wide { grid-column: 1 / -1; }
@@ -946,6 +1045,21 @@
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
       .reveal { opacity: 1; transform: none; }
+      .chimney-runner-track { display: block; }
+      .chimney-runner {
+        left: 0;
+        right: auto;
+        animation: chimney-run-across 13s linear infinite !important;
+        animation-play-state: running !important;
+      }
+      .chimney-runner__wave {
+        animation: chimney-run-wave 3.25s ease-in-out infinite !important;
+        animation-play-state: running !important;
+      }
+      .chimney-runner__figure {
+        animation: chimney-run-step .32s ease-in-out infinite !important;
+        animation-play-state: running !important;
+      }
     }
 
     @media (max-width: 1080px) {
@@ -959,6 +1073,20 @@
 
     @media (max-width: 930px) {
       :root { --header-h: 74px; }
+      .chimney-runner {
+        top: calc(50% - 15px);
+        width: 52px;
+        height: 38px;
+        opacity: 1;
+        animation-duration: 11s !important;
+      }
+      .chimney-runner__wave { animation-duration: 1.4s; }
+      .chimney-runner__person { font-size: 28px; }
+      .chimney-runner__broom { font-size: 24px; }
+      @keyframes chimney-run-wave {
+        0%, 100% { transform: translateY(-14px) rotate(-3deg); }
+        50% { transform: translateY(14px) rotate(3deg); }
+      }
       .menu-toggle { display: flex; margin-left: auto; }
       .nav__panel {
         position: absolute;
@@ -1056,6 +1184,16 @@
   <a class="skip-link" href="#obsah">Přejít na obsah</a>
 
   <header class="site-header">
+    <div class="chimney-runner-track" aria-hidden="true">
+      <span class="chimney-runner">
+        <span class="chimney-runner__wave">
+          <span class="chimney-runner__figure">
+            <span class="chimney-runner__broom">🧹</span>
+            <span class="chimney-runner__person">👨‍🔧</span>
+          </span>
+        </span>
+      </span>
+    </div>
     <div class="container nav" aria-label="Hlavní navigace">
       <a href="#home" class="brand" aria-label="Kominictví Ježek – úvod">
         <span class="brand__logo"><img src="profilovkafotka.png" alt="David Ježek" width="116" height="116" /></span>
@@ -1288,6 +1426,10 @@
           <div class="kicker">Poptávkový formulář</div>
           <h2 class="section-title">Objednat čištění</h2>
           <p class="lead">Povinné jsou jen údaje nutné pro zpětné kontaktování a domluvu zakázky.</p>
+          <p class="form-response-note">
+            <span class="form-response-note__icon" aria-hidden="true">📞</span>
+            <span><strong>Pokud se vám do 24 hodin neozvu,</strong> zavolejte mi prosím na <a href="tel:+420777001019">777 001 019</a>.</span>
+          </p>
 
           <div class="form-grid">
             <div class="form-field">
@@ -1402,12 +1544,12 @@
   <div class="cookie-banner" id="cookieBanner" role="dialog" aria-live="polite" aria-labelledby="cookieTitle" hidden>
     <div class="cookie-banner__grid">
       <div>
-        <h2 id="cookieTitle">Používáme cookies</h2>
-        <p>Nezbytné místní úložiště uchovává vaši volbu a 24hodinový odpočet minihry. Volitelnou analytiku lze povolit nebo později jedním kliknutím odvolat.</p>
+        <h2 id="cookieTitle">Nastavení soukromí</h2>
+        <p>Nezbytné místní úložiště uchovává vaši volbu a 24hodinový odpočet minihry. S vaším souhlasem můžeme v Cloudflare D1 měřit základní návštěvnost bez reklamních profilů.</p>
       </div>
       <div class="cookie-banner__actions" aria-label="Volba cookies">
-        <button class="btn btn--secondary" type="button" data-cookie-choice="accepted">Povolit analytiku</button>
-        <button class="btn btn--secondary" type="button" data-cookie-choice="declined">Odmítnout volitelné</button>
+        <button class="btn btn--secondary" type="button" data-cookie-choice="accepted">Povolit statistiku</button>
+        <button class="btn btn--secondary" type="button" data-cookie-choice="declined">Pouze nezbytné</button>
         <a class="btn btn--secondary" href="#pravni-info" data-open-legal>Více o cookies / Nastavení</a>
       </div>
     </div>
@@ -1444,66 +1586,73 @@
         <article class="legal-card legal-card--wide">
           <h3>Ochrana osobních údajů (GDPR)</h3>
           <div class="legal-text">
-            <p>Vaše osobní údaje zpracováváme v souladu s Nařízením Evropského parlamentu a Rady (EU) 2016/679 (dále jen „GDPR“). Údaje zpracováváme pouze v rozsahu, který je nezbytný pro komunikaci, vyřízení poptávky, domluvu termínu a případné poskytnutí kominických služeb.</p>
+            <p>Správcem osobních údajů je David Ježek, IČO 19800193, Smetanova 780/30, 697 01 Kyjov. Údaje zpracováváme pouze v rozsahu potřebném pro komunikaci, vyřízení poptávky, poskytnutí služby, splnění zákonných povinností, zabezpečení webu a – pokud to povolíte – základní statistiku návštěvnosti.</p>
 
-            <h4>Jaké údaje můžeme zpracovávat</h4>
+            <h4>Jaké údaje zpracováváme</h4>
             <ul>
-              <li>jméno a příjmení,</li>
-              <li>telefonní číslo,</li>
-              <li>e-mailovou adresu,</li>
-              <li>adresu realizace služby,</li>
-              <li>obsah vaší zprávy nebo poptávky,</li>
-              <li>údaje potřebné pro vystavení dokladu (IČO, DIČ, fakturační adresa),</li>
-              <li>technické údaje potřebné k zabezpečení webu a doložení volby cookies: čas, zvolená nastavení, typ zařízení, identifikátor souhlasu a kryptograficky chráněná IP adresa.</li>
+              <li><strong>Poptávka a zakázka:</strong> jméno, telefon, obec nebo adresa realizace, zvolená služba a případně e-mail, počet komínů a obsah zprávy.</li>
+              <li><strong>Účetní údaje:</strong> fakturační adresa, IČO, DIČ a údaje na účetních a daňových dokladech, pokud jsou pro zakázku potřebné.</li>
+              <li><strong>Bezpečnost a evidence volby:</strong> čas, zvolená nastavení, verze těchto informací, pseudonymní identifikátor, typ zařízení, maskovaná IP síť a jednosměrný HMAC otisk IP adresy.</li>
+              <li><strong>Volitelná statistika:</strong> navštívená cesta stránky bez parametrů, doména předchozí stránky, typ zařízení, čas návštěvy a pseudonymní identifikátor volby.</li>
             </ul>
 
-            <h4>Proč údaje zpracováváme a náš právní základ</h4>
-            <p>Osobní údaje zpracováváme na základě těchto právních titulů dle čl. 6 odst. 1 GDPR:</p>
+            <h4>Účely a právní základy</h4>
             <ul>
-              <li><strong>Jednání o uzavření smlouvy a plnění smlouvy (čl. 6 odst. 1 písm. b) GDPR):</strong> odpověď na vaši poptávku, domluva termínu, poskytnutí objednané služby.</li>
-              <li><strong>Splnění právní povinnosti (čl. 6 odst. 1 písm. c) GDPR):</strong> vystavení a uchování účetních a daňových dokladů dle zákona o účetnictví a zákona o DPH.</li>
-              <li><strong>Oprávněný zájem (čl. 6 odst. 1 písm. f) GDPR):</strong> ochrana našich právních nároků a zajištění bezpečnosti webu.</li>
-              <li><strong>Souhlas (čl. 6 odst. 1 písm. a) GDPR):</strong> pro spuštění volitelné analytiky.</li>
+              <li><strong>Jednání o smlouvě a plnění smlouvy (čl. 6 odst. 1 písm. b) GDPR):</strong> odpověď na poptávku, domluva termínu a provedení služby.</li>
+              <li><strong>Právní povinnost (čl. 6 odst. 1 písm. c) GDPR):</strong> vedení účetnictví a uchování daňových dokladů.</li>
+              <li><strong>Oprávněný zájem (čl. 6 odst. 1 písm. f) GDPR):</strong> zabezpečení webu, omezení spamu, doložení provedené volby a ochrana právních nároků.</li>
+              <li><strong>Souhlas (čl. 6 odst. 1 písm. a) GDPR a § 89 odst. 3 zákona č. 127/2005 Sb.):</strong> uložení a zpracování údajů pro volitelnou statistiku návštěvnosti.</li>
             </ul>
 
-            <h4>Jak dlouho údaje uchováváme</h4>
+            <h4>Je poskytnutí údajů povinné?</h4>
+            <p>Jméno, telefon, obec nebo adresa a druh služby jsou potřebné k vyřízení online poptávky; bez nich formulář nelze odeslat. E-mail, počet komínů a vlastní zpráva jsou nepovinné. Statistiku návštěvnosti můžete odmítnout bez omezení přístupu k webu nebo službě.</p>
+
+            <h4>Doba uchování</h4>
             <ul>
-              <li>Údaje pro vyřízení poptávky a realizaci služby uchováváme po dobu trvání spolupráce a následně po dobu nezbytnou k ochraně našich právních nároků (typicky 3 roky od ukončení služby).</li>
-              <li>Údaje uvedené na účetních a daňových dokladech uchováváme po dobu stanovenou zákonem (např. 10 let dle zákona o DPH).</li>
-              <li>Záznam volby cookies uchováváme nejdéle 12 měsíců od poslední změny volby.</li>
+              <li>Údaje z poptávky a zakázky uchováváme po dobu spolupráce a následně zpravidla 3 roky kvůli ochraně právních nároků.</li>
+              <li>Účetní a daňové doklady uchováváme po dobu vyžadovanou příslušnými právními předpisy, zpravidla až 10 let.</li>
+              <li>Záznam volby a analytické události uchováváme nejdéle 12 měsíců. Technické záznamy pro omezení spamu se mažou po 48 hodinách.</li>
             </ul>
 
-            <h4>Komu mohou být údaje předány</h4>
-            <p>Vaše osobní údaje nepředáváme třetím stranám k jejich marketingovým účelům. Pro provoz webu, zabezpečení formuláře, uložení evidence a doručení oznámení používáme služby GitHub Pages, Cloudflare Workers a D1 a soukromý kanál Discord. K údajům mohou mít v nezbytném rozsahu přístup také externí účetní nebo orgány veřejné moci, pokud to ukládá zákon.</p>
+            <h4>Příjemci a předávání mimo EHP</h4>
+            <p>Pro hosting používáme GitHub Pages, pro formulář, databázi, zabezpečení a vlastní statistiku Cloudflare Workers, D1 a případně Turnstile a pro doručení poptávek a evidence voleb soukromé kanály Discord. Tito poskytovatelé mohou v rámci svých služeb zpracovávat údaje také mimo Evropský hospodářský prostor; případný přenos se řídí mechanismy ochrany používanými příslušným poskytovatelem. Údaje neposkytujeme třetím stranám pro jejich vlastní marketing. V nezbytném rozsahu je můžeme zpřístupnit účetnímu nebo orgánu veřejné moci, pokud to vyžaduje zákon.</p>
+            <p>Informace poskytovatelů: <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">GitHub</a>, <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">Cloudflare</a> a <a href="https://discord.com/privacy" target="_blank" rel="noopener noreferrer">Discord</a>.</p>
 
-            <h4>Vaše práva dle GDPR</h4>
-            <p>Za podmínek stanovených v GDPR máte právo:</p>
-            <ul>
-              <li>požadovat přístup ke svým osobním údajům (čl. 15 GDPR),</li>
-              <li>požadovat opravu nepřesných údajů (čl. 16 GDPR),</li>
-              <li>požadovat výmaz údajů, tzv. „právo být zapomenut“ (čl. 17 GDPR),</li>
-              <li>požadovat omezení zpracování (čl. 18 GDPR),</li>
-              <li>vznést námitku proti zpracování na základě oprávněného zájmu (čl. 21 GDPR),</li>
-              <li>odvolat souhlas, pokud je zpracování založeno na souhlasu.</li>
-            </ul>
-            <p class="legal-contact-callout"><span>Se žádostí nás můžete kontaktovat na e-mailu:</span> <a class="legal-email" href="mailto:d.jezurci@seznam.cz">d.jezurci@seznam.cz</a></p>
-            <p>Dále máte právo podat stížnost u Úřadu pro ochranu osobních údajů (<a href="https://www.uoou.cz" target="_blank" rel="noopener noreferrer">www.uoou.cz</a>), pokud se domníváte, že bylo porušeno vaše právo na ochranu osobních údajů.</p>
+            <h4>Vaše práva</h4>
+            <p>Za podmínek GDPR máte právo na přístup k údajům, jejich opravu, výmaz, omezení zpracování a přenositelnost, právo vznést námitku proti zpracování založenému na oprávněném zájmu a právo kdykoliv odvolat souhlas. Odvoláním není dotčena zákonnost dřívějšího zpracování.</p>
+            <p>Nepoužíváme automatizované rozhodování ani profilování, které by pro vás mělo právní nebo obdobně významné účinky.</p>
+            <p class="legal-contact-callout"><span>Žádost můžete poslat na:</span> <a class="legal-email" href="mailto:d.jezurci@seznam.cz">d.jezurci@seznam.cz</a></p>
+            <p>Máte také právo podat stížnost u <a href="https://uoou.gov.cz" target="_blank" rel="noopener noreferrer">Úřadu pro ochranu osobních údajů</a>.</p>
           </div>
         </article>
 
         <article class="legal-card legal-card--wide">
           <h3>Cookies</h3>
           <div class="legal-text">
-            <p>Tento web používá místní úložiště prohlížeče a případně cookies v souladu s § 89 odst. 3 zákona č. 127/2005 Sb., o elektronických komunikacích.</p>
-            <p><strong>Nezbytné uložení:</strong> Slouží k uložení volby v cookie liště a k dodržení 24hodinového omezení minihry. Je potřebné pro zvolené fungování webu a nevyžaduje souhlas.</p>
-            <p><strong>Analytické cookies:</strong> Mohou pomáhat zjistit, jak návštěvníci web používají. Spustí se pouze tehdy, pokud budou na web skutečně doplněny a návštěvník je výslovně povolí.</p>
-            <p><strong>Marketingové cookies:</strong> Aktuálně nepoužíváme. Pokud by byly v budoucnu nasazeny, budou spuštěny pouze na základě vašeho předchozího souhlasu.</p>
-            <p>Svůj souhlas můžete kdykoliv změnit nebo odvolat tlačítkem níže nebo přes odkaz „Nastavení cookies“ v patičce webu. Odvolání vypne volitelnou analytiku; nezbytné uložení pro základní funkce webu zůstane aktivní.</p>
-            <p><strong>Evidence volby:</strong> Pro doložení volby se ukládá anonymní identifikátor, čas, konkrétní volby, verze těchto informací, typ zařízení a jednosměrně chráněný otisk IP adresy. Nechráněná IP adresa se neukládá. Oznámení se zobrazí také v soukromém kanálu Discord. Samotná volba neprozrazuje jméno návštěvníka; se jménem ji lze spojit pouze tehdy, když návštěvník následně odešle poptávku se stejným identifikátorem.</p>
+            <p>Web používá místní úložiště prohlížeče, které je podle pravidel pro přístup k údajům v koncovém zařízení posuzováno obdobně jako cookies.</p>
+
+            <h4>Nezbytné místní uložení</h4>
+            <ul>
+              <li><code>kominictvi-jezek-cookie-consent</code> – uchovává vaši volbu. Při souhlasu se volba znovu nabídne nejpozději za 12 měsíců; při odmítnutí nebo odvolání nejdříve za 6 měsíců, případně dříve při významné změně zpracování.</li>
+              <li><code>kominictvi-jezek-game-unlock-at-v1</code> – uchovává konec 24hodinového omezení minihry.</li>
+              <li><code>kominictvi-jezek-game-reward-v1</code> – uchovává získanou herní odměnu nejdéle 24 hodin.</li>
+            </ul>
+            <p>Tato uložení zajišťují požadovanou funkci webu nebo uchování vaší volby a nepoužívají se k reklamě.</p>
+
+            <h4>Volitelná statistika návštěvnosti</h4>
+            <p>Po kliknutí na „Povolit statistiku“ odešle web do vlastní databáze Cloudflare D1 cestu navštívené stránky bez parametrů, doménu předchozí stránky, typ zařízení, čas a pseudonymní ID volby. Nepoužíváme Google Analytics, Meta Pixel ani marketingové profily. Bez vašeho souhlasu se analytický záznam neodešle.</p>
+
+            <h4>Evidence volby a údaj o připojení</h4>
+            <p>Pro doložení volby ukládáme pseudonymní ID, český čas volby, konkrétní nastavení, verzi pravidel, typ zařízení, maskovanou síť připojení (u IPv4 zpravidla <code>x.x.x.0/24</code>, u IPv6 prefix <code>/64</code>) a jednosměrný HMAC otisk celé IP adresy. Celou čitelnou IP adresu do databáze ani na Discord neukládáme. Cloudflare ji při zpracování požadavku technicky přijme, ale Worker ji ihned převede na uvedené omezené údaje.</p>
+            <p>Kopie evidence se odešle do soukromého kanálu Discord. Sama neobsahuje jméno; se zákazníkem ji lze spojit, pokud odešle poptávku se stejným ID. Záznamy v D1 i odpovídající zprávy Discordu se mažou po 12 měsících.</p>
+
+            <h4>Změna a odvolání</h4>
+            <p>Volbu můžete kdykoliv otevřít přes „Nastavení cookies“ a souhlas stejně snadno odvolat tlačítkem níže. Odvolání zastaví nové analytické záznamy. Automaticky se vás web znovu zeptá nejdříve za 6 měsíců; dříve jen při významné změně účelu nebo pravidel. Nezbytné funkce zůstávají aktivní.</p>
+            <p><strong>Marketingové cookies nepoužíváme.</strong> Poslední aktualizace těchto informací: 16. 9. 2026, verze 2026-09-16-v2.</p>
           </div>
           <div class="legal-actions">
             <button class="btn btn--secondary" type="button" id="openCookieSettings">Nastavení cookies</button>
-            <button class="btn btn--secondary" type="button" id="revokeCookieConsent">Odvolat volitelný souhlas</button>
+            <button class="btn btn--secondary" type="button" id="revokeCookieConsent">Odvolat souhlas se statistikou</button>
           </div>
           <div class="consent-status" id="consentStatus" role="status" aria-live="polite"></div>
         </article>
@@ -1575,13 +1724,16 @@
     const turnstileWrap = document.getElementById("turnstileWrap");
     const turnstileSiteKey = (document.getElementById("poptavka")?.dataset.turnstileSiteKey || "").trim();
     const COOKIE_CONSENT_KEY = "kominictvi-jezek-cookie-consent";
-    const CONSENT_POLICY_VERSION = "2026-09-16";
+    const CONSENT_POLICY_VERSION = "2026-09-16-v2";
+    const ACCEPTED_CHOICE_LIFETIME_MS = 365 * 24 * 60 * 60 * 1000;
+    const DECLINED_CHOICE_LIFETIME_MS = 183 * 24 * 60 * 60 * 1000;
     const inquiryForm = document.getElementById("poptavka");
     const formStatus = document.getElementById("formStatus");
     const legalDrawer = document.getElementById("pravni-info");
     const legalOpeners = document.querySelectorAll("[data-open-legal]");
     const legalClosers = document.querySelectorAll("[data-close-legal]");
     let turnstileWidgetId = null;
+    let analyticsPageviewRecorded = false;
 
     function openLegalDrawer(event) {
       event?.preventDefault();
@@ -1670,7 +1822,7 @@
       };
       storeCookieConsent(record);
       if (cookieBanner) cookieBanner.hidden = true;
-      if (choice === "accepted") enableOptionalAnalytics(); else disableOptionalAnalytics();
+      disableOptionalAnalytics();
 
       if (consentStatus) {
         consentStatus.className = "consent-status";
@@ -1680,8 +1832,9 @@
         const result = await sendToApi("/api/souhlas", record, { keepalive: true });
         record.status = result.status || record.status;
         storeCookieConsent(record);
+        if (choice === "accepted") enableOptionalAnalytics();
         if (consentStatus) {
-          consentStatus.textContent = choice === "accepted" ? "Volitelná analytika byla povolena." : "Volitelná analytika zůstává vypnutá.";
+          consentStatus.textContent = choice === "accepted" ? "Statistika návštěvnosti byla povolena." : "Statistika návštěvnosti zůstává vypnutá.";
           consentStatus.classList.add("is-success");
         }
       } catch (error) {
@@ -1692,19 +1845,54 @@
       }
     }
 
-    function enableOptionalAnalytics() {
-      // Sem vložte měřicí kód až ve chvíli, kdy budete chtít používat analytiku
-      // například Google Analytics / Meta Pixel. Funkce se spustí pouze po souhlasu.
+    function hasValidAnalyticsConsent(record = getCookieConsent()) {
+      if (!record || record.status !== "active" || record.choices?.analytics !== true) return false;
+      if (record.policyVersion !== CONSENT_POLICY_VERSION) return false;
+      const savedAt = Date.parse(record.savedAt || "");
+      return Number.isFinite(savedAt) && Date.now() - savedAt < ACCEPTED_CHOICE_LIFETIME_MS;
+    }
+
+    function getReferrerHostname() {
+      if (!document.referrer) return "";
+      try { return new URL(document.referrer).hostname; }
+      catch (_) { return ""; }
+    }
+
+    async function enableOptionalAnalytics() {
+      const record = getCookieConsent();
+      if (!hasValidAnalyticsConsent(record) || analyticsPageviewRecorded) return;
+      analyticsPageviewRecorded = true;
+      try {
+        await sendToApi("/api/analytyka/navsteva", {
+          consentId: record.consentId,
+          path: location.pathname,
+          referrerHost: getReferrerHostname(),
+          deviceCategory: getDeviceCategory()
+        }, { keepalive: true });
+      } catch (_) {
+        analyticsPageviewRecorded = false;
+      }
     }
 
     function disableOptionalAnalytics() {
-      // Pokud bude analytika v budoucnu doplněna, zde se vypne a odstraní její volitelné cookies.
+      analyticsPageviewRecorded = false;
+    }
+
+    function shouldShowCookieBanner(record) {
+      if (!record) return true;
+      if (record.policyVersion !== CONSENT_POLICY_VERSION) return true;
+      const isAccepted = record.status === "active" && record.choices?.analytics === true;
+      const referenceTime = isAccepted ? record.savedAt : (record.revokedAt || record.savedAt);
+      const savedAt = Date.parse(referenceTime || "");
+      if (!Number.isFinite(savedAt)) return true;
+      const lifetime = isAccepted ? ACCEPTED_CHOICE_LIFETIME_MS : DECLINED_CHOICE_LIFETIME_MS;
+      return Date.now() - savedAt >= lifetime;
     }
 
     function showCookieBanner(force = false) {
       const consent = getCookieConsent();
       if (!cookieBanner) return;
-      cookieBanner.hidden = !(force || !consent);
+      cookieBanner.hidden = !(force || shouldShowCookieBanner(consent));
     }
 
     async function revokeCookieConsent() {
@@ -1741,7 +1929,7 @@
         };
         storeCookieConsent(updated);
         if (consentStatus) {
-          consentStatus.textContent = "Volitelný souhlas byl odvolán. Nezbytné funkce webu zůstávají aktivní.";
+          consentStatus.textContent = "Souhlas se statistikou byl odvolán. Novou volbu můžete kdykoliv provést přes Nastavení cookies.";
           consentStatus.classList.add("is-success");
         }
       } catch (error) {
@@ -1756,7 +1944,7 @@
 
     async function syncConsentStatus() {
       const current = getCookieConsent();
-      if (!current?.consentId) return;
+      if (!current?.consentId) return current;
       try {
         const result = await sendToApi("/api/souhlas/stav", { consentId: current.consentId });
         if (result.found && result.status === "revoked" && current.status !== "revoked") {
@@ -1768,10 +1956,12 @@
           };
           storeCookieConsent(updated);
           disableOptionalAnalytics();
+          return updated;
         }
       } catch (_) {
         // Při nedostupnosti serveru zůstane zachována poslední místní volba.
       }
+      return getCookieConsent();
     }
 
     function setupTurnstile() {
@@ -1798,9 +1988,15 @@
     });
     cookieSettingsButton?.addEventListener("click", (event) => { closeLegalDrawer(event); showCookieBanner(true); });
     revokeCookieConsentButton?.addEventListener("click", revokeCookieConsent);
-    if (getCookieConsent()?.choices?.analytics && getCookieConsent()?.status !== "revoked") enableOptionalAnalytics();
-    showCookieBanner();
-    syncConsentStatus();
+    async function initializePrivacyControls() {
+      await syncConsentStatus();
+      const current = getCookieConsent();
+      if (hasValidAnalyticsConsent(current)) enableOptionalAnalytics();
+      else disableOptionalAnalytics();
+      showCookieBanner();
+    }
+
+    initializePrivacyControls();
     setupTurnstile();
 
     inquiryForm?.addEventListener("submit", async (event) => {
