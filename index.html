@@ -4,12 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#0b0d12" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; img-src 'self' data:; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; connect-src 'self' https://kominictvi-jezek-api.fornitecze.workers.dev https://challenges.cloudflare.com; upgrade-insecure-requests" />
   <meta name="description" content="Vyučený kominík David Ježek: čištění a kontrola jednoho komína včetně písemné zprávy za 1 000 Kč. Kyjov a okres Hodonín. Zavolejte 777 001 019." />
   <meta name="robots" content="index, follow" />
   <meta property="og:locale" content="cs_CZ" />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Kominík Kyjov a okres Hodonín | Kominictví Ježek" />
   <meta property="og:description" content="Čištění a kontrola jednoho komína včetně písemné zprávy za 1 000 Kč. Zakázky osobně provádí vyučený kominík David Ježek." />
+  <meta property="og:url" content="https://sourdero.github.io/David-Je-ek/" />
+  <link rel="canonical" href="https://sourdero.github.io/David-Je-ek/" />
   <link rel="icon" href="profilovkafotka.png" />
   <title>Kominík Kyjov a okres Hodonín | Čištění komína za 1 000 Kč</title>
 
@@ -660,6 +664,16 @@
     .form-status { min-height: 28px; margin-top: 14px; color: var(--text-soft); font-weight: 750; }
     .form-status.is-success { color: var(--success); }
     .form-status.is-error { color: var(--danger); }
+    .turnstile-wrap {
+      grid-column: 1 / -1;
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+    }
+    .turnstile-wrap[hidden] { display: none; }
+    .consent-status { min-height: 26px; margin-top: 14px; color: var(--text-soft); font-weight: 750; }
+    .consent-status.is-success { color: var(--success); }
+    .consent-status.is-error { color: var(--danger); }
     .honeypot { position: absolute !important; left: -9999px !important; width: 1px !important; height: 1px !important; overflow: hidden !important; }
 
     .area-list {
@@ -975,16 +989,19 @@
       .brand__logo { width: 50px; height: 50px; border-radius: 17px; }
       .brand__title { font-size: 1rem; }
       .brand__subtitle { max-width: 185px; overflow: hidden; text-overflow: ellipsis; }
-      h1 { font-size: clamp(2.55rem, 13vw, 4.05rem); line-height: .94; }
-      h2.section-title { font-size: clamp(1.95rem, 9.4vw, 2.9rem); }
+      h1 { font-size: clamp(2.25rem, 10vw, 3.35rem); line-height: 1; }
+      h2.section-title { font-size: clamp(1.8rem, 7.8vw, 2.55rem); }
       .badge { border-radius: 20px; }
       .actions { flex-direction: column; }
       .actions .btn { width: 100%; }
       .grid--3, .grid--2, .gallery, .game-panel, .legal-grid, .form-grid { grid-template-columns: 1fr; }
       .form-field--wide { grid-column: auto; }
+      .turnstile-wrap { grid-column: auto; overflow-x: auto; }
+      .form-field input, .form-field select, .form-field textarea { font-size: 16px; }
       .legal-card--wide { grid-column: auto; }
       .cookie-banner__grid { grid-template-columns: 1fr; }
-      .cookie-banner__actions .btn { flex: 1 1 150px; }
+      .cookie-banner { right: 10px; bottom: calc(10px + env(safe-area-inset-bottom)); left: 10px; max-height: calc(100dvh - 20px); overflow-y: auto; }
+      .cookie-banner__actions .btn { flex: 1 1 100%; width: 100%; }
       .gallery__item, .gallery__item--tall { min-height: 260px; }
       .hero-card__image { min-height: 430px; border-radius: 28px; }
       .about-photo img { min-height: 360px; }
@@ -1033,6 +1050,7 @@
       .contact-link { align-items: flex-start; }
     }
   </style>
+  <noscript><style>.reveal{opacity:1!important;transform:none!important}.cookie-banner{display:none!important}</style></noscript>
 </head>
 <body>
   <a class="skip-link" href="#obsah">Přejít na obsah</a>
@@ -1266,7 +1284,7 @@
           </div>
         </div>
 
-        <form class="card form-card reveal" id="poptavka" data-api-base="https://kominictvi-jezek-api.fornitecze.workers.dev" novalidate>
+        <form class="card form-card reveal" id="poptavka" data-api-base="https://kominictvi-jezek-api.fornitecze.workers.dev" data-turnstile-site-key="" novalidate>
           <div class="kicker">Poptávkový formulář</div>
           <h2 class="section-title">Objednat čištění</h2>
           <p class="lead">Povinné jsou jen údaje nutné pro zpětné kontaktování a domluvu zakázky.</p>
@@ -1285,8 +1303,8 @@
               <input id="customerEmail" name="email" type="email" autocomplete="email" maxlength="120" />
             </div>
             <div class="form-field">
-              <label for="customerTown">Obec nebo PSČ *</label>
-              <input id="customerTown" name="town" type="text" autocomplete="address-level2" required maxlength="100" />
+              <label for="customerTown">Obec nebo adresa *</label>
+              <input id="customerTown" name="town" type="text" autocomplete="street-address" required maxlength="100" />
             </div>
             <div class="form-field">
               <label for="customerService">Požadovaná služba *</label>
@@ -1304,11 +1322,14 @@
             </div>
             <div class="form-field form-field--wide">
               <label for="customerMessage">Upřesnění zakázky</label>
-              <textarea id="customerMessage" name="message" maxlength="1500" placeholder="Např. druh paliva, stav komína nebo kdy se vám návštěva hodí."></textarea>
+              <textarea id="customerMessage" name="message" maxlength="1000" placeholder="Např. druh paliva, stav komína nebo kdy se vám návštěva hodí."></textarea>
             </div>
             <div class="honeypot" aria-hidden="true">
               <label for="customerWebsite">Web</label>
               <input id="customerWebsite" name="website" type="text" tabindex="-1" autocomplete="off" />
+            </div>
+            <div class="turnstile-wrap" id="turnstileWrap" hidden>
+              <div id="turnstileWidget" aria-label="Ochrana formuláře proti spamu"></div>
             </div>
             <label class="form-consent form-field--wide">
               <input name="privacyAcknowledged" type="checkbox" required />
@@ -1318,6 +1339,7 @@
 
           <div class="actions"><button class="btn btn--primary" type="submit">Odeslat poptávku</button></div>
           <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+          <p class="fine-print">Formulář je chráněný omezením počtu odeslání a kontrolou povolené domény.</p>
         </form>
       </div>
     </section>
@@ -1381,7 +1403,7 @@
     <div class="cookie-banner__grid">
       <div>
         <h2 id="cookieTitle">Používáme cookies</h2>
-        <p>Nezbytné místní úložiště uchovává vaši volbu a 24hodinový odpočet minihry. Volitelnou analytiku lze spustit pouze s vaším souhlasem.</p>
+        <p>Nezbytné místní úložiště uchovává vaši volbu a 24hodinový odpočet minihry. Volitelnou analytiku lze povolit nebo později jedním kliknutím odvolat.</p>
       </div>
       <div class="cookie-banner__actions" aria-label="Volba cookies">
         <button class="btn btn--secondary" type="button" data-cookie-choice="accepted">Povolit analytiku</button>
@@ -1448,11 +1470,11 @@
             <ul>
               <li>Údaje pro vyřízení poptávky a realizaci služby uchováváme po dobu trvání spolupráce a následně po dobu nezbytnou k ochraně našich právních nároků (typicky 3 roky od ukončení služby).</li>
               <li>Údaje uvedené na účetních a daňových dokladech uchováváme po dobu stanovenou zákonem (např. 10 let dle zákona o DPH).</li>
-              <li>Záznam volby cookies uchováváme po dobu potřebnou k doložení volby, nejdéle 3 roky, není-li nutná delší doba pro ochranu právních nároků.</li>
+              <li>Záznam volby cookies uchováváme nejdéle 12 měsíců od poslední změny volby.</li>
             </ul>
 
             <h4>Komu mohou být údaje předány</h4>
-            <p>Vaše osobní údaje nepředáváme třetím stranám k marketingovým účelům. K údajům mohou mít v nezbytném rozsahu přístup zpracovatelé, například poskytovatel webhostingu, databáze a služeb pro doručení e-mailových a SMS upozornění, externí účetní nebo orgány veřejné moci, pokud to ukládá zákon.</p>
+            <p>Vaše osobní údaje nepředáváme třetím stranám k jejich marketingovým účelům. Pro provoz webu, zabezpečení formuláře, uložení evidence a doručení oznámení používáme služby GitHub Pages, Cloudflare Workers a D1 a soukromý kanál Discord. K údajům mohou mít v nezbytném rozsahu přístup také externí účetní nebo orgány veřejné moci, pokud to ukládá zákon.</p>
 
             <h4>Vaše práva dle GDPR</h4>
             <p>Za podmínek stanovených v GDPR máte právo:</p>
@@ -1476,12 +1498,14 @@
             <p><strong>Nezbytné uložení:</strong> Slouží k uložení volby v cookie liště a k dodržení 24hodinového omezení minihry. Je potřebné pro zvolené fungování webu a nevyžaduje souhlas.</p>
             <p><strong>Analytické cookies:</strong> Mohou pomáhat zjistit, jak návštěvníci web používají. Spustí se pouze tehdy, pokud budou na web skutečně doplněny a návštěvník je výslovně povolí.</p>
             <p><strong>Marketingové cookies:</strong> Aktuálně nepoužíváme. Pokud by byly v budoucnu nasazeny, budou spuštěny pouze na základě vašeho předchozího souhlasu.</p>
-            <p>Svůj souhlas můžete kdykoliv změnit nebo odvolat kliknutím na odkaz „Nastavení cookies“ v patičce webu.</p>
-            <p><strong>Evidence volby:</strong> Pro doložení volby se může uložit čas, konkrétní volby, verze těchto informací, typ zařízení a jednosměrně chráněný otisk IP adresy. Běžný přehled neobsahuje nechráněnou IP adresu.</p>
+            <p>Svůj souhlas můžete kdykoliv změnit nebo odvolat tlačítkem níže nebo přes odkaz „Nastavení cookies“ v patičce webu. Odvolání vypne volitelnou analytiku; nezbytné uložení pro základní funkce webu zůstane aktivní.</p>
+            <p><strong>Evidence volby:</strong> Pro doložení volby se ukládá anonymní identifikátor, čas, konkrétní volby, verze těchto informací, typ zařízení a jednosměrně chráněný otisk IP adresy. Nechráněná IP adresa se neukládá. Oznámení se zobrazí také v soukromém kanálu Discord. Samotná volba neprozrazuje jméno návštěvníka; se jménem ji lze spojit pouze tehdy, když návštěvník následně odešle poptávku se stejným identifikátorem.</p>
           </div>
           <div class="legal-actions">
             <button class="btn btn--secondary" type="button" id="openCookieSettings">Nastavení cookies</button>
+            <button class="btn btn--secondary" type="button" id="revokeCookieConsent">Odvolat volitelný souhlas</button>
           </div>
+          <div class="consent-status" id="consentStatus" role="status" aria-live="polite"></div>
         </article>
 
         <article class="legal-card legal-card--wide">
@@ -1506,7 +1530,7 @@
             <p>V souladu s § 14 zákona č. 634/1992 Sb., o ochraně spotřebitele, informujeme, že případné spory mezi provozovatelem a zákazníkem, které se nepodaří vyřešit vzájemnou dohodou, lze řešit mimosoudně. Příslušným subjektem pro mimosoudní řešení spotřebitelských sporů je:</p>
             <p><strong>Česká obchodní inspekce</strong><br>Ústřední inspektorát – oddělení ADR<br>Štěpánská 567/15, 120 00 Praha 2<br>E-mail: <a href="mailto:adr@coi.cz">adr@coi.cz</a><br>Web: <a href="https://adr.coi.cz" target="_blank" rel="noopener noreferrer">adr.coi.cz</a></p>
             <p>Web slouží jako prezentace kominických služeb a k odeslání nezávazné poptávky. Platba se na webu neprovádí.</p>
-            <p class="fine-print">Datum poslední aktualizace: 13. 9. 2026</p>
+            <p class="fine-print">Datum poslední aktualizace: 16. 9. 2026</p>
           </div>
         </article>
       </div>
@@ -1546,13 +1570,18 @@
 
     const cookieBanner = document.getElementById("cookieBanner");
     const cookieSettingsButton = document.getElementById("openCookieSettings");
+    const revokeCookieConsentButton = document.getElementById("revokeCookieConsent");
+    const consentStatus = document.getElementById("consentStatus");
+    const turnstileWrap = document.getElementById("turnstileWrap");
+    const turnstileSiteKey = (document.getElementById("poptavka")?.dataset.turnstileSiteKey || "").trim();
     const COOKIE_CONSENT_KEY = "kominictvi-jezek-cookie-consent";
-    const CONSENT_POLICY_VERSION = "2026-09-13";
+    const CONSENT_POLICY_VERSION = "2026-09-16";
     const inquiryForm = document.getElementById("poptavka");
     const formStatus = document.getElementById("formStatus");
     const legalDrawer = document.getElementById("pravni-info");
     const legalOpeners = document.querySelectorAll("[data-open-legal]");
     const legalClosers = document.querySelectorAll("[data-close-legal]");
+    let turnstileWidgetId = null;
 
     function openLegalDrawer(event) {
       event?.preventDefault();
@@ -1607,34 +1636,60 @@
 
     async function sendToApi(path, data, options = {}) {
       const apiBase = getApiBase();
-      if (!apiBase) return { configured: false };
+      if (!apiBase) throw new Error("Online odeslání ještě není propojeno se serverem.");
       const response = await fetch(`${apiBase}${path}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
         keepalive: Boolean(options.keepalive)
       });
-      if (!response.ok) throw new Error(`Server odpověděl stavem ${response.status}.`);
-      return { configured: true, response };
+      let result = {};
+      try { result = await response.json(); } catch (_) {}
+      if (!response.ok) throw new Error(result.error || `Server odpověděl stavem ${response.status}.`);
+      return result;
     }
 
-    function saveCookieConsent(choice) {
+    function storeCookieConsent(record) {
+      try { localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify(record)); }
+      catch (_) {}
+    }
+
+    async function saveCookieConsent(choice) {
+      const existing = getCookieConsent();
       const record = {
-        consentId: createId(),
+        consentId: existing?.consentId || createId(),
         savedAt: new Date().toISOString(),
         policyVersion: CONSENT_POLICY_VERSION,
         choices: {
           necessary: true,
           analytics: choice === "accepted"
         },
-        deviceCategory: getDeviceCategory()
+        deviceCategory: getDeviceCategory(),
+        status: choice === "accepted" ? "active" : "declined",
+        revokedAt: null
       };
-      try {
-        localStorage.setItem(COOKIE_CONSENT_KEY, JSON.stringify(record));
-      } catch (_) {}
-      sendToApi("/api/souhlas", record, { keepalive: true }).catch(() => {});
+      storeCookieConsent(record);
       if (cookieBanner) cookieBanner.hidden = true;
-      if (choice === "accepted") enableOptionalAnalytics();
+      if (choice === "accepted") enableOptionalAnalytics(); else disableOptionalAnalytics();
+
+      if (consentStatus) {
+        consentStatus.className = "consent-status";
+        consentStatus.textContent = "Ukládám vaši volbu…";
+      }
+      try {
+        const result = await sendToApi("/api/souhlas", record, { keepalive: true });
+        record.status = result.status || record.status;
+        storeCookieConsent(record);
+        if (consentStatus) {
+          consentStatus.textContent = choice === "accepted" ? "Volitelná analytika byla povolena." : "Volitelná analytika zůstává vypnutá.";
+          consentStatus.classList.add("is-success");
+        }
+      } catch (error) {
+        if (consentStatus) {
+          consentStatus.textContent = `Volba je uložená v tomto zařízení, ale serverový záznam se nepodařilo uložit: ${error.message}`;
+          consentStatus.classList.add("is-error");
+        }
+      }
     }
 
     function enableOptionalAnalytics() {
@@ -1642,17 +1697,111 @@
       // například Google Analytics / Meta Pixel. Funkce se spustí pouze po souhlasu.
     }
 
+    function disableOptionalAnalytics() {
+      // Pokud bude analytika v budoucnu doplněna, zde se vypne a odstraní její volitelné cookies.
+    }
+
     function showCookieBanner(force = false) {
       const consent = getCookieConsent();
-      if (cookieBanner && (force || !consent)) cookieBanner.hidden = false;
+      if (!cookieBanner) return;
+      cookieBanner.hidden = !(force || !consent);
+    }
+
+    async function revokeCookieConsent() {
+      const current = getCookieConsent();
+      if (!current?.consentId) {
+        if (consentStatus) {
+          consentStatus.className = "consent-status is-success";
+          consentStatus.textContent = "V tomto zařízení není uložený žádný volitelný souhlas.";
+        }
+        return;
+      }
+
+      revokeCookieConsentButton.disabled = true;
+      const locallyRevokedAt = new Date().toISOString();
+      const locallyRevoked = {
+        ...current,
+        savedAt: locallyRevokedAt,
+        choices: { necessary: true, analytics: false },
+        status: "revoked",
+        revokedAt: locallyRevokedAt
+      };
+      storeCookieConsent(locallyRevoked);
+      disableOptionalAnalytics();
+      if (consentStatus) {
+        consentStatus.className = "consent-status";
+        consentStatus.textContent = "Souhlas byl v tomto zařízení odvolán. Aktualizuji serverový záznam…";
+      }
+      try {
+        const result = await sendToApi("/api/souhlas/odvolat", { consentId: current.consentId });
+        const updated = {
+          ...locallyRevoked,
+          status: "revoked",
+          revokedAt: result.revokedAt || locallyRevokedAt
+        };
+        storeCookieConsent(updated);
+        if (consentStatus) {
+          consentStatus.textContent = "Volitelný souhlas byl odvolán. Nezbytné funkce webu zůstávají aktivní.";
+          consentStatus.classList.add("is-success");
+        }
+      } catch (error) {
+        if (consentStatus) {
+          consentStatus.textContent = `Souhlas je v tomto zařízení odvolán, ale serverový záznam se nepodařilo aktualizovat: ${error.message}`;
+          consentStatus.classList.add("is-error");
+        }
+      } finally {
+        revokeCookieConsentButton.disabled = false;
+      }
+    }
+
+    async function syncConsentStatus() {
+      const current = getCookieConsent();
+      if (!current?.consentId) return;
+      try {
+        const result = await sendToApi("/api/souhlas/stav", { consentId: current.consentId });
+        if (result.found && result.status === "revoked" && current.status !== "revoked") {
+          const updated = {
+            ...current,
+            choices: { necessary: true, analytics: false },
+            status: "revoked",
+            revokedAt: result.revokedAt || new Date().toISOString()
+          };
+          storeCookieConsent(updated);
+          disableOptionalAnalytics();
+        }
+      } catch (_) {
+        // Při nedostupnosti serveru zůstane zachována poslední místní volba.
+      }
+    }
+
+    function setupTurnstile() {
+      if (!turnstileSiteKey || !turnstileWrap) return;
+      turnstileWrap.hidden = false;
+      const script = document.createElement("script");
+      script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+      script.async = true;
+      script.defer = true;
+      script.onload = () => {
+        if (!window.turnstile) return;
+        turnstileWidgetId = window.turnstile.render("#turnstileWidget", {
+          sitekey: turnstileSiteKey,
+          theme: "dark",
+          language: "cs",
+          appearance: "interaction-only"
+        });
+      };
+      document.head.appendChild(script);
     }
 
     document.querySelectorAll("[data-cookie-choice]").forEach((button) => {
       button.addEventListener("click", () => saveCookieConsent(button.dataset.cookieChoice));
     });
     cookieSettingsButton?.addEventListener("click", (event) => { closeLegalDrawer(event); showCookieBanner(true); });
-    if (getCookieConsent()?.choices?.analytics) enableOptionalAnalytics();
+    revokeCookieConsentButton?.addEventListener("click", revokeCookieConsent);
+    if (getCookieConsent()?.choices?.analytics && getCookieConsent()?.status !== "revoked") enableOptionalAnalytics();
     showCookieBanner();
+    syncConsentStatus();
+    setupTurnstile();
 
     inquiryForm?.addEventListener("submit", async (event) => {
       event.preventDefault();
@@ -1673,6 +1822,11 @@
         formStatus.classList.add("is-error");
         return;
       }
+      if (location.protocol === "file:") {
+        formStatus.textContent = "Formulář z bezpečnostních důvodů funguje pouze na zveřejněném webu, ne v souboru otevřeném z počítače.";
+        formStatus.classList.add("is-error");
+        return;
+      }
 
       const submitButton = inquiryForm.querySelector('button[type="submit"]');
       const payload = {
@@ -1686,6 +1840,8 @@
         chimneyCount: String(formData.get("chimneyCount") || "").trim(),
         message: String(formData.get("message") || "").trim(),
         privacyAcknowledged: formData.get("privacyAcknowledged") === "on",
+        consentId: getCookieConsent()?.consentId || "",
+        turnstileToken: turnstileWidgetId !== null && window.turnstile ? window.turnstile.getResponse(turnstileWidgetId) : "",
         page: location.href,
         deviceCategory: getDeviceCategory()
       };
@@ -1699,10 +1855,11 @@
         inquiryForm.reset();
         formStatus.textContent = "Děkuji. Poptávka byla odeslána. Ozvu se vám kvůli domluvě.";
         formStatus.classList.add("is-success");
-      } catch (_) {
-        formStatus.innerHTML = 'Poptávku se nepodařilo odeslat. Zavolejte prosím na <a href="tel:+420777001019">777 001 019</a>.';
+      } catch (error) {
+        formStatus.textContent = `${error.message} Pokud problém trvá, zavolejte na 777 001 019.`;
         formStatus.classList.add("is-error");
       } finally {
+        if (turnstileWidgetId !== null && window.turnstile) window.turnstile.reset(turnstileWidgetId);
         submitButton.disabled = false;
         submitButton.textContent = "Odeslat poptávku";
       }
