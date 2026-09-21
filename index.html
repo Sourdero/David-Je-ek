@@ -13,8 +13,16 @@
   <meta property="og:title" content="Kominík Kyjov a okres Hodonín | Kominictví Ježek" />
   <meta property="og:description" content="Čištění a kontrola jednoho komína včetně písemné zprávy za 1 000 Kč. Zakázky osobně provádí vyučený kominík David Ježek." />
   <meta property="og:url" content="https://sourdero.github.io/David-Je-ek/" />
+  <meta property="og:image" content="https://sourdero.github.io/David-Je-ek/sdileni-kominictvi-jezek.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="David Ježek – kominík v Kyjově a okrese Hodonín" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Kominictví Ježek | Kyjov a okres Hodonín" />
+  <meta name="twitter:description" content="Čištění a kontrola komína včetně písemné zprávy za 1 000 Kč." />
+  <meta name="twitter:image" content="https://sourdero.github.io/David-Je-ek/sdileni-kominictvi-jezek.jpg" />
   <link rel="canonical" href="https://sourdero.github.io/David-Je-ek/" />
-  <link rel="icon" href="profilovkafotka.png" />
+  <link rel="icon" type="image/webp" href="profil-david-jezek.webp" />
   <title>Kominík Kyjov a okres Hodonín | Čištění komína za 1 000 Kč</title>
 
   <script type="application/ld+json">
@@ -22,9 +30,11 @@
     "@context": "https://schema.org",
     "@type": "HomeAndConstructionBusiness",
     "name": "Kominictví Ježek",
-    "description": "Čištění a kontrola komínů s písemnou zprávou, vložkování a montáž nerezových komínů v Kyjově a okrese Hodonín.",
+    "description": "Čištění a kontrola komínů s písemnou zprávou, opravy, vložkování a montáž nerezových komínů v Kyjově a okrese Hodonín.",
     "telephone": "+420777001019",
     "email": "d.jezurci@seznam.cz",
+    "url": "https://sourdero.github.io/David-Je-ek/",
+    "image": "https://sourdero.github.io/David-Je-ek/sdileni-kominictvi-jezek.jpg",
     "legalName": "David Ježek",
     "identifier": "IČO 19800193",
     "priceRange": "1 000 Kč za čištění a kontrolu jednoho komína; ostatní práce dle rozsahu",
@@ -171,12 +181,16 @@
     .chimney-runner {
       position: absolute;
       top: calc(50% - 18px);
-      left: 0;
+      left: -82px;
       width: 66px;
       height: 46px;
       opacity: 1;
-      will-change: transform;
-      animation: chimney-run-across 13s linear infinite;
+      will-change: left;
+      animation-name: chimney-run-across;
+      animation-duration: 13s;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      animation-play-state: running;
       filter:
         drop-shadow(0 4px 5px rgba(0,0,0,.85))
         drop-shadow(0 0 8px rgba(214,174,98,.38));
@@ -223,8 +237,8 @@
     }
 
     @keyframes chimney-run-across {
-      from { transform: translate3d(-90px, 0, 0); }
-      to { transform: translate3d(calc(100vw + 90px), 0, 0); }
+      from { left: -82px; }
+      to { left: calc(100% + 82px); }
     }
 
     @keyframes chimney-run-wave {
@@ -580,6 +594,7 @@
     }
     .grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .service-card--wide { grid-column: 1 / -1; }
 
     .card {
       position: relative;
@@ -742,6 +757,7 @@
     .form-field { display: grid; gap: 7px; }
     .form-field--wide { grid-column: 1 / -1; }
     .form-field label, .form-label { color: var(--text); font-weight: 850; }
+    .form-help { color: var(--muted); font-size: .9rem; line-height: 1.5; }
     .form-field input,
     .form-field select,
     .form-field textarea {
@@ -829,6 +845,7 @@
     .game-result { min-height: 76px; }
     .game-result .win { color: var(--success); font-weight: 950; }
     .game-result .lose { color: var(--danger); font-weight: 950; }
+    .game-retry { margin-top: 12px; }
     .game-countdown {
       margin-top: 12px;
       color: var(--gold-light);
@@ -1047,9 +1064,10 @@
       .reveal { opacity: 1; transform: none; }
       .chimney-runner-track { display: block; }
       .chimney-runner {
-        left: 0;
+        left: -82px;
         right: auto;
         animation: chimney-run-across 13s linear infinite !important;
+        animation-iteration-count: infinite !important;
         animation-play-state: running !important;
       }
       .chimney-runner__wave {
@@ -1196,7 +1214,7 @@
     </div>
     <div class="container nav" aria-label="Hlavní navigace">
       <a href="#home" class="brand" aria-label="Kominictví Ježek – úvod">
-        <span class="brand__logo"><img src="profilovkafotka.png" alt="David Ježek" width="116" height="116" /></span>
+        <span class="brand__logo"><img src="profil-david-jezek.webp" alt="Logo Kominictví Ježek" width="512" height="512" /></span>
         <span>
           <span class="brand__title">Kominictví Ježek</span>
           <span class="brand__subtitle">David Ježek · vyučený kominík</span>
@@ -1233,7 +1251,7 @@
 
           <div class="actions">
             <a class="btn btn--primary" href="tel:+420777001019">📞 Zavolat</a>
-            <a class="btn btn--secondary" href="#poptavka">Objednat čištění</a>
+            <a class="btn btn--secondary" href="#poptavka">Nezávazná poptávka</a>
           </div>
 
           <div class="hero__stats" aria-label="Hlavní informace o službě">
@@ -1245,10 +1263,10 @@
 
         <div class="hero-card reveal">
           <div class="hero-card__image">
-            <img src="Davidstojiciu kominukdemaicepicikominik.png" alt="Vyučený kominík David Ježek u komína" width="2536" height="2148" fetchpriority="high" />
+            <img src="david-jezek-kominik.webp" alt="Vyučený kominík David Ježek u komína" width="1400" height="1011" fetchpriority="high" decoding="async" />
             <div class="hero-card__note">
               <strong>David Ježek · IČO 19800193</strong>
-              <span>Čištění a kontroly komínů, vložkování a montáž nerezových komínů.</span>
+              <span>Čištění a kontroly komínů, opravy, vložkování a montáž nerezových komínů.</span>
             </div>
           </div>
         </div>
@@ -1276,7 +1294,7 @@
 
         <div class="grid grid--2 pricing-details">
           <article class="card reveal"><h3>Doprava</h3><p><strong>15 Kč/km</strong>. Účtuje se cesta z Kyjova k zákazníkovi i zpět.</p></article>
-          <article class="card reveal"><h3>Ostatní práce</h3><p>Vložkování a montáž nerezového komína se nacení individuálně podle rozsahu a použitého materiálu.</p></article>
+          <article class="card reveal"><h3>Ostatní práce</h3><p>Opravy, vložkování a montáž nerezového komína se nacení individuálně podle rozsahu a použitého materiálu.</p></article>
           <article class="card reveal"><h3>Možnosti platby</h3><p>Hotově, QR kódem, bankovním převodem nebo na fakturu.</p></article>
           <article class="card reveal"><h3>Potřebujete upřesnit cenu?</h3><p>Zavolejte na <a href="tel:+420777001019"><strong>777 001 019</strong></a> a popište, co potřebujete.</p></article>
         </div>
@@ -1293,9 +1311,10 @@
 
         <div class="grid grid--2">
           <article class="card reveal"><div class="icon" aria-hidden="true">🧹</div><h3>Čištění a kontrola komínů</h3><p>Vyčištění komínové cesty, kontrola jejího stavu a vystavení písemné zprávy.</p></article>
+          <article class="card reveal"><div class="icon" aria-hidden="true">🧱</div><h3>Opravy komínů</h3><p>Posouzení stavu a domluva vhodné opravy podle konkrétní závady a možností objektu.</p></article>
           <article class="card reveal"><div class="icon" aria-hidden="true">🔩</div><h3>Vložkování komínů</h3><p>Odborné vložkování podle konkrétního komína, spotřebiče a potřebného řešení.</p></article>
           <article class="card reveal"><div class="icon" aria-hidden="true">🏠</div><h3>Montáž nerezových komínů</h3><p>Montáž nerezového komínového systému podle možností objektu a domluveného rozsahu.</p></article>
-          <article class="card reveal"><div class="icon" aria-hidden="true">💬</div><h3>Konzultace dalšího postupu</h3><p>Pokud si nejste jistí stavem komína nebo vhodným řešením, nejprve společně probereme situaci.</p></article>
+          <article class="card service-card--wide reveal"><div class="icon" aria-hidden="true">💬</div><h3>Konzultace dalšího postupu</h3><p>Pokud si nejste jistí stavem komína nebo vhodným řešením, nejprve společně probereme situaci.</p></article>
         </div>
       </div>
     </section>
@@ -1319,16 +1338,16 @@
 
     <section class="section" id="omne">
       <div class="container about-layout">
-        <div class="about-photo reveal"><img src="Davidnakomine.jpg" alt="Kominík David Ježek při práci na komíně" loading="lazy" decoding="async" /></div>
+        <div class="about-photo reveal"><img src="david-na-komine.webp" alt="Kominík David Ježek při práci na komíně" width="1200" height="1600" loading="lazy" decoding="async" /></div>
         <div class="about-copy reveal">
           <div class="kicker">O mně</div>
           <h2 class="section-title">Jmenuji se David Ježek</h2>
           <p>Pracuji jako vyučený kominík. Zakázky provádím osobně, takže vždy víte, kdo k vám přijede a s kým řešíte domluvu.</p>
-          <p>Zaměřuji se především na čištění a kontroly komínů, vložkování a montáž nerezových komínů. U každé zakázky je pro mě důležitá bezpečnost, pečlivé provedení a srozumitelné vysvětlení dalšího postupu.</p>
+          <p>Zaměřuji se především na čištění a kontroly komínů, opravy, vložkování a montáž nerezových komínů. U každé zakázky je pro mě důležitá bezpečnost, pečlivé provedení a srozumitelné vysvětlení dalšího postupu.</p>
           <p>Působím v Kyjově a po okrese Hodonín. Pokud potřebujete kominíka, můžete mi rovnou zavolat nebo poslat krátkou poptávku.</p>
           <div class="actions">
             <a class="btn btn--primary" href="tel:+420777001019">📞 Zavolat</a>
-            <a class="btn btn--secondary" href="#poptavka">Objednat čištění</a>
+            <a class="btn btn--secondary" href="#poptavka">Nezávazná poptávka</a>
           </div>
         </div>
       </div>
@@ -1377,12 +1396,12 @@
           <p class="lead">Ukázky kominických prací a stavu komínů přímo v terénu.</p>
         </div>
         <div class="gallery">
-          <figure class="gallery__item gallery__item--tall reveal"><img src="Davidnakomine.jpg" alt="David Ježek při práci na střeše u komína" loading="lazy" decoding="async" /><figcaption class="gallery__label">Práce kominíka ve výšce</figcaption></figure>
-          <figure class="gallery__item reveal"><img src="Komin2.png" alt="Kominík při práci u komína" loading="lazy" decoding="async" /><figcaption class="gallery__label">Práce přímo u komína</figcaption></figure>
-          <figure class="gallery__item reveal"><img src="komin1.png" alt="Detail komínového tělesa" loading="lazy" decoding="async" /><figcaption class="gallery__label">Detail komínového tělesa</figcaption></figure>
-          <figure class="gallery__item reveal"><img src="montazkominu.png" alt="Montáž komínového systému" loading="lazy" decoding="async" /><figcaption class="gallery__label">Montáž komínového systému</figcaption></figure>
-          <figure class="gallery__item reveal"><img src="Stavbakomina.png" alt="Realizace nového komína" loading="lazy" decoding="async" /><figcaption class="gallery__label">Realizace nového komína</figcaption></figure>
-          <figure class="gallery__item reveal"><img src="Spatnystavkomina.png" alt="Komín ve špatném technickém stavu" loading="lazy" decoding="async" /><figcaption class="gallery__label">Stav komína před řešením</figcaption></figure>
+          <figure class="gallery__item gallery__item--tall reveal"><img src="david-na-komine.webp" alt="David Ježek při práci na střeše u komína" width="1200" height="1600" loading="lazy" decoding="async" /><figcaption class="gallery__label">Práce kominíka ve výšce</figcaption></figure>
+          <figure class="gallery__item reveal"><img src="kominik-u-komina.webp" alt="Kominík při práci u komína" width="1200" height="1600" loading="lazy" decoding="async" /><figcaption class="gallery__label">Práce přímo u komína</figcaption></figure>
+          <figure class="gallery__item reveal"><img src="detail-komina.webp" alt="Detail komínového tělesa" width="1200" height="1500" loading="lazy" decoding="async" /><figcaption class="gallery__label">Detail komínového tělesa</figcaption></figure>
+          <figure class="gallery__item reveal"><img src="montaz-kominu.webp" alt="Montáž komínového systému" width="1400" height="1003" loading="lazy" decoding="async" /><figcaption class="gallery__label">Montáž komínového systému</figcaption></figure>
+          <figure class="gallery__item reveal"><img src="stavba-komina.webp" alt="Realizace nového komína" width="1200" height="1600" loading="lazy" decoding="async" /><figcaption class="gallery__label">Realizace nového komína</figcaption></figure>
+          <figure class="gallery__item reveal"><img src="spatny-stav-komina.webp" alt="Komín ve špatném technickém stavu" width="1200" height="1500" loading="lazy" decoding="async" /><figcaption class="gallery__label">Stav komína před řešením</figcaption></figure>
         </div>
       </div>
     </section>
@@ -1418,14 +1437,14 @@
               <li>IČO: 19800193</li>
               <li>Zapsán v živnostenském rejstříku</li>
             </ul>
-            <div class="trust__image" style="margin-top:24px;"><img src="vizitka.png" alt="Kontaktní vizitka Kominictví Ježek" loading="lazy" decoding="async" /></div>
+            <div class="trust__image" style="margin-top:24px;"><img src="vizitka-kominictvi-jezek.webp" alt="Kontaktní vizitka Kominictví Ježek" width="1400" height="933" loading="lazy" decoding="async" /></div>
           </div>
         </div>
 
         <form class="card form-card reveal" id="poptavka" data-api-base="https://kominictvi-jezek-api.fornitecze.workers.dev" data-turnstile-site-key="" novalidate>
           <div class="kicker">Poptávkový formulář</div>
-          <h2 class="section-title">Objednat čištění</h2>
-          <p class="lead">Povinné jsou jen údaje nutné pro zpětné kontaktování a domluvu zakázky.</p>
+          <h2 class="section-title">Nezávazná poptávka</h2>
+          <p class="lead">Vyberte požadovanou službu. Povinné jsou jen údaje nutné pro zpětné kontaktování a domluvu zakázky.</p>
           <p class="form-response-note">
             <span class="form-response-note__icon" aria-hidden="true">📞</span>
             <span><strong>Pokud se vám do 24 hodin neozvu,</strong> zavolejte mi prosím na <a href="tel:+420777001019">777 001 019</a>.</span>
@@ -1453,6 +1472,7 @@
               <select id="customerService" name="service" required>
                 <option value="">Vyberte službu</option>
                 <option>Čištění a kontrola komína</option>
+                <option>Oprava komína</option>
                 <option>Vložkování komína</option>
                 <option>Montáž nerezového komína</option>
                 <option>Konzultace</option>
@@ -1465,6 +1485,11 @@
             <div class="form-field form-field--wide">
               <label for="customerMessage">Upřesnění zakázky</label>
               <textarea id="customerMessage" name="message" maxlength="1000" placeholder="Např. druh paliva, stav komína nebo kdy se vám návštěva hodí."></textarea>
+            </div>
+            <div class="form-field form-field--wide">
+              <label for="discountCode">Slevový kód z minihry</label>
+              <input id="discountCode" name="discountCode" type="text" inputmode="text" autocomplete="off" maxlength="40" placeholder="Např. JEZEK100-1A2B3C4D5E6F" />
+              <span class="form-help">Nepovinné. Platný kód přidá jednorázovou slevu 100 Kč na cenu práce.</span>
             </div>
             <div class="honeypot" aria-hidden="true">
               <label for="customerWebsite">Web</label>
@@ -1491,7 +1516,7 @@
         <div class="section-head reveal">
           <div class="kicker">Minihra</div>
           <h2 class="section-title">Vyčisti komín a získej slevu</h2>
-          <p class="lead">Posbírej všech osm kusů sazí, vyhni se překážkám a dojdi k praporku. Hru lze spustit jednou za 24 hodin; odpočet začne okamžikem spuštění.</p>
+          <p class="lead">Posbírej všech osm kusů sazí, vyhni se překážkám a dojdi k praporku. Za výhru získáte jednorázovou slevu 100 Kč na cenu práce. Hru lze spustit jednou za 24 hodin.</p>
         </div>
 
         <div class="game-layout">
@@ -1518,7 +1543,8 @@
             <div class="panel panel--result">
               <h3>Výsledek</h3>
               <div class="game-result" id="gameResult">Hra zatím nebyla spuštěna.</div>
-              <p class="fine-print">Sleva platí jednorázově na cenu práce, nevztahuje se na materiál ani dopravu, nelze ji kombinovat s jinou akcí a je nutné ji nahlásit při objednávce.</p>
+              <button class="btn btn--secondary game-retry" type="button" id="retryReward" hidden>Znovu ověřit výhru</button>
+              <p class="fine-print">Sleva 100 Kč platí jednorázově na cenu práce, nevztahuje se na materiál ani dopravu, nelze ji kombinovat s jinou akcí a kód je nutné uvést při objednávce.</p>
             </div>
           </div>
         </div>
@@ -1528,7 +1554,7 @@
 
   <div class="mobile-actions" aria-label="Rychlý kontakt">
     <a class="btn btn--primary" href="tel:+420777001019">Zavolat</a>
-    <a class="btn btn--secondary" href="#poptavka">Objednat čištění</a>
+    <a class="btn btn--secondary" href="#poptavka">Nezávazná poptávka</a>
   </div>
 
   <footer class="footer">
@@ -1590,9 +1616,9 @@
 
             <h4>Jaké údaje zpracováváme</h4>
             <ul>
-              <li><strong>Poptávka a zakázka:</strong> jméno, telefon, obec nebo adresa realizace, zvolená služba a případně e-mail, počet komínů a obsah zprávy.</li>
+              <li><strong>Poptávka a zakázka:</strong> jméno, telefon, obec nebo adresa realizace, zvolená služba a případně e-mail, počet komínů, obsah zprávy a slevový kód.</li>
               <li><strong>Účetní údaje:</strong> fakturační adresa, IČO, DIČ a údaje na účetních a daňových dokladech, pokud jsou pro zakázku potřebné.</li>
-              <li><strong>Bezpečnost a evidence volby:</strong> čas, zvolená nastavení, verze těchto informací, pseudonymní identifikátor, typ zařízení, maskovaná IP síť a jednosměrný HMAC otisk IP adresy.</li>
+              <li><strong>Bezpečnost, evidence volby a minihra:</strong> čas, zvolená nastavení, verze těchto informací, pseudonymní identifikátory, typ zařízení, maskovaná IP síť, jednosměrný HMAC otisk IP adresy a u minihry také stav pokusu, vydaný kód a údaj o jeho použití.</li>
               <li><strong>Volitelná statistika:</strong> navštívená cesta stránky bez parametrů, doména předchozí stránky, typ zařízení, čas návštěvy a pseudonymní identifikátor volby.</li>
             </ul>
 
@@ -1600,18 +1626,18 @@
             <ul>
               <li><strong>Jednání o smlouvě a plnění smlouvy (čl. 6 odst. 1 písm. b) GDPR):</strong> odpověď na poptávku, domluva termínu a provedení služby.</li>
               <li><strong>Právní povinnost (čl. 6 odst. 1 písm. c) GDPR):</strong> vedení účetnictví a uchování daňových dokladů.</li>
-              <li><strong>Oprávněný zájem (čl. 6 odst. 1 písm. f) GDPR):</strong> zabezpečení webu, omezení spamu, doložení provedené volby a ochrana právních nároků.</li>
+              <li><strong>Oprávněný zájem (čl. 6 odst. 1 písm. f) GDPR):</strong> zabezpečení webu, omezení spamu a zneužití minihry, doložení provedené volby a ochrana právních nároků.</li>
               <li><strong>Souhlas (čl. 6 odst. 1 písm. a) GDPR a § 89 odst. 3 zákona č. 127/2005 Sb.):</strong> uložení a zpracování údajů pro volitelnou statistiku návštěvnosti.</li>
             </ul>
 
             <h4>Je poskytnutí údajů povinné?</h4>
-            <p>Jméno, telefon, obec nebo adresa a druh služby jsou potřebné k vyřízení online poptávky; bez nich formulář nelze odeslat. E-mail, počet komínů a vlastní zpráva jsou nepovinné. Statistiku návštěvnosti můžete odmítnout bez omezení přístupu k webu nebo službě.</p>
+            <p>Jméno, telefon, obec nebo adresa a druh služby jsou potřebné k vyřízení online poptávky; bez nich formulář nelze odeslat. E-mail, počet komínů, vlastní zpráva a slevový kód jsou nepovinné. Statistiku návštěvnosti můžete odmítnout bez omezení přístupu k webu nebo službě.</p>
 
             <h4>Doba uchování</h4>
             <ul>
               <li>Údaje z poptávky a zakázky uchováváme po dobu spolupráce a následně zpravidla 3 roky kvůli ochraně právních nároků.</li>
               <li>Účetní a daňové doklady uchováváme po dobu vyžadovanou příslušnými právními předpisy, zpravidla až 10 let.</li>
-              <li>Záznam volby a analytické události uchováváme nejdéle 12 měsíců. Technické záznamy pro omezení spamu se mažou po 48 hodinách.</li>
+              <li>Záznam volby, analytické události a záznamy minihry uchováváme nejdéle 12 měsíců. Technické záznamy pro omezení spamu se mažou po 48 hodinách.</li>
             </ul>
 
             <h4>Příjemci a předávání mimo EHP</h4>
@@ -1636,6 +1662,7 @@
               <li><code>kominictvi-jezek-cookie-consent</code> – uchovává vaši volbu. Při souhlasu se volba znovu nabídne nejpozději za 12 měsíců; při odmítnutí nebo odvolání nejdříve za 6 měsíců, případně dříve při významné změně zpracování.</li>
               <li><code>kominictvi-jezek-game-unlock-at-v1</code> – uchovává konec 24hodinového omezení minihry.</li>
               <li><code>kominictvi-jezek-game-reward-v1</code> – uchovává získanou herní odměnu nejdéle 24 hodin.</li>
+              <li><code>kominictvi-jezek-game-session-v1</code> – uchovává pseudonymní ID rozehraného pokusu, aby server mohl bezpečně potvrdit případnou výhru; odstraní se nejpozději po skončení 24hodinového omezení.</li>
             </ul>
             <p>Tato uložení zajišťují požadovanou funkci webu nebo uchování vaší volby a nepoužívají se k reklamě.</p>
 
@@ -1648,7 +1675,7 @@
 
             <h4>Změna a odvolání</h4>
             <p>Volbu můžete kdykoliv otevřít přes „Nastavení cookies“ a souhlas stejně snadno odvolat tlačítkem níže. Odvolání zastaví nové analytické záznamy. Automaticky se vás web znovu zeptá nejdříve za 6 měsíců; dříve jen při významné změně účelu nebo pravidel. Nezbytné funkce zůstávají aktivní.</p>
-            <p><strong>Marketingové cookies nepoužíváme.</strong> Poslední aktualizace těchto informací: 16. 9. 2026, verze 2026-09-16-v2.</p>
+            <p><strong>Marketingové cookies nepoužíváme.</strong> Poslední aktualizace těchto informací: 21. 9. 2026, verze 2026-09-21-v3.</p>
           </div>
           <div class="legal-actions">
             <button class="btn btn--secondary" type="button" id="openCookieSettings">Nastavení cookies</button>
@@ -1660,15 +1687,16 @@
         <article class="legal-card legal-card--wide">
           <h3>Minihra a slevový kód</h3>
           <div class="legal-text">
-            <p>Na webu může být k dispozici jednoduchá minihra, po jejímž dokončení se zobrazí slevový kód.</p>
+            <p>Po úspěšném dokončení minihry vydá server jedinečný slevový kód na 100 Kč. Kód nevytváří prohlížeč a jeho platnost lze ověřit v databázi.</p>
             <ul>
-              <li>Slevový kód je nutné oznámit při objednávce, nejpozději však před začátkem realizace služby.</li>
-              <li>Sleva je jednorázová a vztahuje se výhradně na cenu práce.</li>
+              <li>Slevový kód je nutné uvést v poptávce nebo oznámit při objednávce, nejpozději však před začátkem realizace služby.</li>
+              <li>Sleva činí 100 Kč, je jednorázová a vztahuje se výhradně na cenu práce.</li>
               <li>Sleva se nevztahuje na materiál, dopravu a jiné externí náklady.</li>
               <li>Slevu nelze kombinovat s jinými slevami nebo akcemi.</li>
-              <li>Hru lze na jednom prohlížeči spustit jednou za 24 hodin. Odpočet začíná okamžikem spuštění hry.</li>
-              <li>Omezení uložené v prohlížeči není ochranou proti změně zařízení, anonymnímu režimu nebo smazání dat prohlížeče.</li>
-              <li>Provozovatel může slevu odmítnout při důvodném podezření na technické zneužití nebo opakované použití.</li>
+              <li>Hru lze spustit jednou za 24 hodin v jednom prohlížeči a z jednoho chráněného připojení. Odpočet začíná spuštěním hry.</li>
+              <li>Server ukládá pseudonymní ID pokusu, časy, stav, HMAC otisk připojení, vydaný kód a údaj o použití. Celou čitelnou IP adresu neukládá.</li>
+              <li>Sdílené připojení může způsobit, že 24hodinové omezení bude společné pro více uživatelů.</li>
+              <li>Kód lze označit jako použitý bezpečným odkazem v soukromé zprávě na Discordu. Provozovatel může slevu odmítnout při technickém zneužití nebo opakovaném použití.</li>
             </ul>
           </div>
         </article>
@@ -1679,7 +1707,7 @@
             <p>V souladu s § 14 zákona č. 634/1992 Sb., o ochraně spotřebitele, informujeme, že případné spory mezi provozovatelem a zákazníkem, které se nepodaří vyřešit vzájemnou dohodou, lze řešit mimosoudně. Příslušným subjektem pro mimosoudní řešení spotřebitelských sporů je:</p>
             <p><strong>Česká obchodní inspekce</strong><br>Ústřední inspektorát – oddělení ADR<br>Štěpánská 567/15, 120 00 Praha 2<br>E-mail: <a href="mailto:adr@coi.cz">adr@coi.cz</a><br>Web: <a href="https://adr.coi.cz" target="_blank" rel="noopener noreferrer">adr.coi.cz</a></p>
             <p>Web slouží jako prezentace kominických služeb a k odeslání nezávazné poptávky. Platba se na webu neprovádí.</p>
-            <p class="fine-print">Datum poslední aktualizace: 16. 9. 2026</p>
+            <p class="fine-print">Datum poslední aktualizace: 21. 9. 2026</p>
           </div>
         </article>
       </div>
@@ -1724,7 +1752,7 @@
     const turnstileWrap = document.getElementById("turnstileWrap");
     const turnstileSiteKey = (document.getElementById("poptavka")?.dataset.turnstileSiteKey || "").trim();
     const COOKIE_CONSENT_KEY = "kominictvi-jezek-cookie-consent";
-    const CONSENT_POLICY_VERSION = "2026-09-16-v2";
+    const CONSENT_POLICY_VERSION = "2026-09-21-v3";
     const ACCEPTED_CHOICE_LIFETIME_MS = 365 * 24 * 60 * 60 * 1000;
     const DECLINED_CHOICE_LIFETIME_MS = 183 * 24 * 60 * 60 * 1000;
     const inquiryForm = document.getElementById("poptavka");
@@ -1797,7 +1825,12 @@
       });
       let result = {};
       try { result = await response.json(); } catch (_) {}
-      if (!response.ok) throw new Error(result.error || `Server odpověděl stavem ${response.status}.`);
+      if (!response.ok) {
+        const error = new Error(result.error || `Server odpověděl stavem ${response.status}.`);
+        error.status = response.status;
+        error.details = result;
+        throw error;
+      }
       return result;
     }
 
@@ -2035,6 +2068,7 @@
         service: String(formData.get("service") || "").trim(),
         chimneyCount: String(formData.get("chimneyCount") || "").trim(),
         message: String(formData.get("message") || "").trim(),
+        discountCode: String(formData.get("discountCode") || "").trim().toUpperCase(),
         privacyAcknowledged: formData.get("privacyAcknowledged") === "on",
         consentId: getCookieConsent()?.consentId || "",
         turnstileToken: turnstileWidgetId !== null && window.turnstile ? window.turnstile.getResponse(turnstileWidgetId) : "",
@@ -2049,7 +2083,7 @@
       try {
         await sendToApi("/api/poptavka", payload);
         inquiryForm.reset();
-        formStatus.textContent = "Děkuji. Poptávka byla odeslána. Ozvu se vám kvůli domluvě.";
+        formStatus.textContent = "Děkuji. Poptávka byla odeslána. Ozvu se vám kvůli domluvě. Pokud se vám do 24 hodin neozvu, zavolejte mi prosím na 777 001 019.";
         formStatus.classList.add("is-success");
       } catch (error) {
         formStatus.textContent = `${error.message} Pokud problém trvá, zavolejte na 777 001 019.`;
@@ -2085,12 +2119,17 @@
     const keys = { left: false, right: false, jump: false };
     const gameStartButton = document.getElementById("restartGame");
     const gameCountdown = document.getElementById("gameCountdown");
+    const retryRewardButton = document.getElementById("retryReward");
+    const discountCodeInput = document.getElementById("discountCode");
     const GAME_LOCK_KEY = "kominictvi-jezek-game-unlock-at-v1";
     const GAME_REWARD_KEY = "kominictvi-jezek-game-reward-v1";
-    const GAME_LOCK_MS = 24 * 60 * 60 * 1000;
+    const GAME_SESSION_KEY = "kominictvi-jezek-game-session-v1";
     let lastFrame = performance.now();
     let game = null;
     let gameFrame = null;
+    let gameStarting = false;
+    let winConfirming = false;
+    let serverGameSessionId = "";
 
     function resizeCanvas() {
       const ratio = Math.min(window.devicePixelRatio || 1, 2);
@@ -2148,6 +2187,24 @@
       catch (_) { return null; }
     }
 
+    function getSavedGameSession() {
+      try { return JSON.parse(localStorage.getItem(GAME_SESSION_KEY) || "null"); }
+      catch (_) { return null; }
+    }
+
+    function storeGameSession(session) {
+      try { localStorage.setItem(GAME_SESSION_KEY, JSON.stringify(session)); }
+      catch (_) {}
+    }
+
+    function updateSavedGameSession(changes) {
+      const current = getSavedGameSession() || {};
+      const updated = { ...current, ...changes };
+      if (updated.sessionId) serverGameSessionId = String(updated.sessionId);
+      storeGameSession(updated);
+      return updated;
+    }
+
     function formatRemaining(milliseconds) {
       const totalSeconds = Math.max(0, Math.ceil(milliseconds / 1000));
       const hours = Math.floor(totalSeconds / 3600);
@@ -2162,40 +2219,75 @@
 
       if (remaining > 0) {
         gameStartButton.disabled = true;
-        gameStartButton.textContent = game?.running ? "Hra právě běží" : "Další hra za 24 hodin";
+        gameStartButton.textContent = gameStarting ? "Připravuji hru…" : game?.running ? "Hra právě běží" : "Další hra za 24 hodin";
         gameCountdown.textContent = `Další spuštění za ${formatRemaining(remaining)}`;
       } else {
         try {
           localStorage.removeItem(GAME_LOCK_KEY);
           localStorage.removeItem(GAME_REWARD_KEY);
+          localStorage.removeItem(GAME_SESSION_KEY);
         } catch (_) {}
-        gameStartButton.disabled = Boolean(game?.running);
-        gameStartButton.textContent = game?.running ? "Hra právě běží" : "Spustit hru";
-        gameCountdown.textContent = game?.running ? "Odpočet 24 hodin už běží." : "Hru můžete spustit.";
+        serverGameSessionId = "";
+        gameStartButton.disabled = gameStarting || Boolean(game?.running);
+        gameStartButton.textContent = gameStarting ? "Připravuji hru…" : game?.running ? "Hra právě běží" : "Spustit hru";
+        gameCountdown.textContent = gameStarting ? "Ověřuji dostupnost hry…" : game?.running ? "Odpočet 24 hodin už běží." : "Hru můžete spustit.";
       }
 
       if (!game?.running) render();
     }
 
-    function startGame() {
+    async function startGame() {
+      if (gameStarting || game?.running) return;
       if (getGameUnlockAt()) {
         updateGameAvailability();
         return;
       }
 
-      const unlockAt = Date.now() + GAME_LOCK_MS;
-      try {
-        localStorage.setItem(GAME_LOCK_KEY, String(unlockAt));
-        localStorage.removeItem(GAME_REWARD_KEY);
-      } catch (_) {}
+      gameStarting = true;
+      gameStartButton.disabled = true;
+      gameStartButton.textContent = "Připravuji hru…";
+      gameCountdown.textContent = "Ověřuji dostupnost hry…";
+      resultBox.textContent = "Připravuji bezpečný herní pokus.";
+      retryRewardButton.hidden = true;
 
-      game = createGameState(true);
-      keys.left = false; keys.right = false; keys.jump = false;
-      resultBox.textContent = "Hra běží. Posbírejte všech osm kusů sazí a dojděte k praporku.";
-      updateGameAvailability();
-      canvas.focus();
-      lastFrame = performance.now();
-      if (gameFrame === null) gameFrame = requestAnimationFrame(loop);
+      try {
+        const result = await sendToApi("/api/minihra/zacit", {});
+        const sessionId = String(result.sessionId || "");
+        const unlockAt = Date.parse(result.unlockAt || "");
+        const expiresAt = Date.parse(result.expiresAt || "");
+        if (!/^[a-zA-Z0-9-]{10,100}$/.test(sessionId) || !Number.isFinite(unlockAt)) {
+          throw new Error("Server nevrátil platný herní pokus.");
+        }
+
+        serverGameSessionId = sessionId;
+        try {
+          localStorage.setItem(GAME_LOCK_KEY, String(unlockAt));
+          localStorage.removeItem(GAME_REWARD_KEY);
+        } catch (_) {}
+        storeGameSession({
+          sessionId,
+          status: "running",
+          startedAt: result.startedAt || new Date().toISOString(),
+          expiresAt: Number.isFinite(expiresAt) ? new Date(expiresAt).toISOString() : new Date(Date.now() + 60 * 60 * 1000).toISOString(),
+          unlockAt: new Date(unlockAt).toISOString()
+        });
+
+        game = createGameState(true);
+        keys.left = false; keys.right = false; keys.jump = false;
+        resultBox.textContent = "Hra běží. Posbírejte všech osm kusů sazí a dojděte k praporku.";
+        canvas.focus();
+        lastFrame = performance.now();
+        if (gameFrame === null) gameFrame = requestAnimationFrame(loop);
+      } catch (error) {
+        const serverUnlockAt = Date.parse(error.details?.unlockAt || "");
+        if (error.status === 429 && Number.isFinite(serverUnlockAt)) {
+          try { localStorage.setItem(GAME_LOCK_KEY, String(serverUnlockAt)); } catch (_) {}
+        }
+        resultBox.textContent = `${error.message} Pokud potřebujete službu objednat hned, zavolejte na 777 001 019.`;
+      } finally {
+        gameStarting = false;
+        updateGameAvailability();
+      }
     }
 
     function rectsIntersect(a, b) {
@@ -2218,7 +2310,43 @@
       if (game.hits > game.allowedHits) {
         game.running = false;
         game.lost = true;
+        updateSavedGameSession({ status: "lost" });
         resultBox.innerHTML = '<span class="lose">Hra skončila. Další pokus bude možný po skončení 24hodinového odpočtu.</span>';
+        updateGameAvailability();
+      }
+    }
+
+    async function confirmGameWin() {
+      if (winConfirming) return;
+      const sessionId = serverGameSessionId || String(getSavedGameSession()?.sessionId || "");
+      if (!sessionId) {
+        resultBox.textContent = "Výhru nelze ověřit, protože chybí ID herního pokusu. Zavolejte prosím na 777 001 019.";
+        retryRewardButton.hidden = true;
+        return;
+      }
+
+      winConfirming = true;
+      retryRewardButton.hidden = true;
+      resultBox.textContent = "Ověřuji výhru a vytvářím jednorázový slevový kód…";
+
+      try {
+        const result = await sendToApi("/api/minihra/vyhra", { sessionId });
+        const code = String(result.code || "").toUpperCase();
+        const amount = Number(result.amount);
+        if (!/^JEZEK100-[A-F0-9]{12}$/.test(code) || amount !== 100) {
+          throw new Error("Server nevrátil platný slevový kód.");
+        }
+
+        const reward = { amount, code, wonAt: new Date().toISOString() };
+        try { localStorage.setItem(GAME_REWARD_KEY, JSON.stringify(reward)); } catch (_) {}
+        updateSavedGameSession({ status: "won", code, amount, wonAt: reward.wonAt });
+        if (discountCodeInput) discountCodeInput.value = code;
+        resultBox.innerHTML = `<span class="win">Gratulujeme! Získáváte slevu ${amount} Kč. Kód: ${code}</span><br>Kód jsem automaticky vyplnil také do nezávazné poptávky.`;
+      } catch (error) {
+        resultBox.textContent = `${error.message} Výhra zůstala uložená a ověření můžete zopakovat.`;
+        retryRewardButton.hidden = false;
+      } finally {
+        winConfirming = false;
         updateGameAvailability();
       }
     }
@@ -2227,13 +2355,9 @@
       if (game.won) return;
       game.running = false;
       game.won = true;
-      const discount = Math.floor(Math.random() * 6) + 5;
-      const suffix = Math.random().toString(36).slice(2, 6).toUpperCase();
-      const code = `JEZEK${discount}-${suffix}`;
-      const reward = { discount, code, wonAt: new Date().toISOString() };
-      try { localStorage.setItem(GAME_REWARD_KEY, JSON.stringify(reward)); } catch (_) {}
-      resultBox.innerHTML = `<span class="win">Gratulujeme! Získáváte slevu ${discount} %. Kód: ${code}</span><br>Kód sdělte při objednávce nebo před začátkem práce.`;
+      updateSavedGameSession({ status: "won-pending" });
       updateGameAvailability();
+      void confirmGameWin();
     }
 
     function update(dt) {
@@ -2536,6 +2660,10 @@
     bindPressButton("jumpBtn", "jump");
 
     gameStartButton?.addEventListener("click", startGame);
+    retryRewardButton?.addEventListener("click", confirmGameWin);
+    discountCodeInput?.addEventListener("input", () => {
+      discountCodeInput.value = discountCodeInput.value.toUpperCase().replace(/\s+/g, "");
+    });
 
     canvas.addEventListener("pointerdown", () => canvas.focus?.());
     window.addEventListener("blur", () => { keys.left = false; keys.right = false; keys.jump = false; });
@@ -2546,11 +2674,21 @@
 
     game = createGameState(false);
     const savedReward = getSavedReward();
+    const savedGameSession = getSavedGameSession();
+    serverGameSessionId = String(savedGameSession?.sessionId || "");
     if (savedReward?.code && getGameUnlockAt()) {
       game.won = true;
-      resultBox.innerHTML = `<span class="win">Vaše poslední výhra: sleva ${savedReward.discount} %. Kód: ${savedReward.code}</span>`;
+      if (discountCodeInput) discountCodeInput.value = savedReward.code;
+      resultBox.innerHTML = `<span class="win">Vaše poslední výhra: sleva ${Number(savedReward.amount || 100)} Kč. Kód: ${savedReward.code}</span>`;
+    } else if (savedGameSession?.status === "won-pending" && serverGameSessionId && getGameUnlockAt()) {
+      game.won = true;
+      resultBox.textContent = "Dokončuji ověření vaší výhry…";
+      void confirmGameWin();
+    } else if (savedGameSession?.status === "lost" && getGameUnlockAt()) {
+      game.lost = true;
+      resultBox.textContent = "Tento herní pokus už skončil. Další hra bude dostupná po skončení odpočtu.";
     } else if (getGameUnlockAt()) {
-      resultBox.textContent = "Tento pokus už byl spuštěn. Další hra bude dostupná po skončení odpočtu.";
+      resultBox.textContent = "Tento pokus už byl spuštěn nebo přerušen. Další hra bude dostupná po skončení odpočtu.";
     }
     resizeCanvas();
     updateGameAvailability();
